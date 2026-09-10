@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>KIKO Le Gru LearningHub</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">KIKO LE GRU</p>
+      <h1>LearningHub</h1>
+    </div>
+
+    <div class="version">v0.1</div>
+  </header>
+
+
+  <main>
+
+    <section class="hero">
+
+      <p class="hero-label">
+        FORMAZIONE PRODOTTO
+      </p>
+
+      <h2>
+        Tutto quello che ti serve,
+        <span>quando ti serve.</span>
+      </h2>
+
+      <p class="hero-text">
+        Consulta rapidamente prodotti, ingredienti chiave,
+        benefici e leve di vendita.
+      </p>
+
+      <div class="search-box">
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Cerca un prodotto, ingrediente o esigenza..."
+        >
+
+      </div>
+
+    </section>
+
+
+    <section class="categories">
+
+      <div class="section-heading">
+
+        <div>
+          <p class="section-label">
+            ESPLORA
+          </p>
+
+          <h3>
+            Categorie
+          </h3>
+        </div>
+
+      </div>
+
+
+      <div class="category-grid">
+
+        <button
+          class="category-card"
+          data-category="capelli"
+        >
+
+          <span class="category-number">
+            01
+          </span>
+
+          <div>
+            <h4>
+              Capelli
+            </h4>
+
+            <p>
+              Haircare, styling e trattamenti
+            </p>
+          </div>
+
+          <span class="arrow">
+            →
+          </span>
+
+        </button>
+
+
+        <button
+          class="category-card"
+          data-category="viso"
+        >
+
+          <span class="category-number">
+            02
+          </span>
+
+          <div>
+            <h4>
+              Viso
+            </h4>
+
+            <p>
+              Base, complexion e skincare
+            </p>
+          </div>
+
+          <span class="arrow">
+            →
+          </span>
+
+        </button>
+
+
+        <button
+          class="category-card"
+          data-category="occhi"
+        >
+
+          <span class="category-number">
+            03
+          </span>
+
+          <div>
+            <h4>
+              Occhi
+            </h4>
+
+            <p>
+              Mascara, palette, liner e sopracciglia
+            </p>
+          </div>
+
+          <span class="arrow">
+            →
+          </span>
+
+        </button>
+
+
+        <button
+          class="category-card"
+          data-category="labbra"
+        >
+
+          <span class="category-number">
+            04
+          </span>
+
+          <div>
+            <h4>
+              Labbra
+            </h4>
+
+            <p>
+              Rossetti, matite e trattamenti
+            </p>
+          </div>
+
+          <span class="arrow">
+            →
+          </span>
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <section
+      id="resultsSection"
+      class="results hidden"
+    >
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="section-label">
+            RISULTATI
+          </p>
+
+          <h3 id="resultsTitle">
+            Prodotti
+          </h3>
+
+        </div>
+
+
+        <button
+          id="backButton"
+          class="back-button"
+        >
+          ← Tutte le categorie
+        </button>
+
+      </div>
+
+
+      <div
+        id="productGrid"
+        class="product-grid"
+      ></div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    <p>
+      KIKO Le Gru · LearningHub
+    </p>
+
+  </footer>
+
+
+  <script src="data/prodotti.js"></script>
+<script src="data/quiz-capelli.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

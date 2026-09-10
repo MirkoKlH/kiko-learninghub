@@ -1,0 +1,1737 @@
+/* ========================================================= */
+/* KIKO LE GRU LEARNINGHUB */
+/* STYLE.CSS */
+/* ========================================================= */
+
+
+/* ========================================================= */
+/* RESET */
+/* ========================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ========================================================= */
+/* VARIABILI */
+/* ========================================================= */
+
+:root {
+  --black: #111111;
+  --white: #ffffff;
+  --cream: #f6f4ef;
+  --grey: #777777;
+  --light-grey: #e8e8e8;
+  --border: #d6d4cf;
+
+  --correct-bg: #eaf3ec;
+  --correct-border: #9db7a3;
+  --correct-text: #284c31;
+
+  --wrong-bg: #f6e9e7;
+  --wrong-border: #c7a09b;
+  --wrong-text: #6e332d;
+
+  --remember-bg: #f1eee8;
+}
+
+
+/* ========================================================= */
+/* BASE */
+/* ========================================================= */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--cream);
+  color: var(--black);
+  min-height: 100vh;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+
+/* ========================================================= */
+/* TOPBAR */
+/* ========================================================= */
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 28px 6%;
+
+  background: var(--black);
+  color: var(--white);
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 3px;
+  margin-bottom: 5px;
+  opacity: 0.65;
+}
+
+.topbar h1 {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.version {
+  font-size: 12px;
+
+  border: 1px solid #555555;
+  border-radius: 30px;
+
+  padding: 8px 13px;
+}
+
+
+/* ========================================================= */
+/* LAYOUT GENERALE */
+/* ========================================================= */
+
+main {
+  width: 88%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+
+/* ========================================================= */
+/* HERO */
+/* ========================================================= */
+
+.hero {
+  padding: 90px 0 75px;
+
+  border-bottom: 1px solid #d8d6d0;
+}
+
+.hero-label,
+.section-label {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  color: var(--grey);
+
+  margin-bottom: 18px;
+}
+
+.hero h2 {
+  max-width: 800px;
+
+  font-size: clamp(42px, 6vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -3px;
+  font-weight: 500;
+}
+
+.hero h2 span {
+  color: #8a8a8a;
+}
+
+.hero-text {
+  max-width: 500px;
+
+  margin-top: 30px;
+
+  color: #666666;
+
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+
+/* ========================================================= */
+/* RICERCA */
+/* ========================================================= */
+
+.search-box {
+  margin-top: 45px;
+  max-width: 720px;
+}
+
+.search-box input {
+  width: 100%;
+
+  border: none;
+  border-bottom: 1px solid var(--black);
+
+  background: transparent;
+
+  padding: 18px 4px;
+
+  font-size: 16px;
+
+  outline: none;
+}
+
+.search-box input::placeholder {
+  color: #999999;
+}
+
+
+/* ========================================================= */
+/* SEZIONI */
+/* ========================================================= */
+
+.categories,
+.results {
+  padding: 70px 0;
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  margin-bottom: 35px;
+}
+
+.section-heading h3 {
+  font-size: 35px;
+  font-weight: 500;
+}
+
+
+/* ========================================================= */
+/* CATEGORIE */
+/* ========================================================= */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 14px;
+}
+
+.category-card {
+  min-height: 160px;
+
+  padding: 30px;
+
+  border: 1px solid var(--border);
+
+  background: var(--white);
+
+  display: grid;
+  grid-template-columns: 45px 1fr auto;
+  gap: 15px;
+  align-items: center;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.category-card:hover {
+  background: var(--black);
+  color: var(--white);
+
+  transform: translateY(-3px);
+}
+
+.category-number {
+  font-size: 11px;
+  color: #999999;
+
+  align-self: start;
+}
+
+.category-card h4 {
+  font-size: 25px;
+  font-weight: 500;
+
+  margin-bottom: 8px;
+}
+
+.category-card p {
+  color: #888888;
+  font-size: 14px;
+}
+
+.category-card:hover p {
+  color: #bbbbbb;
+}
+
+.arrow {
+  font-size: 24px;
+}
+
+
+/* ========================================================= */
+/* BOTTONE TORNA ALLE CATEGORIE */
+/* ========================================================= */
+
+.back-button {
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+
+  text-decoration: underline;
+
+  font-size: 13px;
+}
+
+
+/* ========================================================= */
+/* GRIGLIA PRODOTTI */
+/* ========================================================= */
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 16px;
+}
+
+
+/* ========================================================= */
+/* CARD PRODOTTO */
+/* ========================================================= */
+
+.product-card {
+  min-height: 300px;
+
+  padding: 28px;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.product-code {
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+
+  color: #999999;
+}
+
+.product-type {
+  margin-top: 18px;
+
+  font-size: 11px;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+
+  color: #888888;
+}
+
+.product-card h4 {
+  margin-top: 10px;
+
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.product-card-description {
+  margin-top: 14px;
+  margin-bottom: 25px;
+
+  font-size: 13px;
+  line-height: 1.6;
+
+  color: #777777;
+}
+
+.product-button {
+  margin-top: auto;
+
+  width: fit-content;
+
+  padding: 11px 16px;
+
+  border: 1px solid var(--black);
+
+  background: var(--black);
+  color: var(--white);
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.product-button:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+
+/* ========================================================= */
+/* EMPTY STATE */
+/* ========================================================= */
+
+.empty-state {
+  grid-column: 1 / -1;
+
+  padding: 45px;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+}
+
+.empty-state h4 {
+  font-size: 25px;
+  font-weight: 500;
+
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  font-size: 14px;
+  color: #777777;
+}
+
+
+/* ========================================================= */
+/* HIDDEN */
+/* ========================================================= */
+
+.hidden {
+  display: none;
+}
+
+
+/* ========================================================= */
+/* SCHEDA PRODOTTO */
+/* ========================================================= */
+
+.product-detail {
+  grid-column: 1 / -1;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+
+  padding: 40px;
+}
+
+.detail-back-button {
+  border: none;
+  border-bottom: 1px solid var(--black);
+
+  background: transparent;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  padding: 0;
+  margin-bottom: 35px;
+}
+
+.detail-header {
+  max-width: 760px;
+
+  margin-bottom: 45px;
+}
+
+.detail-header h4 {
+  font-size: 38px;
+  font-weight: 500;
+
+  margin: 12px 0 18px;
+}
+
+.detail-description {
+  font-size: 17px;
+  line-height: 1.7;
+
+  color: #666666;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 18px;
+}
+
+.detail-block {
+  border-top: 1px solid #d8d6d0;
+
+  padding-top: 22px;
+}
+
+.detail-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+
+  color: #888888;
+
+  margin-bottom: 15px;
+}
+
+.detail-block p,
+.detail-block li {
+  font-size: 14px;
+  line-height: 1.6;
+
+  color: #444444;
+}
+
+.detail-block ul {
+  padding-left: 18px;
+}
+
+
+/* ========================================================= */
+/* HAIRCARE LINES */
+/* ========================================================= */
+
+.hair-lines-grid {
+  grid-column: 1 / -1;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 18px;
+
+  width: 100%;
+}
+
+.hair-line-card {
+  background: var(--white);
+
+  border: 1px solid var(--border);
+
+  overflow: hidden;
+}
+
+.hair-line-header {
+  min-height: 145px;
+
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.hair-line-header h4 {
+  font-size: 31px;
+  font-weight: 500;
+
+  margin-bottom: 9px;
+}
+
+.hair-line-header p {
+  max-width: 380px;
+
+  font-size: 14px;
+  line-height: 1.5;
+
+  color: #777777;
+}
+
+
+/* ========================================================= */
+/* COLORI DELLE 4 LINEE */
+/* ========================================================= */
+
+.hair-line-card:nth-child(1) .hair-line-header {
+  background: #eef1f8;
+}
+
+.hair-line-card:nth-child(2) .hair-line-header {
+  background: #f3eee8;
+}
+
+.hair-line-card:nth-child(3) .hair-line-header {
+  background: #edf3f1;
+}
+
+.hair-line-card:nth-child(4) .hair-line-header {
+  background: #f4eeee;
+}
+
+
+/* ========================================================= */
+/* PRODOTTI NELLE LINEE */
+/* ========================================================= */
+
+.hair-products-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.hair-product-link {
+  min-height: 92px;
+
+  padding: 22px;
+
+  background: var(--white);
+
+  border: none;
+  border-right: 1px solid #e2e0dc;
+  border-bottom: 1px solid #e2e0dc;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  font-size: 16px;
+
+  transition: 0.2s ease;
+}
+
+.hair-product-link:nth-child(even) {
+  border-right: none;
+}
+
+.hair-product-link:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+.hair-arrow {
+  font-size: 20px;
+
+  transition: transform 0.2s ease;
+}
+
+.hair-product-link:hover .hair-arrow {
+  transform: translateX(4px);
+}
+
+.hair-line-empty {
+  grid-column: 1 / -1;
+
+  min-height: 92px;
+
+  padding: 25px;
+
+  color: #999999;
+
+  font-size: 13px;
+
+  display: flex;
+  align-items: center;
+}
+
+
+/* ========================================================= */
+/* HAIRCARE — ALLENATI */
+/* ========================================================= */
+
+.hair-training-section {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin-top: 28px;
+}
+
+.hair-training-content {
+  position: relative;
+
+  min-height: 220px;
+  padding: 36px 40px;
+
+  background: #ffffff;
+  color: #111111;
+
+  border: 1px solid #d6d4cf;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.hair-training-content::after {
+  content: "HAIR";
+
+  position: absolute;
+  right: 25px;
+  bottom: -20px;
+
+  font-size: clamp(80px, 12vw, 145px);
+  font-weight: 600;
+  letter-spacing: -7px;
+
+  color: rgba(17, 17, 17, 0.025);
+
+  pointer-events: none;
+}
+
+.hair-training-label {
+  position: relative;
+  z-index: 1;
+
+  margin-bottom: 10px;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+
+  color: #999999;
+}
+
+.hair-training-content h4 {
+  position: relative;
+  z-index: 1;
+
+  margin-bottom: 8px;
+
+  font-size: 31px;
+  font-weight: 500;
+}
+
+.hair-training-description {
+  position: relative;
+  z-index: 1;
+
+  max-width: 500px;
+
+  font-size: 14px;
+  line-height: 1.6;
+
+  color: #777777;
+}
+
+.hair-score-preview {
+  position: absolute;
+  z-index: 2;
+
+  top: 36px;
+  right: 40px;
+
+  margin: 0;
+  padding: 0;
+
+  border: none;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.hair-score-preview span {
+  font-size: 9px;
+  letter-spacing: 1.6px;
+
+  color: #999999;
+}
+
+.hair-score-preview strong {
+  font-size: 27px;
+  font-weight: 500;
+
+  color: #111111;
+}
+
+.hair-training-button {
+  position: relative;
+  z-index: 1;
+
+  width: fit-content;
+
+  margin-top: 22px;
+  padding: 11px 16px;
+
+  border: 1px solid #111111;
+
+  background: #111111;
+  color: #ffffff;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.hair-training-button:hover {
+  background: #ffffff;
+  color: #111111;
+}
+
+
+/* ========================================================= */
+/* ALLENATI — SMARTPHONE */
+/* ========================================================= */
+
+@media (max-width: 550px) {
+
+  .hair-training-section {
+    margin-top: 22px;
+  }
+
+  .hair-training-content {
+    min-height: 250px;
+    padding: 28px 24px;
+  }
+
+  .hair-training-content h4 {
+    font-size: 28px;
+  }
+
+  .hair-training-description {
+    max-width: 100%;
+    padding-right: 0;
+  }
+
+  .hair-score-preview {
+    position: relative;
+
+    top: auto;
+    right: auto;
+
+    margin-top: 18px;
+
+    align-items: flex-start;
+  }
+
+  .hair-score-preview strong {
+    font-size: 24px;
+  }
+
+  .hair-training-button {
+    margin-top: 20px;
+  }
+
+  .hair-training-content::after {
+    right: -5px;
+    bottom: -10px;
+
+    font-size: 90px;
+    letter-spacing: -5px;
+  }
+
+}
+
+/* ========================================================= */
+/* IL TUO PERCORSO HAIRCARE */
+/* ========================================================= */
+
+.hair-path-section {
+  grid-column: 1 / -1;
+
+  width: 100%;
+
+  margin-top: 18px;
+  padding: 36px 40px;
+
+  background: #ffffff;
+
+  border: 1px solid #d6d4cf;
+}
+
+.hair-path-heading {
+  max-width: 600px;
+
+  margin-bottom: 30px;
+}
+
+.hair-path-label {
+  margin-bottom: 10px;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.3px;
+
+  color: #999999;
+}
+
+.hair-path-heading h4 {
+  margin-bottom: 8px;
+
+  font-size: 29px;
+  font-weight: 500;
+}
+
+.hair-path-heading > p:last-child {
+  font-size: 14px;
+  line-height: 1.6;
+
+  color: #777777;
+}
+
+
+/* ========================================================= */
+/* PERCORSO — STATI */
+/* ========================================================= */
+
+.hair-path-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 10px;
+}
+
+.hair-path-card {
+  min-height: 135px;
+
+  padding: 20px;
+
+  border: 1px solid #dedcd7;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.hair-path-status {
+  margin-bottom: auto;
+
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+
+  color: #888888;
+}
+
+.hair-path-card strong {
+  margin-top: 22px;
+
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.hair-path-card p {
+  margin-top: 4px;
+
+  font-size: 12px;
+
+  color: #888888;
+}
+
+
+/* DA RAFFORZARE */
+
+.hair-path-recovery {
+  background: #f6e9e7;
+}
+
+
+/* IN APPRENDIMENTO */
+
+.hair-path-learning {
+  background: #f3f0e8;
+}
+
+
+/* SOLIDO */
+
+.hair-path-solid {
+  background: #edf3ee;
+}
+
+
+/* ========================================================= */
+/* PERCORSO — FOOTER */
+/* ========================================================= */
+
+.hair-path-footer {
+  margin-top: 18px;
+  padding-top: 18px;
+
+  border-top: 1px solid #e1dfda;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  font-size: 11px;
+
+  color: #888888;
+}
+
+
+/* ========================================================= */
+/* PERCORSO — SMARTPHONE */
+/* ========================================================= */
+
+@media (max-width: 550px) {
+
+  .hair-path-section {
+    padding: 28px 24px;
+  }
+
+  .hair-path-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hair-path-card {
+    min-height: 110px;
+  }
+
+  .hair-path-footer {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+}
+
+/* ========================================================= */
+/* QUIZ HAIRCARE */
+/* ========================================================= */
+
+.hair-quiz {
+  grid-column: 1 / -1;
+
+  width: 100%;
+
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  padding: 44px 48px 48px;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+}
+
+
+/* ========================================================= */
+/* QUIZ — TESTATA */
+/* ========================================================= */
+
+.quiz-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 20px;
+}
+
+.quiz-label {
+  margin-bottom: 8px;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.3px;
+
+  color: #999999;
+}
+
+.quiz-counter {
+  font-size: 13px;
+
+  color: #666666;
+}
+
+.quiz-exit-button {
+  padding: 8px 0;
+
+  border: none;
+  border-bottom: 1px solid #999999;
+
+  background: transparent;
+
+  font-size: 12px;
+  color: #666666;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.quiz-exit-button:hover {
+  color: var(--black);
+
+  border-color: var(--black);
+}
+
+
+/* ========================================================= */
+/* QUIZ — PROGRESS BAR */
+/* ========================================================= */
+
+.quiz-progress {
+  width: 100%;
+  height: 3px;
+
+  margin-top: 28px;
+  margin-bottom: 32px;
+
+  background: #e7e5e1;
+
+  overflow: hidden;
+}
+
+.quiz-progress-bar {
+  height: 100%;
+
+  background: var(--black);
+
+  transition: width 0.3s ease;
+}
+
+
+/* ========================================================= */
+/* QUIZ — META */
+/* ========================================================= */
+
+.quiz-meta {
+  display: flex;
+  gap: 8px;
+
+  margin-bottom: 22px;
+}
+
+.quiz-meta span {
+  padding: 7px 10px;
+
+  border: 1px solid #d8d6d0;
+
+  font-size: 9px;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+
+  color: #777777;
+}
+
+
+/* ========================================================= */
+/* QUIZ — DOMANDA */
+/* ========================================================= */
+
+.quiz-question {
+  max-width: 760px;
+
+  margin-bottom: 32px;
+
+  font-size: clamp(25px, 3vw, 34px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.7px;
+}
+
+
+/* ========================================================= */
+/* QUIZ — RISPOSTE */
+/* ========================================================= */
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  gap: 10px;
+}
+
+.quiz-option {
+  width: 100%;
+  min-height: 68px;
+
+  padding: 15px 18px;
+
+  border: 1px solid #d9d7d2;
+
+  background: var(--white);
+  color: var(--black);
+
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 14px;
+  align-items: center;
+
+  text-align: left;
+
+  font-size: 14px;
+  line-height: 1.5;
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease,
+    border 0.18s ease,
+    transform 0.18s ease;
+}
+
+.quiz-option:hover:not(:disabled) {
+  border-color: var(--black);
+
+  transform: translateX(3px);
+}
+
+.quiz-option:disabled {
+  cursor: default;
+}
+
+.quiz-option-letter {
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid #d9d7d2;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* ========================================================= */
+/* QUIZ — RISPOSTA CORRETTA */
+/* ========================================================= */
+
+.quiz-option-correct {
+  background: var(--correct-bg);
+
+  border-color: var(--correct-border);
+
+  color: var(--correct-text);
+}
+
+.quiz-option-correct .quiz-option-letter {
+  border-color: var(--correct-border);
+
+  background: rgba(255, 255, 255, 0.55);
+}
+
+
+/* ========================================================= */
+/* QUIZ — RISPOSTA ERRATA */
+/* ========================================================= */
+
+.quiz-option-wrong {
+  background: var(--wrong-bg);
+
+  border-color: var(--wrong-border);
+
+  color: var(--wrong-text);
+}
+
+.quiz-option-wrong .quiz-option-letter {
+  border-color: var(--wrong-border);
+
+  background: rgba(255, 255, 255, 0.55);
+}
+
+
+/* ========================================================= */
+/* QUIZ — FEEDBACK */
+/* ========================================================= */
+
+.quiz-feedback-container {
+  margin-top: 28px;
+}
+
+.quiz-feedback {
+  padding: 22px 24px;
+
+  border-left: 3px solid var(--black);
+
+  background: #f7f6f3;
+}
+
+.quiz-feedback-correct {
+  border-left-color: var(--correct-border);
+
+  background: var(--correct-bg);
+}
+
+.quiz-feedback-wrong {
+  border-left-color: var(--wrong-border);
+
+  background: var(--wrong-bg);
+}
+
+.quiz-feedback-result {
+  margin-bottom: 8px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.quiz-feedback-correct .quiz-feedback-result {
+  color: var(--correct-text);
+}
+
+.quiz-feedback-wrong .quiz-feedback-result {
+  color: var(--wrong-text);
+}
+
+.quiz-feedback-text {
+  max-width: 720px;
+
+  font-size: 14px;
+  line-height: 1.65;
+
+  color: #555555;
+}
+
+
+/* ========================================================= */
+/* QUIZ — RICORDA */
+/* ========================================================= */
+
+.quiz-remember {
+  margin-top: 12px;
+
+  padding: 20px 24px;
+
+  background: var(--remember-bg);
+
+  border: 1px solid #ded8ce;
+}
+
+.quiz-remember p {
+  margin-bottom: 8px;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  color: #777066;
+}
+
+.quiz-remember span {
+  display: block;
+
+  max-width: 720px;
+
+  font-size: 14px;
+  line-height: 1.65;
+
+  color: #4e4942;
+}
+
+
+/* ========================================================= */
+/* QUIZ — PULSANTE SUCCESSIVO */
+/* ========================================================= */
+
+.quiz-next-button {
+  margin-top: 24px;
+
+  padding: 14px 21px;
+
+  border: 1px solid var(--black);
+
+  background: var(--black);
+  color: var(--white);
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.quiz-next-button:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+
+/* ========================================================= */
+/* RISULTATO QUIZ */
+/* ========================================================= */
+
+.quiz-result {
+  grid-column: 1 / -1;
+
+  width: 100%;
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  padding: 50px;
+
+  background: var(--white);
+
+  border: 1px solid var(--border);
+}
+
+.quiz-result-label {
+  margin-bottom: 14px;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+
+  color: #999999;
+}
+
+.quiz-result h4 {
+  max-width: 700px;
+
+  font-size: clamp(31px, 4vw, 46px);
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -1.2px;
+}
+
+.quiz-result-score {
+  margin-top: 40px;
+  margin-bottom: 30px;
+
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+}
+
+.quiz-result-score strong {
+  font-size: clamp(58px, 8vw, 90px);
+  line-height: 0.85;
+  font-weight: 500;
+  letter-spacing: -4px;
+}
+
+.quiz-result-score span {
+  padding-bottom: 6px;
+
+  font-size: 13px;
+
+  color: #777777;
+}
+
+
+/* ========================================================= */
+/* RISULTATO — CARDS */
+/* ========================================================= */
+
+.quiz-result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 12px;
+}
+
+.quiz-result-card {
+  min-height: 130px;
+
+  padding: 22px;
+
+  border: 1px solid #dedcd7;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.quiz-result-card span {
+  font-size: 9px;
+  letter-spacing: 1.6px;
+
+  color: #888888;
+}
+
+.quiz-result-card strong {
+  font-size: 35px;
+  font-weight: 500;
+}
+
+.quiz-result-note {
+  max-width: 620px;
+
+  margin-top: 25px;
+
+  font-size: 13px;
+  line-height: 1.65;
+
+  color: #777777;
+}
+
+
+/* ========================================================= */
+/* RISULTATO — AZIONI */
+/* ========================================================= */
+
+.quiz-result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-top: 32px;
+}
+
+.quiz-result-actions .quiz-next-button {
+  margin-top: 0;
+}
+
+.quiz-secondary-button {
+  padding: 14px 20px;
+
+  border: 1px solid var(--black);
+
+  background: var(--white);
+  color: var(--black);
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.quiz-secondary-button:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+
+/* ========================================================= */
+/* FOOTER */
+/* ========================================================= */
+
+footer {
+  width: 88%;
+  max-width: 1200px;
+
+  margin: 30px auto 0;
+
+  padding: 30px 0;
+
+  border-top: 1px solid #d8d6d0;
+
+  color: #888888;
+
+  font-size: 12px;
+}
+
+
+/* ========================================================= */
+/* TABLET */
+/* ========================================================= */
+
+@media (max-width: 850px) {
+
+  .hero {
+    padding-top: 65px;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hair-lines-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hair-training-content {
+    min-height: 280px;
+    padding: 40px;
+  }
+
+  .hair-quiz,
+  .quiz-result {
+    padding: 38px;
+  }
+
+}
+
+
+/* ========================================================= */
+/* SMARTPHONE */
+/* ========================================================= */
+
+@media (max-width: 550px) {
+
+  .topbar {
+    padding: 22px 6%;
+  }
+
+  main {
+    width: 90%;
+  }
+
+  .hero {
+    padding: 55px 0;
+  }
+
+  .hero h2 {
+    letter-spacing: -2px;
+  }
+
+  .categories,
+  .results {
+    padding: 50px 0;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .section-heading h3 {
+    font-size: 30px;
+  }
+
+  .category-card {
+    padding: 22px;
+    min-height: 135px;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-detail {
+    padding: 25px;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-header h4 {
+    font-size: 30px;
+  }
+
+
+  /* HAIRCARE */
+
+  .hair-line-header {
+    min-height: 125px;
+
+    padding: 24px;
+  }
+
+  .hair-line-header h4 {
+    font-size: 26px;
+  }
+
+  .hair-products-list {
+    grid-template-columns: 1fr;
+  }
+
+  .hair-product-link {
+    border-right: none;
+  }
+
+
+  /* ALLENATI */
+
+  .hair-training-section {
+    margin-top: 24px;
+  }
+
+  .hair-training-content {
+    min-height: 290px;
+
+    padding: 30px 24px;
+  }
+
+  .hair-training-content h4 {
+    font-size: 32px;
+  }
+
+  .hair-training-description {
+    font-size: 14px;
+  }
+
+  .hair-training-content::after {
+    right: -5px;
+    bottom: -12px;
+
+    font-size: 100px;
+    letter-spacing: -5px;
+  }
+
+
+  /* QUIZ */
+
+  .hair-quiz {
+    padding: 28px 20px 30px;
+  }
+
+  .quiz-top {
+    align-items: flex-start;
+  }
+
+  .quiz-progress {
+    margin-top: 23px;
+    margin-bottom: 26px;
+  }
+
+  .quiz-question {
+    margin-bottom: 25px;
+
+    font-size: 25px;
+    line-height: 1.25;
+  }
+
+  .quiz-option {
+    min-height: 64px;
+
+    padding: 13px;
+
+    grid-template-columns: 34px 1fr;
+
+    gap: 11px;
+
+    font-size: 13px;
+  }
+
+  .quiz-option-letter {
+    width: 30px;
+    height: 30px;
+  }
+
+  .quiz-feedback {
+    padding: 19px;
+  }
+
+  .quiz-remember {
+    padding: 19px;
+  }
+
+
+  /* RISULTATO */
+
+  .quiz-result {
+    padding: 32px 22px;
+  }
+
+  .quiz-result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-result-score {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .quiz-result-score strong {
+    letter-spacing: -3px;
+  }
+
+  .quiz-result-score span {
+    padding-bottom: 0;
+  }
+
+  .quiz-result-actions {
+    flex-direction: column;
+  }
+
+  .quiz-result-actions button {
+    width: 100%;
+  }
+
+}
