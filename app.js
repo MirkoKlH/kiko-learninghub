@@ -2352,4 +2352,16 @@ searchInput.addEventListener(
     );
 
   }
-);
+);// TEST TEMPORANEO CONNESSIONE SUPABASE
+(async () => {
+  const { data, error } = await supabaseClient
+    .from("profiles")
+    .select("id")
+    .limit(1);
+
+  if (error) {
+    console.error("SUPABASE - ERRORE DI CONNESSIONE:", error);
+  } else {
+    console.log("SUPABASE - CONNESSIONE OK", data);
+  }
+})();
