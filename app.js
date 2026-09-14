@@ -2359,7 +2359,7 @@ searchInput.addEventListener(
 // =========================================================
 
 const APP_URL =
-  "https://mirkok1h.github.io/kiko-learninghub/";
+  "https://mirkoklh.github.io/kiko-learninghub/";
 
 const authScreen =
   document.getElementById("authScreen");
