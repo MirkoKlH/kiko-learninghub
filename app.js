@@ -2351,7 +2351,8 @@ searchInput.addEventListener(
       `Ricerca: "${searchInput.value}"`
     );
 
-  }
+    }
+);
 // =========================================================
 // AUTENTICAZIONE E CONTROLLO ACCESSO
 // =========================================================
