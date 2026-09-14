@@ -2351,14 +2351,24 @@ searchInput.addEventListener(
       `Ricerca: "${searchInput.value}"`
     );
 
-    }
+  }
 );
+
 // =========================================================
 // AUTENTICAZIONE E CONTROLLO ACCESSO
 // =========================================================
 
+const APP_URL =
+  "https://mirkok1h.github.io/kiko-learninghub/";
+
 const authScreen =
   document.getElementById("authScreen");
+
+const forgotPasswordScreen =
+  document.getElementById("forgotPasswordScreen");
+
+const updatePasswordScreen =
+  document.getElementById("updatePasswordScreen");
 
 const pendingScreen =
   document.getElementById("pendingScreen");
@@ -2378,19 +2388,46 @@ const loginForm =
 const registerForm =
   document.getElementById("registerForm");
 
+const forgotPasswordButton =
+  document.getElementById("forgotPasswordButton");
+
+const forgotPasswordForm =
+  document.getElementById("forgotPasswordForm");
+
+const backToLoginButton =
+  document.getElementById("backToLoginButton");
+
+const updatePasswordForm =
+  document.getElementById("updatePasswordForm");
+
 const authMessage =
   document.getElementById("authMessage");
 
+const forgotPasswordMessage =
+  document.getElementById("forgotPasswordMessage");
+
+const updatePasswordMessage =
+  document.getElementById("updatePasswordMessage");
+
+let modalitaRecuperoPassword = false;
 
 
 // =========================================================
 // SCHERMATE
 // =========================================================
 
-function nascondiSchermateAccesso() {
+function nascondiTutteLeSchermate() {
 
   if (authScreen) {
     authScreen.classList.add("hidden");
+  }
+
+  if (forgotPasswordScreen) {
+    forgotPasswordScreen.classList.add("hidden");
+  }
+
+  if (updatePasswordScreen) {
+    updatePasswordScreen.classList.add("hidden");
   }
 
   if (pendingScreen) {
@@ -2400,45 +2437,57 @@ function nascondiSchermateAccesso() {
   if (appContent) {
     appContent.classList.add("hidden");
   }
-
 }
-
 
 
 function mostraSchermataAccesso() {
 
-  nascondiSchermateAccesso();
+  nascondiTutteLeSchermate();
 
   if (authScreen) {
     authScreen.classList.remove("hidden");
   }
-
 }
 
+
+function mostraSchermataPasswordDimenticata() {
+
+  nascondiTutteLeSchermate();
+
+  if (forgotPasswordScreen) {
+    forgotPasswordScreen.classList.remove("hidden");
+  }
+}
+
+
+function mostraSchermataNuovaPassword() {
+
+  nascondiTutteLeSchermate();
+
+  if (updatePasswordScreen) {
+    updatePasswordScreen.classList.remove("hidden");
+  }
+}
 
 
 function mostraSchermataAttesa() {
 
-  nascondiSchermateAccesso();
+  nascondiTutteLeSchermate();
 
   if (pendingScreen) {
     pendingScreen.classList.remove("hidden");
   }
-
 }
-
 
 
 function mostraLearningHub() {
 
-  nascondiSchermateAccesso();
+  nascondiTutteLeSchermate();
 
   if (appContent) {
     appContent.classList.remove("hidden");
   }
-
 }
-
 
 
 // =========================================================
@@ -2447,74 +2496,214 @@ function mostraLearningHub() {
 
 function mostraLogin() {
 
-  if (!loginTab || !registerTab) {
-    return;
-  }
-
   loginTab.classList.add("active");
   registerTab.classList.remove("active");
 
-  if (loginForm) {
-    loginForm.classList.remove("hidden");
-  }
-
-  if (registerForm) {
-    registerForm.classList.add("hidden");
-  }
+  loginForm.classList.remove("hidden");
+  registerForm.classList.add("hidden");
 
   if (authMessage) {
     authMessage.textContent = "";
   }
-
 }
-
 
 
 function mostraRegistrazione() {
 
-  if (!loginTab || !registerTab) {
-    return;
-  }
-
   registerTab.classList.add("active");
   loginTab.classList.remove("active");
 
-  if (registerForm) {
-    registerForm.classList.remove("hidden");
-  }
-
-  if (loginForm) {
-    loginForm.classList.add("hidden");
-  }
+  registerForm.classList.remove("hidden");
+  loginForm.classList.add("hidden");
 
   if (authMessage) {
     authMessage.textContent = "";
   }
-
 }
 
 
-
 if (loginTab) {
-
   loginTab.addEventListener(
     "click",
     mostraLogin
   );
-
 }
 
 
-
 if (registerTab) {
-
   registerTab.addEventListener(
     "click",
     mostraRegistrazione
   );
-
 }
 
+
+// =========================================================
+// PASSWORD DIMENTICATA
+// =========================================================
+
+if (forgotPasswordButton) {
+
+  forgotPasswordButton.addEventListener(
+    "click",
+    () => {
+
+      if (forgotPasswordMessage) {
+        forgotPasswordMessage.textContent = "";
+      }
+
+      mostraSchermataPasswordDimenticata();
+    }
+  );
+}
+
+
+if (backToLoginButton) {
+
+  backToLoginButton.addEventListener(
+    "click",
+    () => {
+
+      mostraSchermataAccesso();
+      mostraLogin();
+    }
+  );
+}
+
+
+if (forgotPasswordForm) {
+
+  forgotPasswordForm.addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+      const email =
+        document
+          .getElementById("forgotPasswordEmail")
+          .value
+          .trim();
+
+      if (forgotPasswordMessage) {
+        forgotPasswordMessage.textContent =
+          "Invio del link in corso...";
+      }
+
+      const { error } =
+        await supabaseClient.auth
+          .resetPasswordForEmail(
+            email,
+            {
+              redirectTo: APP_URL
+            }
+          );
+
+      if (error) {
+
+        console.error(
+          "Errore recupero password:",
+          error
+        );
+
+        if (forgotPasswordMessage) {
+          forgotPasswordMessage.textContent =
+            "Non è stato possibile inviare il link. " +
+            error.message;
+        }
+
+        return;
+      }
+
+      forgotPasswordForm.reset();
+
+      if (forgotPasswordMessage) {
+        forgotPasswordMessage.textContent =
+          "Link inviato. Controlla la tua email.";
+      }
+    }
+  );
+}
+
+
+// =========================================================
+// NUOVA PASSWORD
+// =========================================================
+
+if (updatePasswordForm) {
+
+  updatePasswordForm.addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+      const nuovaPassword =
+        document
+          .getElementById("newPassword")
+          .value;
+
+      const confermaPassword =
+        document
+          .getElementById("confirmNewPassword")
+          .value;
+
+      if (
+        nuovaPassword !==
+        confermaPassword
+      ) {
+
+        updatePasswordMessage.textContent =
+          "Le due password non coincidono.";
+
+        return;
+      }
+
+      if (nuovaPassword.length < 6) {
+
+        updatePasswordMessage.textContent =
+          "La password deve contenere almeno 6 caratteri.";
+
+        return;
+      }
+
+      updatePasswordMessage.textContent =
+        "Aggiornamento password in corso...";
+
+      const { error } =
+        await supabaseClient.auth
+          .updateUser({
+            password: nuovaPassword
+          });
+
+      if (error) {
+
+        console.error(
+          "Errore aggiornamento password:",
+          error
+        );
+
+        updatePasswordMessage.textContent =
+          "Non è stato possibile aggiornare la password. " +
+          error.message;
+
+        return;
+      }
+
+      modalitaRecuperoPassword = false;
+
+      updatePasswordForm.reset();
+
+      await supabaseClient.auth.signOut();
+
+      mostraSchermataAccesso();
+      mostraLogin();
+
+      authMessage.textContent =
+        "Password aggiornata. Ora puoi accedere con la nuova password.";
+    }
+  );
+}
 
 
 // =========================================================
@@ -2528,18 +2717,17 @@ async function controllaProfiloUtente(user) {
     return;
   }
 
-
   const {
     data: profilo,
     error
-  } = await supabaseClient
-    .from("profiles")
-    .select(
-      "id, nome, cognome, email, stato, ruolo"
-    )
-    .eq("id", user.id)
-    .single();
-
+  } =
+    await supabaseClient
+      .from("profiles")
+      .select(
+        "id, nome, cognome, email, stato, ruolo"
+      )
+      .eq("id", user.id)
+      .single();
 
   if (error) {
 
@@ -2552,48 +2740,23 @@ async function controllaProfiloUtente(user) {
 
     if (authMessage) {
       authMessage.textContent =
-        "Non è stato possibile verificare il tuo profilo. Riprova.";
+        "Non è stato possibile verificare il tuo profilo.";
     }
 
     return;
   }
 
-
-  if (!profilo) {
-
-    mostraSchermataAccesso();
-
-    if (authMessage) {
-      authMessage.textContent =
-        "Profilo utente non trovato.";
-    }
-
-    return;
-  }
-
-
-  /*
-    L'utente può entrare solamente
-    se lo stato del profilo è "approvato".
-  */
-
-  if (profilo.stato === "approvato") {
+  if (
+    profilo.stato ===
+    "approvato"
+  ) {
 
     mostraLearningHub();
     return;
-
   }
 
-
-  /*
-    Tutti gli account non ancora approvati
-    rimangono fuori dal LearningHub.
-  */
-
   mostraSchermataAttesa();
-
 }
-
 
 
 // =========================================================
@@ -2608,13 +2771,11 @@ if (registerForm) {
 
       event.preventDefault();
 
-
       const nome =
         document
           .getElementById("registerNome")
           .value
           .trim();
-
 
       const cognome =
         document
@@ -2622,49 +2783,41 @@ if (registerForm) {
           .value
           .trim();
 
-
       const email =
         document
           .getElementById("registerEmail")
           .value
           .trim();
 
-
       const password =
         document
           .getElementById("registerPassword")
           .value;
 
-
-      if (authMessage) {
-        authMessage.textContent =
-          "Registrazione in corso...";
-      }
-
+      authMessage.textContent =
+        "Registrazione in corso...";
 
       const {
         data,
         error
-      } = await supabaseClient.auth.signUp({
+      } =
+        await supabaseClient.auth.signUp({
 
-        email: email,
+          email: email,
 
-        password: password,
+          password: password,
 
-        options: {
+          options: {
 
-          emailRedirectTo:
-            "https://mirkok1h.github.io/kiko-learninghub/",
+            emailRedirectTo:
+              APP_URL,
 
-          data: {
-            nome: nome,
-            cognome: cognome
+            data: {
+              nome: nome,
+              cognome: cognome
+            }
           }
-
-        }
-
-      });
-
+        });
 
       if (error) {
 
@@ -2673,39 +2826,25 @@ if (registerForm) {
           error
         );
 
-        if (authMessage) {
-          authMessage.textContent =
-            "Non è stato possibile completare la registrazione. " +
-            error.message;
-        }
+        authMessage.textContent =
+          "Non è stato possibile completare la registrazione. " +
+          error.message;
 
         return;
       }
-
 
       console.log(
         "Registrazione completata:",
         data
       );
 
-
       registerForm.reset();
 
-
-      if (authMessage) {
-
-        authMessage.textContent =
-          "Registrazione completata. " +
-          "Controlla la tua email e conferma l'indirizzo. " +
-          "Successivamente il tuo account dovrà essere approvato.";
-
-      }
-
+      authMessage.textContent =
+        "Registrazione completata. Controlla la tua email e conferma l'indirizzo. Dopo la verifica, il tuo account resterà in attesa di approvazione.";
     }
   );
-
 }
-
 
 
 // =========================================================
@@ -2720,25 +2859,19 @@ if (loginForm) {
 
       event.preventDefault();
 
-
       const email =
         document
           .getElementById("loginEmail")
           .value
           .trim();
 
-
       const password =
         document
           .getElementById("loginPassword")
           .value;
 
-
-      if (authMessage) {
-        authMessage.textContent =
-          "Accesso in corso...";
-      }
-
+      authMessage.textContent =
+        "Accesso in corso...";
 
       const {
         data,
@@ -2750,7 +2883,6 @@ if (loginForm) {
             password: password
           });
 
-
       if (error) {
 
         console.error(
@@ -2758,32 +2890,66 @@ if (loginForm) {
           error
         );
 
-        if (authMessage) {
-
-          authMessage.textContent =
-            "Email o password non corretti, " +
-            "oppure indirizzo email non ancora confermato.";
-
-        }
+        authMessage.textContent =
+          "Non è stato possibile accedere. Controlla email e password.";
 
         return;
       }
 
-
-      if (authMessage) {
-        authMessage.textContent = "";
-      }
-
+      authMessage.textContent = "";
 
       await controllaProfiloUtente(
         data.user
       );
-
     }
   );
-
 }
 
+
+// =========================================================
+// EVENTI SUPABASE
+// =========================================================
+
+supabaseClient.auth.onAuthStateChange(
+  (event, session) => {
+
+    setTimeout(
+      async () => {
+
+        if (
+          event ===
+          "PASSWORD_RECOVERY"
+        ) {
+
+          modalitaRecuperoPassword = true;
+
+          mostraSchermataNuovaPassword();
+
+          return;
+        }
+
+        if (modalitaRecuperoPassword) {
+
+          mostraSchermataNuovaPassword();
+
+          return;
+        }
+
+        if (!session) {
+
+          mostraSchermataAccesso();
+
+          return;
+        }
+
+        await controllaProfiloUtente(
+          session.user
+        );
+      },
+      0
+    );
+  }
+);
 
 
 // =========================================================
@@ -2792,15 +2958,13 @@ if (loginForm) {
 
 async function inizializzaAutenticazione() {
 
-  nascondiSchermateAccesso();
-
+  nascondiTutteLeSchermate();
 
   const {
     data,
     error
   } =
     await supabaseClient.auth.getSession();
-
 
   if (error) {
 
@@ -2810,68 +2974,32 @@ async function inizializzaAutenticazione() {
     );
 
     mostraSchermataAccesso();
-    return;
 
+    return;
   }
 
-
-  const sessione =
-    data.session;
-
-
-  if (!sessione) {
+  if (!data.session) {
 
     mostraSchermataAccesso();
-    return;
 
+    return;
   }
 
+  if (modalitaRecuperoPassword) {
+
+    mostraSchermataNuovaPassword();
+
+    return;
+  }
 
   await controllaProfiloUtente(
-    sessione.user
+    data.session.user
   );
-
 }
 
 
-
 // =========================================================
-// CAMBIAMENTI DI SESSIONE SUPABASE
-// =========================================================
-
-supabaseClient.auth.onAuthStateChange(
-  (event, session) => {
-
-    /*
-      Usiamo un breve timeout perché Supabase
-      completi prima internamente il cambio
-      di sessione.
-    */
-
-    setTimeout(
-      async () => {
-
-        if (!session) {
-          mostraSchermataAccesso();
-          return;
-        }
-
-
-        await controllaProfiloUtente(
-          session.user
-        );
-
-      },
-      0
-    );
-
-  }
-);
-
-
-
-// =========================================================
-// AVVIO AUTENTICAZIONE
+// AVVIO
 // =========================================================
 
 inizializzaAutenticazione();

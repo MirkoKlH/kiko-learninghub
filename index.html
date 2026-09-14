@@ -24,13 +24,9 @@
 
     <div class="auth-card">
 
-      <p class="eyebrow">
-        KIKO LE GRU
-      </p>
+      <p class="eyebrow">KIKO LE GRU</p>
 
-      <h1>
-        LearningHub
-      </h1>
+      <h1>LearningHub</h1>
 
 
       <div class="auth-tabs">
@@ -56,10 +52,7 @@
 
       <!-- LOGIN -->
 
-      <form
-        id="loginForm"
-        class="auth-form"
-      >
+      <form id="loginForm" class="auth-form">
 
         <label for="loginEmail">
           Email
@@ -92,7 +85,17 @@
           Accedi
         </button>
 
+
+        <button
+          type="button"
+          id="forgotPasswordButton"
+          class="auth-tab"
+        >
+          Password dimenticata?
+        </button>
+
       </form>
+
 
 
       <!-- REGISTRAZIONE -->
@@ -172,7 +175,144 @@
 
 
   <!-- =====================================================
-       ACCOUNT IN ATTESA DI APPROVAZIONE
+       PASSWORD DIMENTICATA
+  ====================================================== -->
+
+  <section
+    id="forgotPasswordScreen"
+    class="auth-screen hidden"
+  >
+
+    <div class="auth-card">
+
+      <p class="eyebrow">KIKO LE GRU</p>
+
+      <h1>Recupera password</h1>
+
+      <p class="auth-message">
+        Inserisci l'indirizzo email associato al tuo account.
+        Ti invieremo un link per scegliere una nuova password.
+      </p>
+
+
+      <form
+        id="forgotPasswordForm"
+        class="auth-form"
+      >
+
+        <label for="forgotPasswordEmail">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="forgotPasswordEmail"
+          autocomplete="email"
+          required
+        >
+
+        <button
+          type="submit"
+          class="auth-submit"
+        >
+          Invia link di recupero
+        </button>
+
+        <button
+          type="button"
+          id="backToLoginButton"
+          class="auth-tab"
+        >
+          ← Torna all'accesso
+        </button>
+
+      </form>
+
+
+      <p
+        id="forgotPasswordMessage"
+        class="auth-message"
+      ></p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       NUOVA PASSWORD
+  ====================================================== -->
+
+  <section
+    id="updatePasswordScreen"
+    class="auth-screen hidden"
+  >
+
+    <div class="auth-card">
+
+      <p class="eyebrow">KIKO LE GRU</p>
+
+      <h1>Scegli una nuova password</h1>
+
+      <p class="auth-message">
+        Inserisci la nuova password che vuoi utilizzare
+        per accedere al LearningHub.
+      </p>
+
+
+      <form
+        id="updatePasswordForm"
+        class="auth-form"
+      >
+
+        <label for="newPassword">
+          Nuova password
+        </label>
+
+        <input
+          type="password"
+          id="newPassword"
+          autocomplete="new-password"
+          required
+        >
+
+
+        <label for="confirmNewPassword">
+          Conferma password
+        </label>
+
+        <input
+          type="password"
+          id="confirmNewPassword"
+          autocomplete="new-password"
+          required
+        >
+
+
+        <button
+          type="submit"
+          class="auth-submit"
+        >
+          Salva nuova password
+        </button>
+
+      </form>
+
+
+      <p
+        id="updatePasswordMessage"
+        class="auth-message"
+      ></p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       ACCOUNT IN ATTESA
   ====================================================== -->
 
   <section
@@ -212,7 +352,6 @@
 
   <!-- =====================================================
        LEARNINGHUB
-       NASCOSTO FINCHÉ L'UTENTE NON È APPROVATO
   ====================================================== -->
 
   <div
@@ -247,26 +386,21 @@
     <main>
 
 
-      <!-- HERO -->
-
       <section class="hero">
 
         <p class="hero-label">
           FORMAZIONE PRODOTTO
         </p>
 
-
         <h2>
           Tutto quello che ti serve,
           <span>quando ti serve.</span>
         </h2>
 
-
         <p class="hero-text">
           Consulta rapidamente prodotti, ingredienti chiave,
           benefici e leve di vendita.
         </p>
-
 
         <div class="search-box">
 
@@ -281,8 +415,6 @@
       </section>
 
 
-
-      <!-- CATEGORIE -->
 
       <section class="categories">
 
@@ -303,11 +435,8 @@
         </div>
 
 
-
         <div class="category-grid">
 
-
-          <!-- CAPELLI -->
 
           <button
             class="category-card"
@@ -338,8 +467,6 @@
 
 
 
-          <!-- VISO -->
-
           <button
             class="category-card"
             data-category="viso"
@@ -368,8 +495,6 @@
           </button>
 
 
-
-          <!-- OCCHI -->
 
           <button
             class="category-card"
@@ -400,8 +525,6 @@
 
 
 
-          <!-- LABBRA -->
-
           <button
             class="category-card"
             data-category="labbra"
@@ -429,13 +552,12 @@
 
           </button>
 
+
         </div>
 
       </section>
 
 
-
-      <!-- RISULTATI -->
 
       <section
         id="resultsSection"
@@ -516,9 +638,6 @@
 
   </script>
 
-
-
-  <!-- DATI E APP -->
 
   <script src="data/prodotti.js"></script>
   <script src="data/quiz-capelli.js"></script>
