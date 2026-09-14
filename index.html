@@ -1,252 +1,530 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>KIKO Le Gru LearningHub</title>
 
-<link rel="icon" type="image/png" href="icon.png">
-<link rel="apple-touch-icon" href="icon.png">
-
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <header class="topbar">
-    <div>
-      <p class="eyebrow">KIKO LE GRU</p>
-      <h1>LearningHub</h1>
-    </div>
 
-    <div class="version">v0.1.1</div>
-  </header>
+  <!-- =====================================================
+       ACCESSO / REGISTRAZIONE
+  ====================================================== -->
 
+  <section id="authScreen" class="auth-screen">
 
-  <main>
+    <div class="auth-card">
 
-    <section class="hero">
-
-      <p class="hero-label">
-        FORMAZIONE PRODOTTO
+      <p class="eyebrow">
+        KIKO LE GRU
       </p>
 
-      <h2>
-        Tutto quello che ti serve,
-        <span>quando ti serve.</span>
-      </h2>
+      <h1>
+        LearningHub
+      </h1>
 
-      <p class="hero-text">
-        Consulta rapidamente prodotti, ingredienti chiave,
-        benefici e leve di vendita.
-      </p>
 
-      <div class="search-box">
+      <div class="auth-tabs">
+
+        <button
+          id="loginTab"
+          class="auth-tab active"
+          type="button"
+        >
+          Accedi
+        </button>
+
+        <button
+          id="registerTab"
+          class="auth-tab"
+          type="button"
+        >
+          Registrati
+        </button>
+
+      </div>
+
+
+      <!-- LOGIN -->
+
+      <form
+        id="loginForm"
+        class="auth-form"
+      >
+
+        <label for="loginEmail">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="loginEmail"
+          autocomplete="email"
+          required
+        >
+
+
+        <label for="loginPassword">
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="loginPassword"
+          autocomplete="current-password"
+          required
+        >
+
+
+        <button
+          type="submit"
+          class="auth-submit"
+        >
+          Accedi
+        </button>
+
+      </form>
+
+
+      <!-- REGISTRAZIONE -->
+
+      <form
+        id="registerForm"
+        class="auth-form hidden"
+      >
+
+        <label for="registerNome">
+          Nome
+        </label>
 
         <input
           type="text"
-          id="searchInput"
-          placeholder="Cerca un prodotto, ingrediente o esigenza..."
+          id="registerNome"
+          autocomplete="given-name"
+          required
         >
+
+
+        <label for="registerCognome">
+          Cognome
+        </label>
+
+        <input
+          type="text"
+          id="registerCognome"
+          autocomplete="family-name"
+          required
+        >
+
+
+        <label for="registerEmail">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="registerEmail"
+          autocomplete="email"
+          required
+        >
+
+
+        <label for="registerPassword">
+          Password
+        </label>
+
+        <input
+          type="password"
+          id="registerPassword"
+          autocomplete="new-password"
+          required
+        >
+
+
+        <button
+          type="submit"
+          class="auth-submit"
+        >
+          Registrati
+        </button>
+
+      </form>
+
+
+      <p
+        id="authMessage"
+        class="auth-message"
+      ></p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       ACCOUNT IN ATTESA DI APPROVAZIONE
+  ====================================================== -->
+
+  <section
+    id="pendingScreen"
+    class="auth-screen hidden"
+  >
+
+    <div class="auth-card">
+
+      <p class="eyebrow">
+        KIKO LE GRU
+      </p>
+
+      <h1>
+        Richiesta ricevuta
+      </h1>
+
+      <p class="auth-message">
+        Il tuo account è stato creato correttamente.
+      </p>
+
+      <p class="auth-message">
+        L'accesso al LearningHub deve essere approvato
+        da un amministratore.
+      </p>
+
+      <p class="auth-message">
+        Una volta autorizzato potrai accedere
+        con la tua email e la tua password.
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       LEARNINGHUB
+       NASCOSTO FINCHÉ L'UTENTE NON È APPROVATO
+  ====================================================== -->
+
+  <div
+    id="appContent"
+    class="hidden"
+  >
+
+
+    <header class="topbar">
+
+      <div>
+
+        <p class="eyebrow">
+          KIKO LE GRU
+        </p>
+
+        <h1>
+          LearningHub
+        </h1>
 
       </div>
 
-    </section>
+
+      <div class="version">
+        v0.1.1
+      </div>
+
+    </header>
 
 
-    <section class="categories">
 
-      <div class="section-heading">
+    <main>
 
-        <div>
-          <p class="section-label">
-            ESPLORA
-          </p>
 
-          <h3>
-            Categorie
-          </h3>
+      <!-- HERO -->
+
+      <section class="hero">
+
+        <p class="hero-label">
+          FORMAZIONE PRODOTTO
+        </p>
+
+
+        <h2>
+          Tutto quello che ti serve,
+          <span>quando ti serve.</span>
+        </h2>
+
+
+        <p class="hero-text">
+          Consulta rapidamente prodotti, ingredienti chiave,
+          benefici e leve di vendita.
+        </p>
+
+
+        <div class="search-box">
+
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Cerca un prodotto, ingrediente o esigenza..."
+          >
+
         </div>
 
-      </div>
+      </section>
 
 
-      <div class="category-grid">
 
-        <button
-          class="category-card"
-          data-category="capelli"
-        >
+      <!-- CATEGORIE -->
 
-          <span class="category-number">
-            01
-          </span>
+      <section class="categories">
+
+        <div class="section-heading">
 
           <div>
-            <h4>
-              Capelli
-            </h4>
 
-            <p>
-              Haircare, styling e trattamenti
+            <p class="section-label">
+              ESPLORA
             </p>
+
+            <h3>
+              Categorie
+            </h3>
+
           </div>
-
-          <span class="arrow">
-            →
-          </span>
-
-        </button>
-
-
-        <button
-          class="category-card"
-          data-category="viso"
-        >
-
-          <span class="category-number">
-            02
-          </span>
-
-          <div>
-            <h4>
-              Viso
-            </h4>
-
-            <p>
-              Base, complexion e skincare
-            </p>
-          </div>
-
-          <span class="arrow">
-            →
-          </span>
-
-        </button>
-
-
-        <button
-          class="category-card"
-          data-category="occhi"
-        >
-
-          <span class="category-number">
-            03
-          </span>
-
-          <div>
-            <h4>
-              Occhi
-            </h4>
-
-            <p>
-              Mascara, palette, liner e sopracciglia
-            </p>
-          </div>
-
-          <span class="arrow">
-            →
-          </span>
-
-        </button>
-
-
-        <button
-          class="category-card"
-          data-category="labbra"
-        >
-
-          <span class="category-number">
-            04
-          </span>
-
-          <div>
-            <h4>
-              Labbra
-            </h4>
-
-            <p>
-              Rossetti, matite e trattamenti
-            </p>
-          </div>
-
-          <span class="arrow">
-            →
-          </span>
-
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <section
-      id="resultsSection"
-      class="results hidden"
-    >
-
-      <div class="section-heading">
-
-        <div>
-
-          <p class="section-label">
-            RISULTATI
-          </p>
-
-          <h3 id="resultsTitle">
-            Prodotti
-          </h3>
 
         </div>
 
 
-        <button
-          id="backButton"
-          class="back-button"
-        >
-          ← Tutte le categorie
-        </button>
 
-      </div>
+        <div class="category-grid">
 
 
-      <div
-        id="productGrid"
-        class="product-grid"
-      ></div>
+          <!-- CAPELLI -->
 
-    </section>
+          <button
+            class="category-card"
+            data-category="capelli"
+          >
 
-  </main>
+            <span class="category-number">
+              01
+            </span>
+
+            <div>
+
+              <h4>
+                Capelli
+              </h4>
+
+              <p>
+                Haircare, styling e trattamenti
+              </p>
+
+            </div>
+
+            <span class="arrow">
+              →
+            </span>
+
+          </button>
 
 
-  <footer>
 
-    <p>
-      KIKO Le Gru · LearningHub
-    </p>
+          <!-- VISO -->
 
-  </footer>
+          <button
+            class="category-card"
+            data-category="viso"
+          >
 
+            <span class="category-number">
+              02
+            </span>
+
+            <div>
+
+              <h4>
+                Viso
+              </h4>
+
+              <p>
+                Base, complexion e skincare
+              </p>
+
+            </div>
+
+            <span class="arrow">
+              →
+            </span>
+
+          </button>
+
+
+
+          <!-- OCCHI -->
+
+          <button
+            class="category-card"
+            data-category="occhi"
+          >
+
+            <span class="category-number">
+              03
+            </span>
+
+            <div>
+
+              <h4>
+                Occhi
+              </h4>
+
+              <p>
+                Mascara, palette, liner e sopracciglia
+              </p>
+
+            </div>
+
+            <span class="arrow">
+              →
+            </span>
+
+          </button>
+
+
+
+          <!-- LABBRA -->
+
+          <button
+            class="category-card"
+            data-category="labbra"
+          >
+
+            <span class="category-number">
+              04
+            </span>
+
+            <div>
+
+              <h4>
+                Labbra
+              </h4>
+
+              <p>
+                Rossetti, matite e trattamenti
+              </p>
+
+            </div>
+
+            <span class="arrow">
+              →
+            </span>
+
+          </button>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- RISULTATI -->
+
+      <section
+        id="resultsSection"
+        class="results hidden"
+      >
+
+        <div class="section-heading">
+
+          <div>
+
+            <p class="section-label">
+              RISULTATI
+            </p>
+
+            <h3 id="resultsTitle">
+              Prodotti
+            </h3>
+
+          </div>
+
+
+          <button
+            id="backButton"
+            class="back-button"
+          >
+            ← Tutte le categorie
+          </button>
+
+        </div>
+
+
+        <div
+          id="productGrid"
+          class="product-grid"
+        ></div>
+
+      </section>
+
+
+    </main>
+
+
+
+    <footer>
+
+      <p>
+        KIKO Le Gru · LearningHub
+      </p>
+
+    </footer>
+
+
+  </div>
+
+
+
+  <!-- =====================================================
+       SUPABASE
+  ====================================================== -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
-<script>
-  const SUPABASE_URL = "https://ffmpiiuwsltpraisqgnj.supabase.co";
-  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_F5b0unQHnvcW4a_CbCL2kA_dWdpzUFI";
 
-  const supabaseClient = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
-</script>
+  <script>
 
-<script src="data/prodotti.js"></script>
-<script src="data/quiz-capelli.js"></script>
-<script src="app.js"></script>
+    const SUPABASE_URL =
+      "https://ffmpiiuwsltpraisqgnj.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_F5b0unQHnvcW4a_CbCL2kA_dWdpzUFI";
+
+
+    const supabaseClient =
+      supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+      );
+
+  </script>
+
+
+
+  <!-- DATI E APP -->
+
+  <script src="data/prodotti.js"></script>
+  <script src="data/quiz-capelli.js"></script>
+  <script src="app.js"></script>
+
 
 </body>
+
 </html>

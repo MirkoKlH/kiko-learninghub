@@ -2352,16 +2352,525 @@ searchInput.addEventListener(
     );
 
   }
-);// TEST TEMPORANEO CONNESSIONE SUPABASE
-(async () => {
-  const { data, error } = await supabaseClient
+// =========================================================
+// AUTENTICAZIONE E CONTROLLO ACCESSO
+// =========================================================
+
+const authScreen =
+  document.getElementById("authScreen");
+
+const pendingScreen =
+  document.getElementById("pendingScreen");
+
+const appContent =
+  document.getElementById("appContent");
+
+const loginTab =
+  document.getElementById("loginTab");
+
+const registerTab =
+  document.getElementById("registerTab");
+
+const loginForm =
+  document.getElementById("loginForm");
+
+const registerForm =
+  document.getElementById("registerForm");
+
+const authMessage =
+  document.getElementById("authMessage");
+
+
+
+// =========================================================
+// SCHERMATE
+// =========================================================
+
+function nascondiSchermateAccesso() {
+
+  if (authScreen) {
+    authScreen.classList.add("hidden");
+  }
+
+  if (pendingScreen) {
+    pendingScreen.classList.add("hidden");
+  }
+
+  if (appContent) {
+    appContent.classList.add("hidden");
+  }
+
+}
+
+
+
+function mostraSchermataAccesso() {
+
+  nascondiSchermateAccesso();
+
+  if (authScreen) {
+    authScreen.classList.remove("hidden");
+  }
+
+}
+
+
+
+function mostraSchermataAttesa() {
+
+  nascondiSchermateAccesso();
+
+  if (pendingScreen) {
+    pendingScreen.classList.remove("hidden");
+  }
+
+}
+
+
+
+function mostraLearningHub() {
+
+  nascondiSchermateAccesso();
+
+  if (appContent) {
+    appContent.classList.remove("hidden");
+  }
+
+}
+
+
+
+// =========================================================
+// TAB ACCEDI / REGISTRATI
+// =========================================================
+
+function mostraLogin() {
+
+  if (!loginTab || !registerTab) {
+    return;
+  }
+
+  loginTab.classList.add("active");
+  registerTab.classList.remove("active");
+
+  if (loginForm) {
+    loginForm.classList.remove("hidden");
+  }
+
+  if (registerForm) {
+    registerForm.classList.add("hidden");
+  }
+
+  if (authMessage) {
+    authMessage.textContent = "";
+  }
+
+}
+
+
+
+function mostraRegistrazione() {
+
+  if (!loginTab || !registerTab) {
+    return;
+  }
+
+  registerTab.classList.add("active");
+  loginTab.classList.remove("active");
+
+  if (registerForm) {
+    registerForm.classList.remove("hidden");
+  }
+
+  if (loginForm) {
+    loginForm.classList.add("hidden");
+  }
+
+  if (authMessage) {
+    authMessage.textContent = "";
+  }
+
+}
+
+
+
+if (loginTab) {
+
+  loginTab.addEventListener(
+    "click",
+    mostraLogin
+  );
+
+}
+
+
+
+if (registerTab) {
+
+  registerTab.addEventListener(
+    "click",
+    mostraRegistrazione
+  );
+
+}
+
+
+
+// =========================================================
+// CONTROLLO PROFILO
+// =========================================================
+
+async function controllaProfiloUtente(user) {
+
+  if (!user) {
+    mostraSchermataAccesso();
+    return;
+  }
+
+
+  const {
+    data: profilo,
+    error
+  } = await supabaseClient
     .from("profiles")
-    .select("id")
-    .limit(1);
+    .select(
+      "id, nome, cognome, email, stato, ruolo"
+    )
+    .eq("id", user.id)
+    .single();
+
 
   if (error) {
-    console.error("SUPABASE - ERRORE DI CONNESSIONE:", error);
-  } else {
-    console.log("SUPABASE - CONNESSIONE OK", data);
+
+    console.error(
+      "Errore lettura profilo:",
+      error
+    );
+
+    mostraSchermataAccesso();
+
+    if (authMessage) {
+      authMessage.textContent =
+        "Non è stato possibile verificare il tuo profilo. Riprova.";
+    }
+
+    return;
   }
-})();
+
+
+  if (!profilo) {
+
+    mostraSchermataAccesso();
+
+    if (authMessage) {
+      authMessage.textContent =
+        "Profilo utente non trovato.";
+    }
+
+    return;
+  }
+
+
+  /*
+    L'utente può entrare solamente
+    se lo stato del profilo è "approvato".
+  */
+
+  if (profilo.stato === "approvato") {
+
+    mostraLearningHub();
+    return;
+
+  }
+
+
+  /*
+    Tutti gli account non ancora approvati
+    rimangono fuori dal LearningHub.
+  */
+
+  mostraSchermataAttesa();
+
+}
+
+
+
+// =========================================================
+// REGISTRAZIONE
+// =========================================================
+
+if (registerForm) {
+
+  registerForm.addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      const nome =
+        document
+          .getElementById("registerNome")
+          .value
+          .trim();
+
+
+      const cognome =
+        document
+          .getElementById("registerCognome")
+          .value
+          .trim();
+
+
+      const email =
+        document
+          .getElementById("registerEmail")
+          .value
+          .trim();
+
+
+      const password =
+        document
+          .getElementById("registerPassword")
+          .value;
+
+
+      if (authMessage) {
+        authMessage.textContent =
+          "Registrazione in corso...";
+      }
+
+
+      const {
+        data,
+        error
+      } = await supabaseClient.auth.signUp({
+
+        email: email,
+
+        password: password,
+
+        options: {
+
+          emailRedirectTo:
+            "https://mirkok1h.github.io/kiko-learninghub/",
+
+          data: {
+            nome: nome,
+            cognome: cognome
+          }
+
+        }
+
+      });
+
+
+      if (error) {
+
+        console.error(
+          "Errore registrazione:",
+          error
+        );
+
+        if (authMessage) {
+          authMessage.textContent =
+            "Non è stato possibile completare la registrazione. " +
+            error.message;
+        }
+
+        return;
+      }
+
+
+      console.log(
+        "Registrazione completata:",
+        data
+      );
+
+
+      registerForm.reset();
+
+
+      if (authMessage) {
+
+        authMessage.textContent =
+          "Registrazione completata. " +
+          "Controlla la tua email e conferma l'indirizzo. " +
+          "Successivamente il tuo account dovrà essere approvato.";
+
+      }
+
+    }
+  );
+
+}
+
+
+
+// =========================================================
+// LOGIN
+// =========================================================
+
+if (loginForm) {
+
+  loginForm.addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      const email =
+        document
+          .getElementById("loginEmail")
+          .value
+          .trim();
+
+
+      const password =
+        document
+          .getElementById("loginPassword")
+          .value;
+
+
+      if (authMessage) {
+        authMessage.textContent =
+          "Accesso in corso...";
+      }
+
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient.auth
+          .signInWithPassword({
+            email: email,
+            password: password
+          });
+
+
+      if (error) {
+
+        console.error(
+          "Errore accesso:",
+          error
+        );
+
+        if (authMessage) {
+
+          authMessage.textContent =
+            "Email o password non corretti, " +
+            "oppure indirizzo email non ancora confermato.";
+
+        }
+
+        return;
+      }
+
+
+      if (authMessage) {
+        authMessage.textContent = "";
+      }
+
+
+      await controllaProfiloUtente(
+        data.user
+      );
+
+    }
+  );
+
+}
+
+
+
+// =========================================================
+// CONTROLLO SESSIONE ALL'APERTURA
+// =========================================================
+
+async function inizializzaAutenticazione() {
+
+  nascondiSchermateAccesso();
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient.auth.getSession();
+
+
+  if (error) {
+
+    console.error(
+      "Errore controllo sessione:",
+      error
+    );
+
+    mostraSchermataAccesso();
+    return;
+
+  }
+
+
+  const sessione =
+    data.session;
+
+
+  if (!sessione) {
+
+    mostraSchermataAccesso();
+    return;
+
+  }
+
+
+  await controllaProfiloUtente(
+    sessione.user
+  );
+
+}
+
+
+
+// =========================================================
+// CAMBIAMENTI DI SESSIONE SUPABASE
+// =========================================================
+
+supabaseClient.auth.onAuthStateChange(
+  (event, session) => {
+
+    /*
+      Usiamo un breve timeout perché Supabase
+      completi prima internamente il cambio
+      di sessione.
+    */
+
+    setTimeout(
+      async () => {
+
+        if (!session) {
+          mostraSchermataAccesso();
+          return;
+        }
+
+
+        await controllaProfiloUtente(
+          session.user
+        );
+
+      },
+      0
+    );
+
+  }
+);
+
+
+
+// =========================================================
+// AVVIO AUTENTICAZIONE
+// =========================================================
+
+inizializzaAutenticazione();
