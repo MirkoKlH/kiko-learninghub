@@ -1832,3 +1832,242 @@ footer {
 .hidden {
   display: none !important;
 }
+
+/* =========================================================
+   HOME - CATEGORIE COMPATTE E COLORATE
+========================================================= */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+
+.category-card {
+  position: relative;
+
+  min-height: 145px;
+  padding: 20px;
+
+  display: grid;
+  grid-template-columns: 45px 1fr auto;
+  align-items: center;
+  gap: 18px;
+
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  background: var(--white);
+  color: var(--black);
+
+  text-align: left;
+  cursor: pointer;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+
+/* BARRA COLORE */
+
+.category-card::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 6px;
+
+  background: var(--category-color);
+}
+
+
+/* HOVER */
+
+.category-card:hover {
+  background: var(--white);
+  color: var(--black);
+
+  border-color: var(--category-color);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.07);
+}
+
+
+.category-card:hover h4 {
+  color: var(--black);
+}
+
+
+.category-card:hover p {
+  color: #777777;
+}
+
+
+.category-card:hover .category-number,
+.category-card:hover .arrow {
+  color: var(--category-color);
+}
+
+
+/* NUMERO */
+
+.category-number {
+  min-width: 45px;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  color: var(--category-color);
+
+  align-self: center;
+}
+
+
+/* TESTI */
+
+.category-card h4 {
+  margin: 0 0 6px;
+
+  font-size: 21px;
+
+  color: var(--black);
+}
+
+
+.category-card p {
+  margin: 0;
+
+  font-size: 13px;
+  line-height: 1.35;
+
+  color: #777777;
+}
+
+
+/* FRECCIA */
+
+.category-card .arrow {
+  font-size: 21px;
+
+  color: var(--category-color);
+}
+
+
+/* =========================================================
+   COLORI CATEGORIE
+========================================================= */
+
+.category-capelli {
+  --category-color: #8eb7c5;
+}
+
+
+.category-skincare {
+  --category-color: #9caf88;
+}
+
+
+.category-viso {
+  --category-color: #d5aaa4;
+}
+
+
+.category-occhi {
+  --category-color: #ac96c8;
+}
+
+
+.category-labbra {
+  --category-color: #c85f7d;
+}
+
+
+.category-collection {
+  --category-color: #dc876e;
+}
+
+
+/* =========================================================
+   TABLET E SMARTPHONE
+   Manteniamo SEMPRE due colonne
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   SMARTPHONE
+========================================================= */
+
+@media (max-width: 550px) {
+
+  .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+
+  .category-card {
+    min-height: 140px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 8px;
+
+    padding: 16px 14px;
+  }
+
+
+  .category-number {
+    min-width: 0;
+
+    font-size: 11px;
+  }
+
+
+  .category-card h4 {
+    margin-bottom: 5px;
+
+    font-size: 17px;
+  }
+
+
+  .category-card p {
+    font-size: 11.5px;
+    line-height: 1.3;
+  }
+
+
+  .category-card .arrow {
+    position: absolute;
+
+    right: 14px;
+    top: 13px;
+
+    font-size: 17px;
+  }
+
+}
