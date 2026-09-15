@@ -2960,6 +2960,26 @@ async function inizializzaAutenticazione() {
 
   nascondiTutteLeSchermate();
 
+  // Se siamo entrati dal link di recupero password,
+  // lasciamo a onAuthStateChange la gestione della schermata.
+  const hash =
+    window.location.hash;
+
+  const query =
+    window.location.search;
+
+  if (
+    hash.includes("type=recovery") ||
+    query.includes("type=recovery")
+  ) {
+
+    modalitaRecuperoPassword = true;
+
+    mostraSchermataNuovaPassword();
+
+    return;
+  }
+
   const {
     data,
     error
@@ -2978,16 +2998,16 @@ async function inizializzaAutenticazione() {
     return;
   }
 
-  if (!data.session) {
+  if (modalitaRecuperoPassword) {
 
-    mostraSchermataAccesso();
+    mostraSchermataNuovaPassword();
 
     return;
   }
 
-  if (modalitaRecuperoPassword) {
+  if (!data.session) {
 
-    mostraSchermataNuovaPassword();
+    mostraSchermataAccesso();
 
     return;
   }
@@ -2996,7 +3016,6 @@ async function inizializzaAutenticazione() {
     data.session.user
   );
 }
-
 
 // =========================================================
 // AVVIO
