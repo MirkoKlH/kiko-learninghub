@@ -2701,6 +2701,9 @@ mostraLogin();
 
 authMessage.textContent =
   "Password aggiornata. Ora puoi accedere con la nuova password.";
+      }
+  );
+}
 
 // =========================================================
 // CONTROLLO PROFILO
