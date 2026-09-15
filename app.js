@@ -2690,21 +2690,17 @@ if (updatePasswordForm) {
         return;
       }
 
-      modalitaRecuperoPassword = false;
+    updatePasswordForm.reset();
 
-      updatePasswordForm.reset();
+await supabaseClient.auth.signOut();
 
-      await supabaseClient.auth.signOut();
+modalitaRecuperoPassword = false;
 
-      mostraSchermataAccesso();
-      mostraLogin();
+mostraSchermataAccesso();
+mostraLogin();
 
-      authMessage.textContent =
-        "Password aggiornata. Ora puoi accedere con la nuova password.";
-    }
-  );
-}
-
+authMessage.textContent =
+  "Password aggiornata. Ora puoi accedere con la nuova password.";
 
 // =========================================================
 // CONTROLLO PROFILO
