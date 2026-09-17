@@ -338,6 +338,77 @@ function contaConceptValutati() {
     progressi.concepts
   ).length;
 }
+// =========================================================
+// KNOWLEDGE SCORE GENERALE
+// =========================================================
+
+function calcolaStatisticheGenerali() {
+
+  const progressi =
+    caricaProgressiHair();
+
+  const conceptsTotaliHair = [
+    ...new Set(
+      quizCapelli
+        .filter(
+          domanda =>
+            domanda.tipo ===
+            "principale"
+        )
+        .map(
+          domanda =>
+            domanda.concept
+        )
+    )
+  ];
+
+  const conceptsValutati =
+    Object.values(
+      progressi.concepts
+    );
+
+  const totaleValutati =
+    conceptsValutati.length;
+
+  const totaleDisponibili =
+    conceptsTotaliHair.length;
+
+  let knowledgeScore = null;
+
+  if (totaleValutati > 0) {
+
+    const sommaMastery =
+      conceptsValutati.reduce(
+        (somma, concept) =>
+          somma +
+          (concept.mastery || 0),
+        0
+      );
+
+    knowledgeScore =
+      Math.round(
+        sommaMastery /
+        totaleValutati
+      );
+  }
+
+  const copertura =
+    totaleDisponibili > 0
+      ? Math.round(
+          (
+            totaleValutati /
+            totaleDisponibili
+          ) * 100
+        )
+      : 0;
+
+  return {
+    knowledgeScore,
+    copertura,
+    totaleValutati,
+    totaleDisponibili
+  };
+}
 
 // =========================================================
 // RIEPILOGO PERCORSO HAIRCARE
@@ -2704,6 +2775,92 @@ authMessage.textContent =
       }
   );
 }
+let profiloCorrente = null;
+let utenteCorrente = null;
+// =========================================================
+// DATI PROFILO
+// =========================================================
+
+function aggiornaMenuProfilo(profilo, user) {
+profiloCorrente = profilo;
+utenteCorrente = user;
+
+  const nome =
+    profilo?.nome || "";
+
+  const cognome =
+    profilo?.cognome || "";
+
+  const email =
+    profilo?.email ||
+    user?.email ||
+    "";
+
+  const nomeCompleto =
+    `${nome} ${cognome}`.trim();
+
+  const iniziale =
+    nome
+      ? nome.charAt(0).toUpperCase()
+      : "?";
+
+  const profileAvatars =
+    document.querySelectorAll(
+      ".profile-avatar, .profile-menu-avatar"
+    );
+
+  profileAvatars.forEach(
+    avatar => {
+      avatar.textContent = iniziale;
+    }
+  );
+
+  const profileName =
+    document.getElementById(
+      "profileName"
+    );
+
+  const profileEmail =
+    document.getElementById(
+      "profileEmail"
+    );
+
+  if (profileName) {
+    profileName.textContent =
+      nomeCompleto || "Utente";
+  }
+
+  if (profileEmail) {
+    profileEmail.textContent = email;
+  }
+const statistiche =
+  calcolaStatisticheGenerali();
+
+const generalKnowledgeScore =
+  document.getElementById(
+    "generalKnowledgeScore"
+  );
+
+const learningHubCoverage =
+  document.getElementById(
+    "learningHubCoverage"
+  );
+
+if (generalKnowledgeScore) {
+
+  generalKnowledgeScore.textContent =
+    statistiche.knowledgeScore === null
+      ? "Da valutare"
+      : `${statistiche.knowledgeScore}%`;
+}
+
+if (learningHubCoverage) {
+
+  learningHubCoverage.textContent =
+    `${statistiche.copertura}%`;
+}
+}
+
 
 // =========================================================
 // CONTROLLO PROFILO
@@ -2745,18 +2902,21 @@ async function controllaProfiloUtente(user) {
     return;
   }
 
-  if (
-    profilo.stato ===
-    "approvato"
-  ) {
+if (
+  profilo.stato ===
+  "approvato"
+) {
 
-    mostraLearningHub();
-    return;
-  }
+  aggiornaMenuProfilo(
+    profilo,
+    user
+  );
 
-  mostraSchermataAttesa();
+  mostraLearningHub();
+
+  return;
 }
-
+}
 
 // =========================================================
 // REGISTRAZIONE
@@ -3019,5 +3179,38 @@ async function inizializzaAutenticazione() {
 // =========================================================
 // AVVIO
 // =========================================================
+// =========================================================
+// MENU PROFILO
+// =========================================================
+
+profileButton.addEventListener(
+  "click",
+  event => {
+
+    event.stopPropagation();
+
+    const menuAperto =
+      !profileMenu.classList.contains("hidden");
+
+    if (
+      menuAperto === false &&
+      profiloCorrente &&
+      utenteCorrente
+    ) {
+
+      aggiornaMenuProfilo(
+        profiloCorrente,
+        utenteCorrente
+      );
+    }
+
+    profileMenu.classList.toggle("hidden");
+
+    profileButton.setAttribute(
+      "aria-expanded",
+      String(!menuAperto)
+    );
+  }
+);
 
 inizializzaAutenticazione();

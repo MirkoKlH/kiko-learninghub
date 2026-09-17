@@ -375,9 +375,128 @@
       </div>
 
 
-      <div class="version">
-        v0.1.1
-      </div>
+  <div class="topbar-actions">
+
+  <div class="version">
+    v0.1.1
+  </div>
+
+  <button
+    id="profileButton"
+    class="profile-button"
+    type="button"
+    aria-expanded="false"
+    aria-controls="profileMenu"
+  >
+    <span class="profile-avatar">
+      M
+    </span>
+
+    <span>
+      Profilo
+    </span>
+
+    <span class="profile-chevron">
+      ▾
+    </span>
+  </button>
+<div
+  id="profileMenu"
+  class="profile-menu hidden"
+>
+
+  <div class="profile-menu-header">
+
+    <div class="profile-menu-avatar">
+      M
+    </div>
+
+    <div>
+      <strong id="profileName">
+  Utente
+</strong>
+
+<span id="profileEmail">
+</span>
+    </div>
+
+  </div>
+
+  <div class="profile-menu-section">
+
+    <div class="profile-stat-heading">
+      <span>Knowledge Score generale</span>
+      <strong id="generalKnowledgeScore">
+  Da valutare
+</strong>
+    </div>
+
+    <div class="profile-progress">
+      <div
+        class="profile-progress-bar"
+        style="width: 0%"
+      ></div>
+    </div>
+
+    <p>
+      Quanto padroneggi le conoscenze
+      già valutate.
+    </p>
+
+  </div>
+
+  <div class="profile-menu-section">
+
+    <div class="profile-stat-heading">
+      <span>Copertura LearningHub</span>
+      <strong id="learningHubCoverage">
+  0%
+</strong>
+    </div>
+
+    <div class="profile-progress">
+      <div
+        class="profile-progress-bar"
+        style="width: 0%"
+      ></div>
+    </div>
+
+    <p>
+      Quanto del percorso è già stato
+      valutato.
+    </p>
+
+  </div>
+
+  <div class="profile-menu-section profile-notifications">
+
+    <div>
+      <strong>Notifiche</strong>
+      <span>Promemoria di apprendimento</span>
+    </div>
+
+    <button
+      class="notification-toggle"
+      type="button"
+      aria-label="Attiva notifiche"
+      aria-pressed="false"
+    >
+      <span></span>
+    </button>
+
+  </div>
+
+  <button
+    id="logoutButton"
+    class="profile-logout"
+    type="button"
+  >
+    Esci dall'account
+  </button>
+
+</div>
+
+</div>
 
     </header>
 
@@ -705,3 +824,200 @@
 </body>
 
 </html>
+/* =========================================================
+   PROFILO - MENU
+   ========================================================= */
+
+.topbar-actions {
+  position: relative;
+}
+
+.profile-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 1000;
+
+  width: 320px;
+  padding: 18px;
+
+  background: #ffffff;
+  color: #111111;
+
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 18px;
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.18);
+}
+
+.profile-menu-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding-bottom: 16px;
+}
+
+.profile-menu-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #111111;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.profile-menu-header > div:last-child {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.profile-menu-header strong {
+  font-size: 15px;
+}
+
+.profile-menu-header span {
+  overflow: hidden;
+
+  color: #777777;
+
+  font-size: 12px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-menu-section {
+  padding: 16px 0;
+
+  border-top: 1px solid #e8e8e8;
+}
+
+.profile-stat-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-bottom: 10px;
+}
+
+.profile-stat-heading span {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.profile-stat-heading strong {
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.profile-progress {
+  width: 100%;
+  height: 6px;
+
+  overflow: hidden;
+
+  background: #e9e9e9;
+  border-radius: 999px;
+}
+
+.profile-progress-bar {
+  height: 100%;
+
+  background: #111111;
+  border-radius: inherit;
+}
+
+.profile-menu-section p {
+  margin: 8px 0 0;
+
+  color: #777777;
+
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.profile-notifications {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.profile-notifications > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.profile-notifications strong {
+  font-size: 13px;
+}
+
+.profile-notifications span {
+  color: #777777;
+  font-size: 11px;
+}
+
+.notification-toggle {
+  position: relative;
+
+  width: 42px;
+  height: 24px;
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: #d6d6d6;
+
+  cursor: pointer;
+}
+
+.notification-toggle span {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+
+  width: 18px;
+  height: 18px;
+
+  background: #ffffff;
+  border-radius: 50%;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.profile-logout {
+  width: 100%;
+
+  padding: 13px 0 0;
+
+  border: 0;
+  border-top: 1px solid #e8e8e8;
+
+  background: transparent;
+  color: #111111;
+
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+
+  cursor: pointer;
+}
