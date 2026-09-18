@@ -227,7 +227,49 @@ function caricaProgressiHair() {
     };
   }
 }
+async function caricaProgressiHairDaSupabase(userId) {
+  const { data, error } = await supabaseClient
+    .from("progressi")
+    .select(
+      "concept_id, mastery, ultima_risposta_corretta, serie_corrette, tentativi, corrette, errori, ultima_domanda"
+    )
+    .eq("user_id", userId)
+    .eq("area", "haircare");
 
+  if (error) {
+    console.error(
+      "Errore caricamento progressi Supabase:",
+      error
+    );
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    return;
+  }
+
+  const progressi = {
+    concepts: {}
+  };
+
+  data.forEach((riga) => {
+    progressi.concepts[riga.concept_id] = {
+      mastery: riga.mastery ?? 0,
+      ultimaRispostaCorretta:
+        riga.ultima_risposta_corretta ?? false,
+      serieCorrette: riga.serie_corrette ?? 0,
+      tentativi: riga.tentativi ?? 0,
+      corrette: riga.corrette ?? 0,
+      errori: riga.errori ?? 0,
+      ultimaDomanda: riga.ultima_domanda ?? null
+    };
+  });
+
+  localStorage.setItem(
+    STORAGE_KEY_HAIR,
+    JSON.stringify(progressi)
+  );
+}
 async function salvaProgressiHair(
   progressi
 ) {
@@ -3319,6 +3361,9 @@ async function inizializzaAutenticazione() {
 
     return;
   }
+await caricaProgressiHairDaSupabase(
+  data.session.user.id
+);
 
   await controllaProfiloUtente(
     data.session.user
