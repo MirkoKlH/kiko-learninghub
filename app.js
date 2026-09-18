@@ -3177,7 +3177,17 @@ supabaseClient.auth.onAuthStateChange(
     );
   }
 );
+const logoutButton = document.getElementById("logoutButton");
 
+if (logoutButton) {
+  logoutButton.addEventListener("click", async () => {
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) {
+      console.error("Errore durante il logout:", error);
+    }
+  });
+}
 
 // =========================================================
 // CONTROLLO SESSIONE ALL'APERTURA
