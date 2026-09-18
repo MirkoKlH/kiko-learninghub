@@ -10,6 +10,13 @@
   <link rel="icon" type="image/png" href="icon.png">
   <link rel="apple-touch-icon" href="icon.png">
 
+  <link rel="apple-touch-icon" href="icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -362,16 +369,16 @@
 
     <header class="topbar">
 
-      <div>
-
-        <p class="eyebrow">
-          KIKO LE GRU
-        </p>
-
-        <h1>
-          LearningHub
-        </h1>
-
+      <div class="home-brand">
+        <div class="kiko-wordmark">
+          <strong>KIKO</strong>
+          <span>MILANO</span>
+        </div>
+        <span class="brand-divider" aria-hidden="true"></span>
+        <div class="learning-brand">
+          <span>LE GRU</span>
+          <strong>LearningHub</strong>
+        </div>
       </div>
 
 
@@ -424,19 +431,31 @@
 
   <div class="profile-menu-section">
 
-    <div class="profile-stat-heading">
-      <span>Knowledge Score generale</span>
-      <strong id="generalKnowledgeScore">
-  Da valutare
-</strong>
-    </div>
+  <div class="profile-stat-heading">
+  <span>Knowledge Score generale</span>
+  <strong
+    id="generalKnowledgeScore"
+    class="profile-score-hidden"
+  >
+    Da valutare
+  </strong>
+</div>
 
-    <div class="profile-progress">
-      <div
-        class="profile-progress-bar"
-        style="width: 0%"
-      ></div>
-    </div>
+<div
+  class="profile-progress profile-knowledge-progress"
+  id="knowledgeProgress"
+>
+  <div
+    class="profile-progress-bar"
+    id="knowledgeProgressBar"
+    style="width: 0%"
+  ></div>
+
+  <div
+    class="knowledge-avatar-marker"
+    id="knowledgeAvatarMarker"
+  ></div>
+</div>
 
     <p>
       Quanto padroneggi le conoscenze
@@ -505,33 +524,44 @@
     <main>
 
 
-      <section class="hero">
+     <section class="hero hero-home">
 
-        <p class="hero-label">
-          FORMAZIONE PRODOTTO
-        </p>
+  <div class="hero-copy">
+    <p class="hero-label">KIKO LE GRU LEARNINGHUB</p>
 
-        <h2>
-          Tutto quello che ti serve,
-          <span>quando ti serve.</span>
-        </h2>
+    <h2>
+      La Formazione<br>
+      che valorizza<br>
+      il tuo <span>talento.</span>
+    </h2>
 
-        <p class="hero-text">
-          Consulta rapidamente prodotti, ingredienti chiave,
-          benefici e leve di vendita.
-        </p>
+    <p class="hero-text">
+      Scopri i prodotti, approfondisci le tue conoscenze
+      e allenati per rendere ogni consulenza ancora più efficace.
+    </p>
+  </div>
 
-        <div class="search-box">
+  <div class="hero-pigments" aria-hidden="true">
+    <img src="images/home/pigments.png" alt="">
+    <div class="hero-signature">
+     More Knowledge<br><span>More Beauty</span><span class="signature-heart">♡</span>
+    </div>
+  </div>
 
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Cerca un prodotto, ingrediente o esigenza..."
-          >
+  <div class="hero-book" aria-hidden="true">
+    <img src="images/home/book.png" alt="">
+  </div>
 
-        </div>
+  <div class="search-box hero-search">
+    <span class="search-icon" aria-hidden="true">⌕</span>
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Cerca un prodotto, ingrediente o esigenza..."
+    >
+  </div>
 
-      </section>
+</section>
 
 
 
@@ -541,13 +571,9 @@
 
           <div>
 
-            <p class="section-label">
-              ESPLORA
+            <p class="section-label home-areas-title">
+              ESPLORA LE AREE FORMATIVE <span aria-hidden="true"></span>
             </p>
-
-            <h3>
-              Categorie
-            </h3>
 
           </div>
 
@@ -778,12 +804,12 @@
 
 
 
-    <footer>
-
-      <p>
-        KIKO Le Gru · LearningHub
-      </p>
-
+    <footer class="home-footer">
+      <div class="footer-kiko">
+        <strong>KIKO</strong>
+        <span>MILANO</span>
+      </div>
+      <p>BEAUTY<br>LIVES IN YOU</p>
     </footer>
 
 

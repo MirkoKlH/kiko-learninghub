@@ -1,142 +1,221 @@
 /* ========================================================= */
+
 /* KIKO LE GRU LEARNINGHUB */
+
 /* STYLE.CSS */
+
 /* ========================================================= */
 
 
+
 /* ========================================================= */
+
 /* RESET */
+
 /* ========================================================= */
 
 * {
+
   box-sizing: border-box;
+
   margin: 0;
+
   padding: 0;
+
 }
 
 
+
 /* ========================================================= */
+
 /* VARIABILI */
+
 /* ========================================================= */
 
 :root {
+
   --black: #111111;
+
   --white: #ffffff;
+
   --cream: #f6f4ef;
+
   --grey: #777777;
+
   --light-grey: #e8e8e8;
+
   --border: #d6d4cf;
 
   --correct-bg: #eaf3ec;
+
   --correct-border: #9db7a3;
+
   --correct-text: #284c31;
 
   --wrong-bg: #f6e9e7;
+
   --wrong-border: #c7a09b;
+
   --wrong-text: #6e332d;
 
   --remember-bg: #f1eee8;
+
 }
 
 
+
 /* ========================================================= */
+
 /* BASE */
+
 /* ========================================================= */
 
 body {
+
   font-family: Arial, Helvetica, sans-serif;
+
   background: var(--cream);
+
   color: var(--black);
+
   min-height: 100vh;
+
 }
 
 button,
+
 input {
+
   font-family: inherit;
+
 }
 
 
+
 /* ========================================================= */
+
 /* TOPBAR */
+
 /* ========================================================= */
 
 .topbar {
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
 
   padding: 28px 6%;
 
   background: var(--black);
+
   color: var(--white);
+
 }
 
 .eyebrow {
+
   font-size: 11px;
+
   letter-spacing: 3px;
+
   margin-bottom: 5px;
+
   opacity: 0.65;
+
 }
 
 .topbar h1 {
+
   font-size: 25px;
+
   font-weight: 500;
+
 }
 
 .version {
+
   font-size: 12px;
 
   border: 1px solid #555555;
+
   border-radius: 30px;
 
   padding: 8px 13px;
+
 }
 
 
+
 /* ========================================================= */
+
 /* LAYOUT GENERALE */
+
 /* ========================================================= */
 
 main {
+
   width: 88%;
+
   max-width: 1200px;
+
   margin: auto;
+
 }
 
 
+
 /* ========================================================= */
+
 /* HERO */
+
 /* ========================================================= */
 
 .hero {
+
   padding: 90px 0 75px;
 
   border-bottom: 1px solid #d8d6d0;
+
 }
 
 .hero-label,
+
 .section-label {
+
   font-size: 11px;
+
   letter-spacing: 2.5px;
+
   color: var(--grey);
 
   margin-bottom: 18px;
+
 }
 
 .hero h2 {
+
   max-width: 800px;
 
   font-size: clamp(42px, 6vw, 76px);
+
   line-height: 0.98;
+
   letter-spacing: -3px;
+
   font-weight: 500;
+
 }
 
 .hero h2 span {
+
   color: #8a8a8a;
+
 }
 
 .hero-text {
+
   max-width: 500px;
 
   margin-top: 30px;
@@ -144,23 +223,33 @@ main {
   color: #666666;
 
   line-height: 1.6;
+
   font-size: 16px;
+
 }
 
 
+
 /* ========================================================= */
+
 /* RICERCA */
+
 /* ========================================================= */
 
 .search-box {
+
   margin-top: 45px;
+
   max-width: 720px;
+
 }
 
 .search-box input {
+
   width: 100%;
 
   border: none;
+
   border-bottom: 1px solid var(--black);
 
   background: transparent;
@@ -170,48 +259,71 @@ main {
   font-size: 16px;
 
   outline: none;
+
 }
 
 .search-box input::placeholder {
+
   color: #999999;
+
 }
 
 
+
 /* ========================================================= */
+
 /* SEZIONI */
+
 /* ========================================================= */
 
 .categories,
+
 .results {
+
   padding: 70px 0;
+
 }
 
 .section-heading {
+
   display: flex;
+
   align-items: flex-end;
+
   justify-content: space-between;
 
   margin-bottom: 35px;
+
 }
 
 .section-heading h3 {
+
   font-size: 35px;
+
   font-weight: 500;
+
 }
 
 
+
 /* ========================================================= */
+
 /* CATEGORIE */
+
 /* ========================================================= */
 
 .category-grid {
+
   display: grid;
+
   grid-template-columns: repeat(2, 1fr);
 
   gap: 14px;
+
 }
 
 .category-card {
+
   min-height: 160px;
 
   padding: 30px;
@@ -221,8 +333,11 @@ main {
   background: var(--white);
 
   display: grid;
+
   grid-template-columns: 45px 1fr auto;
+
   gap: 15px;
+
   align-items: center;
 
   text-align: left;
@@ -230,49 +345,71 @@ main {
   cursor: pointer;
 
   transition: 0.25s ease;
+
 }
 
 .category-card:hover {
+
   background: var(--black);
+
   color: var(--white);
 
   transform: translateY(-3px);
+
 }
 
 .category-number {
+
   font-size: 11px;
+
   color: #999999;
 
   align-self: start;
+
 }
 
 .category-card h4 {
+
   font-size: 25px;
+
   font-weight: 500;
 
   margin-bottom: 8px;
+
 }
 
 .category-card p {
+
   color: #888888;
+
   font-size: 14px;
+
 }
 
 .category-card:hover p {
+
   color: #bbbbbb;
+
 }
 
 .arrow {
+
   font-size: 24px;
+
 }
 
 
+
 /* ========================================================= */
+
 /* BOTTONE TORNA ALLE CATEGORIE */
+
 /* ========================================================= */
 
 .back-button {
+
   background: transparent;
+
   border: none;
 
   cursor: pointer;
@@ -280,26 +417,37 @@ main {
   text-decoration: underline;
 
   font-size: 13px;
+
 }
 
 
+
 /* ========================================================= */
+
 /* GRIGLIA PRODOTTI */
+
 /* ========================================================= */
 
 .product-grid {
+
   display: grid;
+
   grid-template-columns: repeat(3, 1fr);
 
   gap: 16px;
+
 }
 
 
+
 /* ========================================================= */
+
 /* CARD PRODOTTO */
+
 /* ========================================================= */
 
 .product-card {
+
   min-height: 300px;
 
   padding: 28px;
@@ -309,46 +457,65 @@ main {
   border: 1px solid var(--border);
 
   display: flex;
+
   flex-direction: column;
+
 }
 
 .product-code {
+
   font-size: 10px;
+
   letter-spacing: 1.8px;
+
   text-transform: uppercase;
 
   color: #999999;
+
 }
 
 .product-type {
+
   margin-top: 18px;
 
   font-size: 11px;
+
   letter-spacing: 1.3px;
+
   text-transform: uppercase;
 
   color: #888888;
+
 }
 
 .product-card h4 {
+
   margin-top: 10px;
 
   font-size: 24px;
+
   font-weight: 500;
+
   line-height: 1.15;
+
 }
 
 .product-card-description {
+
   margin-top: 14px;
+
   margin-bottom: 25px;
 
   font-size: 13px;
+
   line-height: 1.6;
 
   color: #777777;
+
 }
 
 .product-button {
+
   margin-top: auto;
 
   width: fit-content;
@@ -358,6 +525,7 @@ main {
   border: 1px solid var(--black);
 
   background: var(--black);
+
   color: var(--white);
 
   font-size: 12px;
@@ -365,19 +533,27 @@ main {
   cursor: pointer;
 
   transition: 0.2s ease;
+
 }
 
 .product-button:hover {
+
   background: var(--white);
+
   color: var(--black);
+
 }
 
 
+
 /* ========================================================= */
+
 /* EMPTY STATE */
+
 /* ========================================================= */
 
 .empty-state {
+
   grid-column: 1 / -1;
 
   padding: 45px;
@@ -385,35 +561,51 @@ main {
   background: var(--white);
 
   border: 1px solid var(--border);
+
 }
 
 .empty-state h4 {
+
   font-size: 25px;
+
   font-weight: 500;
 
   margin-bottom: 10px;
+
 }
 
 .empty-state p {
+
   font-size: 14px;
+
   color: #777777;
+
 }
 
 
+
 /* ========================================================= */
+
 /* HIDDEN */
+
 /* ========================================================= */
 
 .hidden {
+
   display: none;
+
 }
 
 
+
 /* ========================================================= */
+
 /* SCHEDA PRODOTTO */
+
 /* ========================================================= */
 
 .product-detail {
+
   grid-column: 1 / -1;
 
   background: var(--white);
@@ -421,10 +613,13 @@ main {
   border: 1px solid var(--border);
 
   padding: 40px;
+
 }
 
 .detail-back-button {
+
   border: none;
+
   border-bottom: 1px solid var(--black);
 
   background: transparent;
@@ -434,147 +629,207 @@ main {
   cursor: pointer;
 
   padding: 0;
+
   margin-bottom: 35px;
+
 }
 
 .detail-header {
+
   max-width: 760px;
 
   margin-bottom: 45px;
+
 }
 
 .detail-header h4 {
+
   font-size: 38px;
+
   font-weight: 500;
 
   margin: 12px 0 18px;
+
 }
 
 .detail-description {
+
   font-size: 17px;
+
   line-height: 1.7;
 
   color: #666666;
+
 }
 
 .detail-grid {
+
   display: grid;
+
   grid-template-columns: repeat(2, 1fr);
 
   gap: 18px;
+
 }
 
 .detail-block {
+
   border-top: 1px solid #d8d6d0;
 
   padding-top: 22px;
+
 }
 
 .detail-label {
+
   font-size: 10px;
+
   letter-spacing: 2px;
 
   color: #888888;
 
   margin-bottom: 15px;
+
 }
 
 .detail-block p,
+
 .detail-block li {
+
   font-size: 14px;
+
   line-height: 1.6;
 
   color: #444444;
+
 }
 
 .detail-block ul {
+
   padding-left: 18px;
+
 }
 
 
+
 /* ========================================================= */
+
 /* HAIRCARE LINES */
+
 /* ========================================================= */
 
 .hair-lines-grid {
+
   grid-column: 1 / -1;
 
   display: grid;
+
   grid-template-columns: repeat(2, 1fr);
 
   gap: 18px;
 
   width: 100%;
+
 }
 
 .hair-line-card {
+
   background: var(--white);
 
   border: 1px solid var(--border);
 
   overflow: hidden;
+
 }
 
 .hair-line-header {
+
   min-height: 145px;
 
   padding: 30px;
 
   display: flex;
+
   flex-direction: column;
+
   justify-content: flex-end;
 
   border-bottom: 1px solid var(--border);
+
 }
 
 .hair-line-header h4 {
+
   font-size: 31px;
+
   font-weight: 500;
 
   margin-bottom: 9px;
+
 }
 
 .hair-line-header p {
+
   max-width: 380px;
 
   font-size: 14px;
+
   line-height: 1.5;
 
   color: #777777;
+
 }
 
 
+
 /* ========================================================= */
+
 /* COLORI DELLE 4 LINEE */
+
 /* ========================================================= */
 
 .hair-line-card:nth-child(1) .hair-line-header {
+
   background: #eef1f8;
+
 }
 
 .hair-line-card:nth-child(2) .hair-line-header {
+
   background: #f3eee8;
+
 }
 
 .hair-line-card:nth-child(3) .hair-line-header {
+
   background: #edf3f1;
+
 }
 
 .hair-line-card:nth-child(4) .hair-line-header {
+
   background: #f4eeee;
+
 }
 
 
+
 /* ========================================================= */
+
 /* PRODOTTI NELLE LINEE */
+
 /* ========================================================= */
 
 .hair-products-list {
+
   display: grid;
+
   grid-template-columns: repeat(2, 1fr);
+
 }
 
 .hair-product-link {
+
   min-height: 92px;
 
   padding: 22px;
@@ -582,11 +837,15 @@ main {
   background: var(--white);
 
   border: none;
+
   border-right: 1px solid #e2e0dc;
+
   border-bottom: 1px solid #e2e0dc;
 
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
 
   text-align: left;
@@ -596,28 +855,39 @@ main {
   font-size: 16px;
 
   transition: 0.2s ease;
+
 }
 
 .hair-product-link:nth-child(even) {
+
   border-right: none;
+
 }
 
 .hair-product-link:hover {
+
   background: var(--black);
+
   color: var(--white);
+
 }
 
 .hair-arrow {
+
   font-size: 20px;
 
   transition: transform 0.2s ease;
+
 }
 
 .hair-product-link:hover .hair-arrow {
+
   transform: translateX(4px);
+
 }
 
 .hair-line-empty {
+
   grid-column: 1 / -1;
 
   min-height: 92px;
@@ -629,133 +899,185 @@ main {
   font-size: 13px;
 
   display: flex;
+
   align-items: center;
+
 }
 
 
+
 /* ========================================================= */
+
 /* HAIRCARE — ALLENATI */
+
 /* ========================================================= */
 
 .hair-training-section {
+
   grid-column: 1 / -1;
+
   width: 100%;
+
   margin-top: 28px;
+
 }
 
 .hair-training-content {
+
   position: relative;
 
   min-height: 220px;
+
   padding: 36px 40px;
 
   background: #ffffff;
+
   color: #111111;
 
   border: 1px solid #d6d4cf;
 
   display: flex;
+
   flex-direction: column;
+
   justify-content: center;
 
   overflow: hidden;
+
 }
 
 .hair-training-content::after {
+
   content: "HAIR";
 
   position: absolute;
+
   right: 25px;
+
   bottom: -20px;
 
   font-size: clamp(80px, 12vw, 145px);
+
   font-weight: 600;
+
   letter-spacing: -7px;
 
   color: rgba(17, 17, 17, 0.025);
 
   pointer-events: none;
+
 }
 
 .hair-training-label {
+
   position: relative;
+
   z-index: 1;
 
   margin-bottom: 10px;
 
   font-size: 10px;
+
   font-weight: 600;
+
   letter-spacing: 2.5px;
 
   color: #999999;
+
 }
 
 .hair-training-content h4 {
+
   position: relative;
+
   z-index: 1;
 
   margin-bottom: 8px;
 
   font-size: 31px;
+
   font-weight: 500;
+
 }
 
 .hair-training-description {
+
   position: relative;
+
   z-index: 1;
 
   max-width: 500px;
 
   font-size: 14px;
+
   line-height: 1.6;
 
   color: #777777;
+
 }
 
 .hair-score-preview {
+
   position: absolute;
+
   z-index: 2;
 
   top: 36px;
+
   right: 40px;
 
   margin: 0;
+
   padding: 0;
 
   border: none;
 
   display: flex;
+
   flex-direction: column;
+
   align-items: flex-end;
+
   gap: 4px;
+
 }
 
 .hair-score-preview span {
+
   font-size: 9px;
+
   letter-spacing: 1.6px;
 
   color: #999999;
+
 }
 
 .hair-score-preview strong {
+
   font-size: 27px;
+
   font-weight: 500;
 
   color: #111111;
+
 }
 
 .hair-training-button {
+
   position: relative;
+
   z-index: 1;
 
   width: fit-content;
 
   margin-top: 22px;
+
   padding: 11px 16px;
 
   border: 1px solid #111111;
 
   background: #111111;
+
   color: #ffffff;
 
   font-size: 12px;
@@ -763,127 +1085,179 @@ main {
   cursor: pointer;
 
   transition: 0.2s ease;
+
 }
 
 .hair-training-button:hover {
+
   background: #ffffff;
+
   color: #111111;
+
 }
 
 
+
 /* ========================================================= */
+
 /* ALLENATI — SMARTPHONE */
+
 /* ========================================================= */
 
 @media (max-width: 550px) {
 
   .hair-training-section {
+
     margin-top: 22px;
+
   }
 
   .hair-training-content {
+
     min-height: 250px;
+
     padding: 28px 24px;
+
   }
 
   .hair-training-content h4 {
+
     font-size: 28px;
+
   }
 
   .hair-training-description {
+
     max-width: 100%;
+
     padding-right: 0;
+
   }
 
   .hair-score-preview {
+
     position: relative;
 
     top: auto;
+
     right: auto;
 
     margin-top: 18px;
 
     align-items: flex-start;
+
   }
 
   .hair-score-preview strong {
+
     font-size: 24px;
+
   }
 
   .hair-training-button {
+
     margin-top: 20px;
+
   }
 
   .hair-training-content::after {
+
     right: -5px;
+
     bottom: -10px;
 
     font-size: 90px;
+
     letter-spacing: -5px;
+
   }
 
 }
 
 /* ========================================================= */
+
 /* IL TUO PERCORSO HAIRCARE */
+
 /* ========================================================= */
 
 .hair-path-section {
+
   grid-column: 1 / -1;
 
   width: 100%;
 
   margin-top: 18px;
+
   padding: 36px 40px;
 
   background: #ffffff;
 
   border: 1px solid #d6d4cf;
+
 }
 
 .hair-path-heading {
+
   max-width: 600px;
 
   margin-bottom: 30px;
+
 }
 
 .hair-path-label {
+
   margin-bottom: 10px;
 
   font-size: 10px;
+
   font-weight: 600;
+
   letter-spacing: 2.3px;
 
   color: #999999;
+
 }
 
 .hair-path-heading h4 {
+
   margin-bottom: 8px;
 
   font-size: 29px;
+
   font-weight: 500;
+
 }
 
 .hair-path-heading > p:last-child {
+
   font-size: 14px;
+
   line-height: 1.6;
 
   color: #777777;
+
 }
 
 
+
 /* ========================================================= */
+
 /* PERCORSO — STATI */
+
 /* ========================================================= */
 
 .hair-path-grid {
+
   display: grid;
+
   grid-template-columns: repeat(3, 1fr);
 
   gap: 10px;
+
 }
 
 .hair-path-card {
+
   min-height: 135px;
 
   padding: 20px;
@@ -891,108 +1265,153 @@ main {
   border: 1px solid #dedcd7;
 
   display: flex;
+
   flex-direction: column;
+
   justify-content: flex-end;
+
 }
 
 .hair-path-status {
+
   margin-bottom: auto;
 
   font-size: 9px;
+
   font-weight: 600;
+
   letter-spacing: 1.5px;
 
   color: #888888;
+
 }
 
 .hair-path-card strong {
+
   margin-top: 22px;
 
   font-size: 34px;
+
   line-height: 1;
+
   font-weight: 500;
+
 }
 
 .hair-path-card p {
+
   margin-top: 4px;
 
   font-size: 12px;
 
   color: #888888;
+
 }
+
 
 
 /* DA RAFFORZARE */
 
 .hair-path-recovery {
+
   background: #f6e9e7;
+
 }
+
 
 
 /* IN APPRENDIMENTO */
 
 .hair-path-learning {
+
   background: #f3f0e8;
+
 }
+
 
 
 /* SOLIDO */
 
 .hair-path-solid {
+
   background: #edf3ee;
+
 }
 
 
+
 /* ========================================================= */
+
 /* PERCORSO — FOOTER */
+
 /* ========================================================= */
 
 .hair-path-footer {
+
   margin-top: 18px;
+
   padding-top: 18px;
 
   border-top: 1px solid #e1dfda;
 
   display: flex;
+
   justify-content: space-between;
+
   gap: 20px;
 
   font-size: 11px;
 
   color: #888888;
+
 }
 
 
+
 /* ========================================================= */
+
 /* PERCORSO — SMARTPHONE */
+
 /* ========================================================= */
 
 @media (max-width: 550px) {
 
   .hair-path-section {
+
     padding: 28px 24px;
+
   }
 
   .hair-path-grid {
+
     grid-template-columns: 1fr;
+
   }
 
   .hair-path-card {
+
     min-height: 110px;
+
   }
 
   .hair-path-footer {
+
     flex-direction: column;
+
     gap: 6px;
+
   }
 
 }
 
 /* ========================================================= */
+
 /* QUIZ HAIRCARE */
+
 /* ========================================================= */
 
 .hair-quiz {
+
   grid-column: 1 / -1;
 
   width: 100%;
@@ -1006,138 +1425,193 @@ main {
   background: var(--white);
 
   border: 1px solid var(--border);
+
 }
 
 
+
 /* ========================================================= */
+
 /* QUIZ — TESTATA */
+
 /* ========================================================= */
 
 .quiz-top {
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: flex-start;
 
   gap: 20px;
+
 }
 
 .quiz-label {
+
   margin-bottom: 8px;
 
   font-size: 10px;
+
   font-weight: 600;
+
   letter-spacing: 2.3px;
 
   color: #999999;
+
 }
 
 .quiz-counter {
+
   font-size: 13px;
 
   color: #666666;
+
 }
 
 .quiz-exit-button {
+
   padding: 8px 0;
 
   border: none;
+
   border-bottom: 1px solid #999999;
 
   background: transparent;
 
   font-size: 12px;
+
   color: #666666;
 
   cursor: pointer;
 
   transition: 0.2s ease;
+
 }
 
 .quiz-exit-button:hover {
+
   color: var(--black);
 
   border-color: var(--black);
+
 }
 
 
+
 /* ========================================================= */
+
 /* QUIZ — PROGRESS BAR */
+
 /* ========================================================= */
 
 .quiz-progress {
+
   width: 100%;
+
   height: 3px;
 
   margin-top: 28px;
+
   margin-bottom: 32px;
 
   background: #e7e5e1;
 
   overflow: hidden;
+
 }
 
 .quiz-progress-bar {
+
   height: 100%;
 
   background: var(--black);
 
   transition: width 0.3s ease;
+
 }
 
 
+
 /* ========================================================= */
+
 /* QUIZ — META */
+
 /* ========================================================= */
 
 .quiz-meta {
+
   display: flex;
+
   gap: 8px;
 
   margin-bottom: 22px;
+
 }
 
 .quiz-meta span {
+
   padding: 7px 10px;
 
   border: 1px solid #d8d6d0;
 
   font-size: 9px;
+
   letter-spacing: 1.3px;
+
   text-transform: uppercase;
 
   color: #777777;
+
 }
 
 
+
 /* ========================================================= */
+
 /* QUIZ — DOMANDA */
+
 /* ========================================================= */
 
 .quiz-question {
+
   max-width: 760px;
 
   margin-bottom: 32px;
 
   font-size: clamp(25px, 3vw, 34px);
+
   font-weight: 500;
+
   line-height: 1.2;
+
   letter-spacing: -0.7px;
+
 }
 
 
+
 /* ========================================================= */
+
 /* QUIZ — RISPOSTE */
+
 /* ========================================================= */
 
 .quiz-options {
+
   display: grid;
+
   grid-template-columns: 1fr;
 
   gap: 10px;
+
 }
 
 .quiz-option {
+
   width: 100%;
+
   min-height: 68px;
 
   padding: 15px 18px;
@@ -1145,148 +1619,207 @@ main {
   border: 1px solid #d9d7d2;
 
   background: var(--white);
+
   color: var(--black);
 
   display: grid;
+
   grid-template-columns: 38px 1fr;
+
   gap: 14px;
+
   align-items: center;
 
   text-align: left;
 
   font-size: 14px;
+
   line-height: 1.5;
 
   cursor: pointer;
 
   transition:
-    background 0.18s ease,
+
+background* 0.18s ease,
+
     border 0.18s ease,
+
     transform 0.18s ease;
+
 }
 
 .quiz-option:hover:not(:disabled) {
+
   border-color: var(--black);
 
   transform: translateX(3px);
+
 }
 
 .quiz-option:disabled {
+
   cursor: default;
+
 }
 
 .quiz-option-letter {
+
   width: 32px;
+
   height: 32px;
 
   border: 1px solid #d9d7d2;
+
   border-radius: 50%;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   font-size: 11px;
+
   font-weight: 600;
+
 }
 
 
+
 /* ========================================================= */
+
 /* QUIZ — RISPOSTA CORRETTA */
+
 /* ========================================================= */
 
 .quiz-option-correct {
+
   background: var(--correct-bg);
 
   border-color: var(--correct-border);
 
   color: var(--correct-text);
+
 }
 
 .quiz-option-correct .quiz-option-letter {
+
   border-color: var(--correct-border);
 
   background: rgba(255, 255, 255, 0.55);
+
 }
 
 
+
 /* ========================================================= */
+
 /* QUIZ — RISPOSTA ERRATA */
+
 /* ========================================================= */
 
 .quiz-option-wrong {
+
   background: var(--wrong-bg);
 
   border-color: var(--wrong-border);
 
   color: var(--wrong-text);
+
 }
 
 .quiz-option-wrong .quiz-option-letter {
+
   border-color: var(--wrong-border);
 
   background: rgba(255, 255, 255, 0.55);
+
 }
 
 
+
 /* ========================================================= */
+
 /* QUIZ — FEEDBACK */
+
 /* ========================================================= */
 
 .quiz-feedback-container {
+
   margin-top: 28px;
+
 }
 
 .quiz-feedback {
+
   padding: 22px 24px;
 
   border-left: 3px solid var(--black);
 
   background: #f7f6f3;
+
 }
 
 .quiz-feedback-correct {
+
   border-left-color: var(--correct-border);
 
   background: var(--correct-bg);
+
 }
 
 .quiz-feedback-wrong {
+
   border-left-color: var(--wrong-border);
 
   background: var(--wrong-bg);
+
 }
 
 .quiz-feedback-result {
+
   margin-bottom: 8px;
 
   font-size: 13px;
+
   font-weight: 600;
+
 }
 
 .quiz-feedback-correct .quiz-feedback-result {
+
   color: var(--correct-text);
+
 }
 
 .quiz-feedback-wrong .quiz-feedback-result {
+
   color: var(--wrong-text);
+
 }
 
 .quiz-feedback-text {
+
   max-width: 720px;
 
   font-size: 14px;
+
   line-height: 1.65;
 
   color: #555555;
+
 }
 
 
+
 /* ========================================================= */
+
 /* QUIZ — RICORDA */
+
 /* ========================================================= */
 
 .quiz-remember {
+
   margin-top: 12px;
 
   padding: 20px 24px;
@@ -1294,35 +1827,47 @@ main {
   background: var(--remember-bg);
 
   border: 1px solid #ded8ce;
+
 }
 
 .quiz-remember p {
+
   margin-bottom: 8px;
 
   font-size: 9px;
+
   font-weight: 700;
+
   letter-spacing: 2px;
 
   color: #777066;
+
 }
 
 .quiz-remember span {
+
   display: block;
 
   max-width: 720px;
 
   font-size: 14px;
+
   line-height: 1.65;
 
   color: #4e4942;
+
 }
 
 
+
 /* ========================================================= */
+
 /* QUIZ — PULSANTE SUCCESSIVO */
+
 /* ========================================================= */
 
 .quiz-next-button {
+
   margin-top: 24px;
 
   padding: 14px 21px;
@@ -1330,6 +1875,7 @@ main {
   border: 1px solid var(--black);
 
   background: var(--black);
+
   color: var(--white);
 
   font-size: 13px;
@@ -1337,22 +1883,31 @@ main {
   cursor: pointer;
 
   transition: 0.2s ease;
+
 }
 
 .quiz-next-button:hover {
+
   background: var(--white);
+
   color: var(--black);
+
 }
 
 
+
 /* ========================================================= */
+
 /* RISULTATO QUIZ */
+
 /* ========================================================= */
 
 .quiz-result {
+
   grid-column: 1 / -1;
 
   width: 100%;
+
   max-width: 900px;
 
   margin: 0 auto;
@@ -1362,64 +1917,93 @@ main {
   background: var(--white);
 
   border: 1px solid var(--border);
+
 }
 
 .quiz-result-label {
+
   margin-bottom: 14px;
 
   font-size: 10px;
+
   font-weight: 600;
+
   letter-spacing: 2.5px;
 
   color: #999999;
+
 }
 
 .quiz-result h4 {
+
   max-width: 700px;
 
   font-size: clamp(31px, 4vw, 46px);
+
   line-height: 1.1;
+
   font-weight: 500;
+
   letter-spacing: -1.2px;
+
 }
 
 .quiz-result-score {
+
   margin-top: 40px;
+
   margin-bottom: 30px;
 
   display: flex;
+
   align-items: flex-end;
+
   gap: 15px;
+
 }
 
 .quiz-result-score strong {
+
   font-size: clamp(58px, 8vw, 90px);
+
   line-height: 0.85;
+
   font-weight: 500;
+
   letter-spacing: -4px;
+
 }
 
 .quiz-result-score span {
+
   padding-bottom: 6px;
 
   font-size: 13px;
 
   color: #777777;
+
 }
 
 
+
 /* ========================================================= */
+
 /* RISULTATO — CARDS */
+
 /* ========================================================= */
 
 .quiz-result-grid {
+
   display: grid;
+
   grid-template-columns: repeat(2, 1fr);
 
   gap: 12px;
+
 }
 
 .quiz-result-card {
+
   min-height: 130px;
 
   padding: 22px;
@@ -1427,56 +2011,79 @@ main {
   border: 1px solid #dedcd7;
 
   display: flex;
+
   flex-direction: column;
+
   justify-content: space-between;
+
 }
 
 .quiz-result-card span {
+
   font-size: 9px;
+
   letter-spacing: 1.6px;
 
   color: #888888;
+
 }
 
 .quiz-result-card strong {
+
   font-size: 35px;
+
   font-weight: 500;
+
 }
 
 .quiz-result-note {
+
   max-width: 620px;
 
   margin-top: 25px;
 
   font-size: 13px;
+
   line-height: 1.65;
 
   color: #777777;
+
 }
 
 
+
 /* ========================================================= */
+
 /* RISULTATO — AZIONI */
+
 /* ========================================================= */
 
 .quiz-result-actions {
+
   display: flex;
+
   flex-wrap: wrap;
+
   gap: 10px;
 
   margin-top: 32px;
+
 }
 
 .quiz-result-actions .quiz-next-button {
+
   margin-top: 0;
+
 }
 
 .quiz-secondary-button {
+
   padding: 14px 20px;
 
   border: 1px solid var(--black);
 
   background: var(--white);
+
   color: var(--black);
 
   font-size: 13px;
@@ -1484,20 +2091,29 @@ main {
   cursor: pointer;
 
   transition: 0.2s ease;
+
 }
 
 .quiz-secondary-button:hover {
+
   background: var(--black);
+
   color: var(--white);
+
 }
 
 
+
 /* ========================================================= */
+
 /* FOOTER */
+
 /* ========================================================= */
 
 footer {
+
   width: 88%;
+
   max-width: 1200px;
 
   margin: 30px auto 0;
@@ -1509,175 +2125,257 @@ footer {
   color: #888888;
 
   font-size: 12px;
+
 }
 
 
+
 /* ========================================================= */
+
 /* TABLET */
+
 /* ========================================================= */
 
 @media (max-width: 850px) {
 
   .hero {
+
     padding-top: 65px;
+
   }
 
   .category-grid {
+
     grid-template-columns: 1fr;
+
   }
 
   .product-grid {
+
     grid-template-columns: repeat(2, 1fr);
+
   }
 
   .hair-lines-grid {
+
     grid-template-columns: 1fr;
+
   }
 
   .hair-training-content {
+
     min-height: 280px;
+
     padding: 40px;
+
   }
 
   .hair-quiz,
+
   .quiz-result {
+
     padding: 38px;
+
   }
 
 }
 
 
+
 /* ========================================================= */
+
 /* SMARTPHONE */
+
 /* ========================================================= */
 
 @media (max-width: 550px) {
 
   .topbar {
+
     padding: 22px 6%;
+
   }
 
   main {
+
     width: 90%;
+
   }
 
   .hero {
+
     padding: 55px 0;
+
   }
 
   .hero h2 {
+
     letter-spacing: -2px;
+
   }
 
   .categories,
+
   .results {
+
     padding: 50px 0;
+
   }
 
   .section-heading {
+
     align-items: flex-start;
+
     gap: 20px;
+
   }
 
   .section-heading h3 {
+
     font-size: 30px;
+
   }
 
   .category-card {
+
     padding: 22px;
+
     min-height: 135px;
+
   }
 
   .product-grid {
+
     grid-template-columns: 1fr;
+
   }
 
   .product-detail {
+
     padding: 25px;
+
   }
 
   .detail-grid {
+
     grid-template-columns: 1fr;
+
   }
 
   .detail-header h4 {
+
     font-size: 30px;
+
   }
+
 
 
   /* HAIRCARE */
 
   .hair-line-header {
+
     min-height: 125px;
 
     padding: 24px;
+
   }
 
   .hair-line-header h4 {
+
     font-size: 26px;
+
   }
 
   .hair-products-list {
+
     grid-template-columns: 1fr;
+
   }
 
   .hair-product-link {
+
     border-right: none;
+
   }
+
 
 
   /* ALLENATI */
 
   .hair-training-section {
+
     margin-top: 24px;
+
   }
 
   .hair-training-content {
+
     min-height: 290px;
 
     padding: 30px 24px;
+
   }
 
   .hair-training-content h4 {
+
     font-size: 32px;
+
   }
 
   .hair-training-description {
+
     font-size: 14px;
+
   }
 
   .hair-training-content::after {
+
     right: -5px;
+
     bottom: -12px;
 
     font-size: 100px;
+
     letter-spacing: -5px;
+
   }
+
 
 
   /* QUIZ */
 
   .hair-quiz {
+
     padding: 28px 20px 30px;
+
   }
 
   .quiz-top {
+
     align-items: flex-start;
+
   }
 
   .quiz-progress {
+
     margin-top: 23px;
+
     margin-bottom: 26px;
+
   }
 
   .quiz-question {
+
     margin-bottom: 25px;
 
     font-size: 25px;
+
     line-height: 1.25;
+
   }
 
   .quiz-option {
+
     min-height: 64px;
 
     padding: 13px;
@@ -1687,214 +2385,337 @@ footer {
     gap: 11px;
 
     font-size: 13px;
+
   }
 
   .quiz-option-letter {
+
     width: 30px;
+
     height: 30px;
+
   }
 
   .quiz-feedback {
+
     padding: 19px;
+
   }
 
   .quiz-remember {
+
     padding: 19px;
+
   }
+
 
 
   /* RISULTATO */
 
   .quiz-result {
+
     padding: 32px 22px;
+
   }
 
   .quiz-result-grid {
+
     grid-template-columns: 1fr;
+
   }
 
   .quiz-result-score {
+
     align-items: flex-start;
+
     flex-direction: column;
+
   }
 
   .quiz-result-score strong {
+
     letter-spacing: -3px;
+
   }
 
   .quiz-result-score span {
+
     padding-bottom: 0;
+
   }
 
   .quiz-result-actions {
+
     flex-direction: column;
+
   }
 
   .quiz-result-actions button {
+
     width: 100%;
+
   }
 
 }/* =========================
+
    AUTH SCREEN
-========================= */
+
+\========================= */
 
 .auth-screen {
+
   min-height: 100vh;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   padding: 24px;
+
   background: #f6f6f4;
+
 }
 
 .auth-card {
+
   width: 100%;
+
   max-width: 420px;
+
   background: #ffffff;
+
   border-radius: 24px;
+
   padding: 32px;
+
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+
 }
 
 .auth-card h1 {
+
   margin: 4px 0 24px;
+
   font-size: 32px;
+
 }
 
 .auth-tabs {
+
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   gap: 8px;
+
   margin-bottom: 24px;
+
 }
 
 .auth-tab {
+
   border: 1px solid #d8d8d8;
+
   background: #ffffff;
+
   padding: 12px 16px;
+
   border-radius: 12px;
+
   font-size: 15px;
+
   font-weight: 600;
+
   cursor: pointer;
+
 }
 
 .auth-tab.active {
+
   background: #111111;
+
   color: #ffffff;
+
   border-color: #111111;
+
 }
 
 .auth-form {
+
   display: flex;
+
   flex-direction: column;
+
   gap: 10px;
+
 }
 
 .auth-form label {
+
   margin-top: 6px;
+
   font-size: 13px;
+
   font-weight: 600;
+
 }
 
 .auth-form input {
+
   width: 100%;
+
   padding: 13px 14px;
+
   border: 1px solid #d8d8d8;
+
   border-radius: 12px;
+
   font-size: 16px;
+
   background: #ffffff;
+
   box-sizing: border-box;
+
 }
 
 .auth-form input:focus {
+
   outline: none;
+
   border-color: #111111;
+
 }
 
 .auth-submit {
+
   margin-top: 14px;
+
   border: 0;
+
   border-radius: 12px;
+
   padding: 14px 18px;
+
   background: #111111;
+
   color: #ffffff;
+
   font-size: 15px;
+
   font-weight: 700;
+
   cursor: pointer;
+
 }
 
 .auth-message {
+
   margin: 18px 0 0;
+
   font-size: 14px;
+
   line-height: 1.5;
+
 }
 
 .hidden {
+
   display: none !important;
+
 }
 
 /* =========================================================
+
    HOME - CATEGORIE COMPATTE E COLORATE
-========================================================= */
+
+\========================================================= */
 
 .category-grid {
+
   display: grid;
+
   grid-template-columns: repeat(2, minmax(0, 1fr));
+
   gap: 14px;
+
 }
 
 
+
 .category-card {
+
   position: relative;
 
   min-height: 145px;
+
   padding: 20px;
 
   display: grid;
+
   grid-template-columns: 45px 1fr auto;
+
   align-items: center;
+
   gap: 18px;
 
   border: 1px solid var(--border);
+
   border-radius: 18px;
 
   background: var(--white);
+
   color: var(--black);
 
   text-align: left;
+
   cursor: pointer;
 
   overflow: hidden;
 
   transition:
+
     transform 0.2s ease,
+
     box-shadow 0.2s ease,
+
     border-color 0.2s ease,
-    background 0.2s ease;
+
+background 0.2s ease;
+
 }
+
 
 
 /* BARRA COLORE */
 
 .category-card::before {
+
   content: "";
 
   position: absolute;
 
   left: 0;
+
   top: 0;
+
   bottom: 0;
 
   width: 6px;
 
   background: var(--category-color);
+
 }
+
 
 
 /* HOVER */
 
 .category-card:hover {
+
   background: var(--white);
+
   color: var(--black);
 
   border-color: var(--category-color);
@@ -1902,116 +2723,2248 @@ footer {
   transform: translateY(-2px);
 
   box-shadow:
+
     0 12px 28px rgba(0, 0, 0, 0.07);
+
 }
+
 
 
 .category-card:hover h4 {
+
   color: var(--black);
+
 }
+
 
 
 .category-card:hover p {
+
   color: #777777;
+
 }
+
 
 
 .category-card:hover .category-number,
+
 .category-card:hover .arrow {
+
   color: var(--category-color);
+
 }
+
 
 
 /* NUMERO */
 
 .category-number {
+
   min-width: 45px;
 
   font-size: 13px;
+
   font-weight: 800;
 
   color: var(--category-color);
 
   align-self: center;
+
 }
+
 
 
 /* TESTI */
 
 .category-card h4 {
+
   margin: 0 0 6px;
 
   font-size: 21px;
 
   color: var(--black);
+
 }
+
 
 
 .category-card p {
+
   margin: 0;
 
   font-size: 13px;
+
   line-height: 1.35;
 
   color: #777777;
+
 }
+
 
 
 /* FRECCIA */
 
 .category-card .arrow {
+
   font-size: 21px;
 
   color: var(--category-color);
+
 }
+
 
 
 /* =========================================================
+
    COLORI CATEGORIE
-========================================================= */
+
+\========================================================= */
 
 .category-capelli {
+
   --category-color: #8eb7c5;
+
 }
+
 
 
 .category-skincare {
+
   --category-color: #9caf88;
+
 }
+
 
 
 .category-viso {
+
   --category-color: #d5aaa4;
+
 }
+
 
 
 .category-occhi {
+
   --category-color: #ac96c8;
+
 }
+
 
 
 .category-labbra {
+
   --category-color: #c85f7d;
+
 }
+
 
 
 .category-collection {
+
   --category-color: #dc876e;
+
 }
 
 
+
 /* =========================================================
+
    TABLET E SMARTPHONE
+
    Manteniamo SEMPRE due colonne
-========================================================= */
+
+\========================================================= */
 
 @media (max-width: 850px) {
 
   .category-grid {
+
     grid-template-columns: repeat(2, minmax(0, 1fr));
+
     gap: 12px;
+
   }
 
+}
+
+
+
+/* =========================================================
+
+   SMARTPHONE
+
+\========================================================= */
+
+@media (max-width: 550px) {
+
+  .category-grid {
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+
+  }
+
+
+
+  .category-card {
+
+    min-height: 140px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    padding: 16px 14px;
+
+  }
+
+
+
+  .category-number {
+
+    min-width: 0;
+
+    font-size: 11px;
+
+  }
+
+
+
+  .category-card h4 {
+
+    margin-bottom: 5px;
+
+    font-size: 17px;
+
+  }
+
+
+
+  .category-card p {
+
+    font-size: 11.5px;
+
+    line-height: 1.3;
+
+  }
+
+
+
+  .category-card .arrow {
+
+    position: absolute;
+
+    right: 14px;
+
+    top: 13px;
+
+    font-size: 17px;
+
+  }
+
+}
+
+/* =========================================================
+
+   PROFILO - TOPBAR
+
+   \========================================================= */
+
+.topbar-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+}
+
+.profile-button {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 7px 12px 7px 8px;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  color: inherit;
+
+  font: inherit;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+
+background 0.2s ease,
+
+    border-color 0.2s ease;
+
+}
+
+.profile-button:hover {
+
+  background: rgba(255, 255, 255, 0.1);
+
+  border-color: rgba(255, 255, 255, 0.22);
+
+}
+
+.profile-avatar {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 30px;
+
+  height: 30px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  color: #111111;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+}
+
+.profile-chevron {
+
+  font-size: 11px;
+
+  opacity: 0.65;
+
+}
+
+/* =========================================================
+
+   PROFILO - MENU
+
+   \========================================================= */
+
+.topbar-actions {
+
+  position: relative;
+
+}
+
+.profile-menu {
+
+  position: absolute;
+
+  top: calc(100% + 12px);
+
+  right: 0;
+
+  z-index: 1000;
+
+  width: 320px;
+
+  padding: 18px;
+
+  background: #ffffff;
+
+  color: #111111;
+
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  border-radius: 18px;
+
+  box-shadow:
+
+    0 18px 45px rgba(0, 0, 0, 0.18);
+
+}
+
+.profile-menu-header {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding-bottom: 16px;
+
+}
+
+.profile-menu-avatar {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 42px;
+
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #111111;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+}
+
+.profile-menu-header > div:last-child {
+
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+}
+
+.profile-menu-header strong {
+
+  font-size: 15px;
+
+}
+
+.profile-menu-header span {
+
+  overflow: hidden;
+
+  color: #777777;
+
+  font-size: 12px;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+}
+
+.profile-menu-section {
+
+  padding: 16px 0;
+
+  border-top: 1px solid #e8e8e8;
+
+}
+
+.profile-stat-heading {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 10px;
+
+}
+
+.profile-stat-heading span {
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+}
+
+.profile-stat-heading strong {
+
+  font-size: 13px;
+
+  white-space: nowrap;
+
+}
+
+.profile-progress {
+
+  width: 100%;
+
+  height: 6px;
+
+  overflow: hidden;
+
+  background: #e9e9e9;
+
+  border-radius: 999px;
+
+}
+
+.profile-progress-bar {
+
+  height: 100%;
+
+  background: #111111;
+
+  border-radius: inherit;
+
+}
+
+.profile-menu-section p {
+
+  margin: 8px 0 0;
+
+  color: #777777;
+
+  font-size: 11px;
+
+  line-height: 1.45;
+
+}
+
+.profile-notifications {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 16px;
+
+}
+
+.profile-notifications > div {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+}
+
+.profile-notifications strong {
+
+  font-size: 13px;
+
+}
+
+.profile-notifications span {
+
+  color: #777777;
+
+  font-size: 11px;
+
+}
+
+.notification-toggle {
+
+  position: relative;
+
+  width: 42px;
+
+  height: 24px;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius: 999px;
+
+  background: #d6d6d6;
+
+  cursor: pointer;
+
+}
+
+.notification-toggle span {
+
+  position: absolute;
+
+  top: 3px;
+
+  left: 3px;
+
+  width: 18px;
+
+  height: 18px;
+
+  background: #ffffff;
+
+  border-radius: 50%;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+}
+
+.profile-logout {
+
+  width: 100%;
+
+  padding: 13px 0 0;
+
+  border: 0;
+
+  border-top: 1px solid #e8e8e8;
+
+  background: transparent;
+
+  color: #111111;
+
+  font: inherit;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  text-align: left;
+
+  cursor: pointer;
+
+}
+
+/* =========================================
+
+   KNOWLEDGE SCORE - AVATAR PROGRESS
+
+\========================================= */
+
+.profile-score-hidden {
+
+  display: none;
+
+}
+
+.profile-knowledge-progress {
+
+  position: relative;
+
+  height: 7px;
+
+  margin-top: 12px;
+
+  margin-bottom: 18px;
+
+  overflow: visible;
+
+  background: #eeeeee;
+
+  border-radius: 999px;
+
+}
+
+.profile-knowledge-progress .profile-progress-bar {
+
+  height: 100%;
+
+  border-radius: 999px;
+
+  background: #171717;
+
+  transition: width 0.4s ease;
+
+}
+
+.knowledge-avatar-marker {
+
+  position: absolute;
+
+  top: 50%;
+
+  left: 0%;
+
+  width: 42px;
+
+  height: 42px;
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+
+  background-size: 100%;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+
+  border: 3px solid #ffffff;
+
+  box-shadow:
+
+    0 2px 8px rgba(0, 0, 0, 0.18),
+
+    0 0 0 1px rgba(0, 0, 0, 0.08);
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  transition:
+
+    left 0.4s ease,
+
+    background-image 0.25s ease;
+
+}
+
+/* =========================================================
+
+   HOME 2026 — EDITORIAL BEAUTY
+
+   \========================================================= */
+
+body {
+
+  background:
+
+    linear-gradient(
+
+      135deg,
+
+      #f8f5ef 0%,
+
+      #f7f3ef 48%,
+
+      #f4eee9 100%
+
+    );
+
+}
+
+
+
+/* HERO */
+
+.hero-home {
+
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+
+  column-gap: 55px;
+
+  row-gap: 45px;
+
+  padding: 88px 0 70px;
+
+  overflow: hidden;
+
+}
+
+.hero-copy {
+
+  position: relative;
+
+  z-index: 2;
+
+}
+
+.hero-home .hero-label {
+
+  margin-bottom: 22px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 3.2px;
+
+  color: #77716c;
+
+}
+
+.hero-home h2 {
+
+  max-width: 720px;
+
+  margin: 0;
+
+  font-size: clamp(52px, 6.5vw, 88px);
+
+  line-height: 0.91;
+
+  letter-spacing: -1.5px;
+
+  font-weight: 500;
+
+  color: #111111;
+
+}
+
+.hero-home h2 span {
+
+  color: #a2707b;
+
+}
+
+.hero-home .hero-text {
+
+  max-width: 520px;
+
+  margin-top: 30px;
+
+  font-size: 15px;
+
+  line-height: 1.7;
+
+  color: #68625e;
+
+}
+
+
+
+/* SCRITTA MORE KNOWLEDGE */
+
+.hero-signature {
+
+  width: fit-content;
+
+  margin-top: 30px;
+
+  font-family: "Allura", cursive;
+
+  font-size: clamp(30px, 3.5vw, 46px);
+
+  font-style: italic;
+
+  transform: rotate(-2deg);
+
+  color: #181818;
+
+}
+
+.hero-signature span {
+
+  color: #c85f7d;
+
+}
+
+
+
+/* ELEMENTO BEAUTY DESTRA */
+
+.hero-beauty {
+
+  position: relative;
+
+  min-height: 310px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  isolation: isolate;
+
+}
+
+.hero-beauty::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 270px;
+
+  height: 270px;
+
+  border-radius: 50%;
+
+  background:
+
+    radial-gradient(
+
+      circle at 35% 30%,
+
+      #f7cbd2 0%,
+
+      #e6a2ad 42%,
+
+      #cf788b 72%,
+
+      #bd6178 100%
+
+    );
+
+  opacity: 0.95;
+
+  z-index: -2;
+
+}
+
+.hero-beauty::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 330px;
+
+  height: 145px;
+
+  border: 1px solid rgba(17, 17, 17, 0.13);
+
+  border-radius: 50%;
+
+  transform: rotate(-18deg);
+
+  z-index: -1;
+
+}
+
+.hero-beauty-word {
+
+  position: absolute;
+
+  font-size: clamp(64px, 8vw, 105px);
+
+  font-weight: 800;
+
+  letter-spacing: -7px;
+
+  color: rgba(255, 255, 255, 0.38);
+
+  transform: rotate(-7deg);
+
+  user-select: none;
+
+}
+
+.hero-beauty-smear {
+
+  position: absolute;
+
+  width: 250px;
+
+  height: 46px;
+
+  border-radius:
+
+    70% 30% 65% 35% /
+
+    55% 50% 50% 45%;
+
+  background:
+
+    linear-gradient(
+
+      90deg,
+
+      rgba(154, 47, 73, 0.05),
+
+      rgba(169, 51, 78, 0.72),
+
+      rgba(208, 95, 119, 0.92),
+
+      rgba(191, 73, 99, 0.18)
+
+    );
+
+  transform: rotate(-10deg);
+
+  filter: blur(0.2px);
+
+}
+
+.hero-beauty-copy {
+
+  position: relative;
+
+  z-index: 3;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  line-height: 0.9;
+
+  color: #ffffff;
+
+}
+
+.hero-beauty-copy span {
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 5px;
+
+}
+
+.hero-beauty-copy strong {
+
+  margin: 8px 0;
+
+  font-size: 40px;
+
+  font-weight: 500;
+
+  letter-spacing: -2px;
+
+}
+
+
+
+/* RICERCA */
+
+.hero-search {
+
+  grid-column: 1 / -1;
+
+  position: relative;
+
+  width: 100%;
+
+  max-width: none;
+
+  margin-top: 0;
+
+  background: rgba(255, 255, 255, 0.7);
+
+  border: 1px solid rgba(17, 17, 17, 0.11);
+
+  border-radius: 16px;
+
+  box-shadow:
+
+    0 12px 35px rgba(62, 44, 37, 0.045);
+
+  backdrop-filter: blur(8px);
+
+}
+
+.hero-search .search-icon {
+
+  position: absolute;
+
+  left: 20px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  font-size: 22px;
+
+  color: #8d8580;
+
+  pointer-events: none;
+
+}
+
+.hero-search input {
+
+  width: 100%;
+
+  padding: 19px 22px 19px 55px;
+
+  border: none;
+
+  background: transparent;
+
+  font-size: 14px;
+
+}
+
+.hero-search input::placeholder {
+
+  color: #918a85;
+
+}
+
+
+
+/* CATEGORIE */
+
+.categories {
+
+  padding-top: 64px;
+
+}
+
+.categories .section-heading {
+
+  margin-bottom: 30px;
+
+}
+
+.categories .section-label {
+
+  margin-bottom: 9px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  color: #918a85;
+
+}
+
+.categories .section-heading h3 {
+
+  font-size: clamp(32px, 4vw, 46px);
+
+  letter-spacing: -1.5px;
+
+}
+
+
+
+/* CARDS PIÙ BEAUTY */
+
+.category-grid {
+
+  gap: 16px;
+
+}
+
+.category-card {
+
+  min-height: 170px;
+
+  border: none;
+
+  border-radius: 18px;
+
+  box-shadow:
+
+    0 8px 30px rgba(48, 37, 31, 0.055);
+
+  overflow: hidden;
+
+}
+
+.category-card::before {
+
+  width: 7px;
+
+}
+
+.category-card::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 110px;
+
+  height: 110px;
+
+  right: -42px;
+
+  bottom: -48px;
+
+  border-radius: 50%;
+
+  background: var(--category-color);
+
+  opacity: 0.12;
+
+  transition:
+
+    transform 0.3s ease,
+
+    opacity 0.3s ease;
+
+}
+
+.category-card:hover {
+
+  transform: translateY(-5px);
+
+  box-shadow:
+
+    0 16px 36px rgba(48, 37, 31, 0.10);
+
+}
+
+.category-card:hover::after {
+
+  transform: scale(1.35);
+
+  opacity: 0.2;
+
+}
+
+.category-number {
+
+  font-weight: 800;
+
+}
+
+.category-card h4 {
+
+  font-size: 23px;
+
+  letter-spacing: -0.5px;
+
+}
+
+.category-card .arrow {
+
+  position: relative;
+
+  z-index: 2;
+
+  transition: transform 0.25s ease;
+
+}
+
+.category-card:hover .arrow {
+
+  transform: translateX(5px);
+
+}
+
+
+
+/* FOOTER */
+
+footer {
+
+  margin-top: 45px;
+
+  padding: 35px 0 42px;
+
+}
+
+
+
+/* =========================================================
+
+   HOME — TABLET
+
+   \========================================================= */
+
+@media (max-width: 850px) {
+
+  .hero-home {
+
+    grid-template-columns: 1fr 0.72fr;
+
+    column-gap: 20px;
+
+    padding-top: 65px;
+
+  }
+
+  .hero-home h2 {
+
+    font-size: clamp(48px, 8vw, 70px);
+
+  }
+
+  .hero-beauty {
+
+    min-height: 270px;
+
+  }
+
+  .hero-beauty::before {
+
+    width: 220px;
+
+    height: 220px;
+
+  }
+
+}
+
+
+
+/* =========================================================
+
+   HOME — SMARTPHONE
+
+   \========================================================= */
+
+@media (max-width: 550px) {
+
+  .hero-home {
+
+    grid-template-columns: 1fr;
+
+    gap: 28px;
+
+    padding:
+
+      52px 0
+
+      46px;
+
+  }
+
+  .hero-home h2 {
+
+    font-size: clamp(45px, 13vw, 62px);
+
+    line-height: 0.94;
+
+    letter-spacing: -3px;
+
+  }
+
+  .hero-home .hero-text {
+
+    margin-top: 23px;
+
+    font-size: 14px;
+
+  }
+
+  .hero-signature {
+
+    margin-top: 22px;
+
+    font-size: 20px;
+
+  }
+
+  .hero-beauty {
+
+    min-height: 220px;
+
+    margin-top: -5px;
+
+  }
+
+  .hero-beauty::before {
+
+    width: 190px;
+
+    height: 190px;
+
+  }
+
+  .hero-beauty::after {
+
+    width: 245px;
+
+    height: 110px;
+
+  }
+
+  .hero-beauty-word {
+
+    font-size: 65px;
+
+    letter-spacing: -5px;
+
+  }
+
+  .hero-beauty-copy strong {
+
+    font-size: 34px;
+
+  }
+
+  .hero-search {
+
+    grid-column: 1;
+
+    border-radius: 14px;
+
+  }
+
+  .hero-search input {
+
+    padding:
+
+      17px 15px
+
+      17px 48px;
+
+    font-size: 13px;
+
+  }
+
+  .hero-search .search-icon {
+
+    left: 17px;
+
+  }
+
+  .categories {
+
+    padding-top: 48px;
+
+  }
+
+  .category-grid {
+
+    grid-template-columns:
+
+      repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+
+  }
+
+  .category-card {
+
+    min-height: 150px;
+
+    padding: 17px 15px;
+
+    border-radius: 14px;
+
+  }
+
+  .category-card h4 {
+
+    font-size: 18px;
+
+  }
+
+  .category-card p {
+
+    font-size: 11.5px;
+
+  }
+
+}
+
+/* =========================================================
+   HOME APPROVATA — 17/09/2026
+   Riferimento visivo bloccato: non modificare senza richiesta.
+   ========================================================= */
+
+/* =========================================================
+   KIKO LE GRU LEARNINGHUB
+   HOME DEFINITIVA — 17/09/2026
+   Riferimento visivo approvato
+========================================================= */
+
+/* ---------- BASE HOME ---------- */
+
+#appContent {
+  background: #f8f1eb;
+}
+
+#appContent > main,
+#appContent > .topbar,
+#appContent > footer {
+  width: 100%;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.topbar {
+  min-height: 92px;
+  padding: 14px max(5.5vw, 28px);
+  background: #111313;
+  color: #fff;
+  border-bottom: 0;
+}
+
+.home-brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.kiko-wordmark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: .8;
+}
+
+.kiko-wordmark strong {
+  font-size: 31px;
+  font-weight: 400;
+  letter-spacing: 3px;
+}
+
+.kiko-wordmark span {
+  margin-top: 8px;
+  font-size: 8px;
+  letter-spacing: 4px;
+}
+
+.brand-divider {
+  width: 1px;
+  height: 42px;
+  background: rgba(255,255,255,.45);
+}
+
+.learning-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.learning-brand span {
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.learning-brand strong {
+  margin-top: 2px;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.topbar-actions {
+  gap: 14px;
+}
+
+.version {
+  display: none;
+}
+
+.profile-button {
+  border-color: rgba(255,255,255,.22);
+  background: transparent;
+}
+
+
+/* =========================================================
+   LARGHEZZA CONTENUTI HOME
+========================================================= */
+
+.hero-home,
+.categories,
+.results,
+.home-footer {
+  width: min(1120px, calc(100% - 11vw));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero-home {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.05fr)
+    minmax(340px, .95fr);
+
+  grid-template-areas:
+    "copy pigments"
+    "book book"
+    "search search";
+
+  column-gap: 34px;
+  row-gap: 0;
+
+  padding: 38px 0 0;
+
+  overflow: visible;
+}
+
+
+/* ---------- TESTO SINISTRA ---------- */
+
+.hero-copy {
+  grid-area: copy;
+  position: relative;
+  z-index: 3;
+  padding-top: 0;
+}
+
+.hero-home .hero-label {
+  margin: 0 0 18px;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4.5px;
+
+  color: #333;
+}
+
+.hero-home h2 {
+  max-width: 590px;
+  margin: 0;
+
+  font-size: clamp(52px, 6.1vw, 78px);
+  line-height: .86;
+  letter-spacing: -0.5px;
+  font-weight: 400;
+
+  color: #0f1010;
+}
+
+.hero-home h2 span {
+  color: #b67b83;
+}
+
+.hero-home .hero-text {
+  max-width: 510px;
+  margin: 25px 0 0;
+
+  font-size: 17px;
+  line-height: 1.45;
+
+  color: #5d5a57;
+}
+
+
+/* ---------- PIGMENTI DESTRA ---------- */
+
+.hero-pigments {
+  grid-area: pigments;
+
+  position: relative;
+  z-index: 1;
+
+  min-height: 315px;
+
+  /*
+     Il pigmento sale fino alla parte superiore della hero
+     senza trascinare verso il basso la colonna destra.
+  */
+  margin-top: -38px;
+
+  overflow: visible;
+}
+
+.hero-pigments > img {
+  position: absolute;
+
+  top: 0;
+  right: -5.5vw;
+
+  width: min(100px, 8vw);
+  height: 315px;
+
+  object-fit: cover;
+  object-position: center top;
+
+  /*
+     Il fondo chiaro dell'immagine si integra con
+     il fondo cipria della pagina.
+  */
+  mix-blend-mode: multiply;
+
+  opacity: 1;
+
+  pointer-events: none;
+}
+
+
+/* ---------- MORE KNOWLEDGE / MORE BEAUTY ---------- */
+
+.hero-signature {
+  position: absolute;
+
+  right: 20px;
+  bottom: 18px;
+
+  z-index: 4;
+
+  margin: 0;
+
+  font-family:
+    "Brush Script MT",
+    "Segoe Script",
+    cursive;
+
+  font-size: clamp(27px, 3vw, 42px);
+  line-height: .82;
+
+  transform: rotate(-7deg);
+
+  color: #111;
+  text-align: center;
+
+  pointer-events: none;
+}
+
+.hero-signature span {
+  color: #cf7580;
+}
+.hero-signature .signature-heart {
+  display: inline-block;
+  margin-left: 8px;
+  font-family: "Allura", cursive;
+  font-size: 0.90em;
+  font-weight: 400;
+  line-height: 0;
+  transform: rotate(-8deg) scaleX(0.90);
+  transform-origin: center;
+  vertical-align: -0.12em;
+  color: #c85f7d;
+}
+
+/* =========================================================
+   LIBRO + PENNELLO
+========================================================= */
+
+.hero-book {
+  grid-area: book;
+
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 180px;
+
+  /*
+     Avvicina il libro alla parte superiore come
+     nel riferimento senza sovrapporlo al sottotitolo.
+  */
+  margin-top: -52px;
+
+  overflow: hidden;
+}
+
+.hero-book img {
+  display: block;
+
+  width: min(760px, 82%);
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center center;
+
+  mix-blend-mode: multiply;
+
+
+  pointer-events: none;
+
+-webkit-mask-image:
+  linear-gradient(to bottom, transparent 0%, #000 10%, #000 100%),
+  linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+
+-webkit-mask-composite: source-in;
+
+mask-image:
+  linear-gradient(to bottom, transparent 0%, #000 10%, #000 100%),
+  linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+
+mask-composite: intersect;
+}
+/* =========================================================
+   RICERCA
+========================================================= */
+
+.hero-search {
+  grid-area: search;
+
+  position: relative;
+
+  min-height: 74px;
+
+  margin-top: -4px;
+
+  border: 1px solid rgba(40,35,31,.13);
+  border-radius: 18px;
+
+  background: rgba(255,255,255,.78);
+
+  box-shadow: none;
+}
+
+.hero-search input {
+  width: 100%;
+
+  padding:
+    23px
+    24px
+    23px
+    70px;
+
+  font-size: 17px;
+}
+
+.hero-search .search-icon {
+  left: 27px;
+  font-size: 30px;
+}
+
+
+/* =========================================================
+   AREE FORMATIVE
+========================================================= */
+
+.categories {
+  padding: 38px 0 0;
+}
+
+.categories .section-heading {
+  margin-bottom: 20px;
+}
+
+.categories .section-label.home-areas-title {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  margin: 0;
+
+  color: #111;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+.categories .section-label.home-areas-title span {
+  display: block;
+
+  width: 34px;
+  height: 1px;
+
+  background: #777;
+}
+
+.categories .section-heading h3 {
+  display: none;
+}
+
+
+/* =========================================================
+   GRIGLIA CATEGORIE
+========================================================= */
+
+.category-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px 16px;
+}
+
+
+/* =========================================================
+   CARD CATEGORIA
+========================================================= */
+
+.category-card {
+  position: relative;
+
+  min-height: 128px;
+
+  padding: 26px 34px;
+
+  border: 0;
+  border-radius: 15px;
+
+  overflow: hidden;
+
+  background-color: #eee;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  box-shadow: none;
+
+  color: #111;
+
+  cursor: pointer;
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    filter .25s ease;
+}
+
+
+/*
+   IMPORTANTE:
+   eventuali decorazioni della vecchia card
+   vengono completamente disattivate.
+*/
+
+.category-card::before {
+  content: none !important;
+  display: none !important;
+}
+
+
+/*
+   Unico velo sopra la fotografia.
+   Non contiene immagini, testi o frecce.
+*/
+
+.category-card::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.38) 0%,
+      rgba(255,255,255,.17) 44%,
+      rgba(255,255,255,.03) 100%
+    );
+
+  opacity: 1;
+
+  pointer-events: none;
+
+  transition: opacity .25s ease;
+}
+
+
+/*
+   Tutto il contenuto HTML della card resta
+   sopra l'immagine e sopra il velo.
+*/
+
+.category-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.category-card div {
+  align-self: end;
+}
+
+.category-card p {
+  display: none;
+}
+
+
+/* ---------- NUMERO ---------- */
+
+.category-number {
+  position: absolute;
+
+  top: 25px;
+  left: 34px;
+
+  color: #4d4b49 !important;
+
+  font-size: 14px;
+  font-weight: 400;
+}
+
+
+/* ---------- TITOLO ---------- */
+
+.category-card h4 {
+  margin: 34px 0 0;
+
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -1.4px;
+
+  color: #0e0f0f !important;
+}
+
+
+/* ---------- UNICA FRECCIA ---------- */
+
+.category-card .arrow {
+  position: absolute;
+
+  right: 22px;
+  bottom: 20px;
+
+  display: grid;
+  place-items: center;
+
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.58);
+
+  color: #111 !important;
+
+  font-size: 27px;
+  line-height: 1;
+
+  transition:
+    transform .25s ease,
+    background .25s ease;
+}
+
+
+/* =========================================================
+   IMMAGINI CATEGORIE
+   Una sola immagine per ogni card
+========================================================= */
+
+.category-capelli {
+  background-image:
+    url("images/home/capelli.png") !important;
+}
+
+.category-skincare {
+  background-image:
+    url("images/home/skincare.png") !important;
+}
+
+.category-viso {
+  background-image:
+    url("images/home/viso.png") !important;
+}
+
+.category-occhi {
+  background-image:
+    url("images/home/occhi.png") !important;
+}
+
+.category-labbra {
+  background-image:
+    url("images/home/labbra.png") !important;
+}
+
+.category-collection {
+  background-image:
+    url("images/home/collection.png") !important;
+}
+
+
+/* =========================================================
+   HOVER CATEGORIE
+   L'immagine NON viene mai sostituita
+========================================================= */
+
+.category-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 13px 28px
+    rgba(35,26,22,.12);
+
+  filter:
+    saturate(1.05)
+    brightness(1.015);
+}
+
+.category-card:hover::after {
+  opacity: .78;
+}
+
+.category-card:hover .arrow {
+  transform: translateX(3px);
+
+  background:
+    rgba(255,255,255,.76);
+}
+
+
+/*
+   Anche focus e click mantengono
+   sempre la fotografia originale.
+*/
+
+.category-card:focus,
+.category-card:focus-visible,
+.category-card:active {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.category-capelli:hover,
+.category-capelli:focus,
+.category-capelli:active {
+  background-image:
+    url("images/home/capelli.png") !important;
+}
+
+.category-skincare:hover,
+.category-skincare:focus,
+.category-skincare:active {
+  background-image:
+    url("images/home/skincare.png") !important;
+}
+
+.category-viso:hover,
+.category-viso:focus,
+.category-viso:active {
+  background-image:
+    url("images/home/viso.png") !important;
+}
+
+.category-occhi:hover,
+.category-occhi:focus,
+.category-occhi:active {
+  background-image:
+    url("images/home/occhi.png") !important;
+}
+
+.category-labbra:hover,
+.category-labbra:focus,
+.category-labbra:active {
+  background-image:
+    url("images/home/labbra.png") !important;
+}
+
+.category-collection:hover,
+.category-collection:focus,
+.category-collection:active {
+  background-image:
+    url("images/home/collection.png") !important;
+}
+
+
+/* =========================================================
+   FOOTER HOME
+========================================================= */
+
+.home-footer {
+  margin-top: 52px;
+
+  padding:
+    28px
+    4px
+    42px;
+
+  border-top:
+    1px solid #77716c;
+
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  color: #111;
+}
+
+.footer-kiko {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  line-height: .8;
+}
+
+.footer-kiko strong {
+  font-size: 38px;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+.footer-kiko span {
+  margin-top: 8px;
+
+  font-size: 8px;
+  letter-spacing: 4px;
+}
+
+.home-footer p {
+  font-size: 12px;
+  line-height: 1.8;
+  letter-spacing: 4px;
+
+  text-align: right;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .topbar {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .hero-home,
+  .categories,
+  .results,
+  .home-footer {
+    width: calc(100% - 48px);
+  }
+
+  .hero-home {
+    grid-template-columns:
+      minmax(0, 1.08fr)
+      minmax(260px, .92fr);
+
+    grid-template-areas:
+      "copy pigments"
+      "book book"
+      "search search";
+
+    column-gap: 14px;
+  }
+
+  .hero-home h2 {
+    font-size:
+      clamp(48px, 7vw, 62px);
+
+    line-height: .88;
+  }
+
+  .hero-home .hero-text {
+    max-width: 470px;
+  }
+
+  .hero-pigments {
+    min-height: 285px;
+  }
+
+  .hero-pigments > img {
+    right: -25px;
+
+    width:
+      min(260px, 28vw);
+
+    height: auto;
+  }
+
+  .hero-signature {
+    right: 8px;
+    bottom: 125px;
+
+    font-size:
+  clamp(36px, 5.5vw, 48px);
+  }
+
+  .hero-book {
+    height: 315px;
+    margin-top: -0.5px;
+  }
 }
 
 
@@ -2021,310 +4974,246 @@ footer {
 
 @media (max-width: 550px) {
 
-  .category-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
+  .topbar {
+    min-height: 76px;
+
+    padding:
+      12px
+      18px;
   }
 
+  .home-brand {
+    gap: 11px;
+  }
+
+  .kiko-wordmark strong {
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+
+  .kiko-wordmark span {
+    margin-top: 6px;
+
+    font-size: 6px;
+    letter-spacing: 2.5px;
+  }
+
+  .brand-divider {
+    height: 34px;
+  }
+
+  .learning-brand span {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+
+  .learning-brand strong {
+    font-size: 15px;
+  }
+
+  .profile-button > span:not(.profile-avatar):not(.profile-chevron) {
+    display: none;
+  }
+
+  .profile-chevron {
+    display: none;
+  }
+
+  .profile-button {
+    padding: 5px;
+
+    border: 0;
+  }
+
+  .hero-home,
+  .categories,
+  .results,
+  .home-footer {
+    width: calc(100% - 36px);
+  }
+
+
+  /* HERO MOBILE */
+
+  .hero-home {
+    grid-template-columns: 1fr;
+
+    grid-template-areas:
+      "copy"
+      "pigments"
+      "book"
+      "search";
+
+    padding-top: 30px;
+  }
+
+  .hero-home .hero-label {
+    margin-bottom: 15px;
+
+    font-size: 8px;
+    letter-spacing: 3.2px;
+  }
+
+  .hero-home h2 {
+    font-size:
+      clamp(45px, 13.6vw, 61px);
+
+    line-height: .89;
+    letter-spacing: -3.2px;
+  }
+
+  .hero-home .hero-text {
+    max-width: 92%;
+
+    margin-top: 22px;
+
+    font-size: 14px;
+  }
+
+
+  /* PIGMENTI MOBILE */
+
+  .hero-pigments {
+    min-height: 225px;
+
+    margin-top: 8px;
+  }
+
+  .hero-pigments > img {
+    top: 0;
+    right: -18px;
+
+    width:
+      min(430px, 96vw);
+
+    height: 220px;
+  }
+
+  .hero-signature {
+    right: 8px;
+    bottom: 2px;
+
+    font-size: 28px;
+  }
+
+
+  /* LIBRO MOBILE */
+
+  .hero-book {
+    height: 230px;
+
+    margin-top: -2px;
+  }
+
+  .hero-book img {
+    width: 108%;
+    max-width: none;
+  }
+
+
+  /* SEARCH MOBILE */
+
+  .hero-search {
+    min-height: 62px;
+
+    margin-top: 8px;
+
+    border-radius: 15px;
+  }
+
+  .hero-search input {
+    padding:
+      19px
+      15px
+      19px
+      52px;
+
+    font-size: 13px;
+  }
+
+  .hero-search .search-icon {
+    left: 18px;
+
+    font-size: 25px;
+  }
+
+
+  /* CATEGORIE MOBILE */
+
+  .categories {
+    padding-top: 32px;
+  }
+
+  .categories .section-label.home-areas-title {
+    gap: 12px;
+
+    font-size: 9px;
+    letter-spacing: 2.7px;
+  }
+
+  .categories .section-label.home-areas-title span {
+    width: 24px;
+  }
+
+  .category-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 9px;
+  }
 
   .category-card {
-    min-height: 140px;
+    min-height: 122px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
+    padding:
+      17px
+      14px;
 
-    gap: 8px;
-
-    padding: 16px 14px;
+    border-radius: 13px;
   }
 
-
   .category-number {
-    min-width: 0;
+    top: 16px;
+    left: 15px;
 
     font-size: 11px;
   }
 
-
   .category-card h4 {
-    margin-bottom: 5px;
+    margin-top: 38px;
 
-    font-size: 17px;
+    font-size: 20px;
+    letter-spacing: -.8px;
   }
-
-
-  .category-card p {
-    font-size: 11.5px;
-    line-height: 1.3;
-  }
-
 
   .category-card .arrow {
-    position: absolute;
+    right: 10px;
+    bottom: 10px;
 
-    right: 14px;
-    top: 13px;
+    width: 38px;
+    height: 38px;
 
-    font-size: 17px;
+    font-size: 21px;
   }
 
-}
-/* =========================================================
-   PROFILO - TOPBAR
-   ========================================================= */
 
-.topbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
+  /* FOOTER MOBILE */
 
-.profile-button {
-  display: flex;
-  align-items: center;
-  gap: 9px;
+  .home-footer {
+    margin-top: 40px;
 
-  padding: 7px 12px 7px 8px;
+    padding:
+      24px
+      2px
+      34px;
+  }
 
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
+  .footer-kiko strong {
+    font-size: 29px;
+  }
 
-  background: rgba(255, 255, 255, 0.06);
-  color: inherit;
-
-  font: inherit;
-  font-size: 13px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.profile-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.22);
-}
-
-.profile-avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 30px;
-  height: 30px;
-
-  border-radius: 50%;
-
-  background: #ffffff;
-  color: #111111;
-
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.profile-chevron {
-  font-size: 11px;
-  opacity: 0.65;
-}
-/* =========================================================
-   PROFILO - MENU
-   ========================================================= */
-
-.topbar-actions {
-  position: relative;
-}
-
-.profile-menu {
-  position: absolute;
-  top: calc(100% + 12px);
-  right: 0;
-  z-index: 1000;
-
-  width: 320px;
-  padding: 18px;
-
-  background: #ffffff;
-  color: #111111;
-
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 18px;
-
-  box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.18);
-}
-
-.profile-menu-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  padding-bottom: 16px;
-}
-
-.profile-menu-avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 42px;
-  height: 42px;
-  flex-shrink: 0;
-
-  border-radius: 50%;
-
-  background: #111111;
-  color: #ffffff;
-
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.profile-menu-header > div:last-child {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.profile-menu-header strong {
-  font-size: 15px;
-}
-
-.profile-menu-header span {
-  overflow: hidden;
-
-  color: #777777;
-
-  font-size: 12px;
-
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.profile-menu-section {
-  padding: 16px 0;
-
-  border-top: 1px solid #e8e8e8;
-}
-
-.profile-stat-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-
-  margin-bottom: 10px;
-}
-
-.profile-stat-heading span {
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.profile-stat-heading strong {
-  font-size: 13px;
-  white-space: nowrap;
-}
-
-.profile-progress {
-  width: 100%;
-  height: 6px;
-
-  overflow: hidden;
-
-  background: #e9e9e9;
-  border-radius: 999px;
-}
-
-.profile-progress-bar {
-  height: 100%;
-
-  background: #111111;
-  border-radius: inherit;
-}
-
-.profile-menu-section p {
-  margin: 8px 0 0;
-
-  color: #777777;
-
-  font-size: 11px;
-  line-height: 1.45;
-}
-
-.profile-notifications {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.profile-notifications > div {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.profile-notifications strong {
-  font-size: 13px;
-}
-
-.profile-notifications span {
-  color: #777777;
-  font-size: 11px;
-}
-
-.notification-toggle {
-  position: relative;
-
-  width: 42px;
-  height: 24px;
-  flex-shrink: 0;
-
-  padding: 0;
-
-  border: 0;
-  border-radius: 999px;
-
-  background: #d6d6d6;
-
-  cursor: pointer;
-}
-
-.notification-toggle span {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-
-  width: 18px;
-  height: 18px;
-
-  background: #ffffff;
-  border-radius: 50%;
-
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.profile-logout {
-  width: 100%;
-
-  padding: 13px 0 0;
-
-  border: 0;
-  border-top: 1px solid #e8e8e8;
-
-  background: transparent;
-  color: #111111;
-
-  font: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  text-align: left;
-
-  cursor: pointer;
+  .home-footer p {
+    font-size: 9px;
+    letter-spacing: 3px;
+  }
 }

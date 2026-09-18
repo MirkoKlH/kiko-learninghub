@@ -2780,6 +2780,35 @@ let utenteCorrente = null;
 // =========================================================
 // DATI PROFILO
 // =========================================================
+function getAvatarStage(knowledgeScore) {
+  if (
+    knowledgeScore === null ||
+    knowledgeScore < 20
+  ) {
+    return 1;
+  }
+
+  if (knowledgeScore < 40) {
+    return 2;
+  }
+
+  if (knowledgeScore < 60) {
+    return 3;
+  }
+
+  if (knowledgeScore < 80) {
+    return 4;
+  }
+
+  return 5;
+}
+
+function getAvatarPath(knowledgeScore) {
+  const stage =
+    getAvatarStage(knowledgeScore);
+
+  return `images/avatar-stage-${stage}.png`;
+}
 
 function aggiornaMenuProfilo(profilo, user) {
 profiloCorrente = profilo;
@@ -2799,21 +2828,36 @@ utenteCorrente = user;
   const nomeCompleto =
     `${nome} ${cognome}`.trim();
 
-  const iniziale =
-    nome
-      ? nome.charAt(0).toUpperCase()
-      : "?";
+const statistiche =
+  calcolaStatisticheGenerali();
 
-  const profileAvatars =
-    document.querySelectorAll(
-      ".profile-avatar, .profile-menu-avatar"
-    );
-
-  profileAvatars.forEach(
-    avatar => {
-      avatar.textContent = iniziale;
-    }
+const avatarPath =
+  getAvatarPath(
+    statistiche.knowledgeScore
   );
+
+const profileAvatars =
+  document.querySelectorAll(
+    ".profile-avatar, .profile-menu-avatar"
+  );
+
+profileAvatars.forEach(
+  avatar => {
+    avatar.textContent = "";
+
+    avatar.style.backgroundImage =
+      `url("${avatarPath}")`;
+
+    avatar.style.backgroundSize =
+  "100%";
+
+  avatar.style.backgroundPosition =
+  "center";
+
+    avatar.style.backgroundRepeat =
+      "no-repeat";
+  }
+);
 
   const profileName =
     document.getElementById(
@@ -2833,8 +2877,7 @@ utenteCorrente = user;
   if (profileEmail) {
     profileEmail.textContent = email;
   }
-const statistiche =
-  calcolaStatisticheGenerali();
+
 
 const generalKnowledgeScore =
   document.getElementById(
@@ -2852,6 +2895,31 @@ if (generalKnowledgeScore) {
     statistiche.knowledgeScore === null
       ? "Da valutare"
       : `${statistiche.knowledgeScore}%`;
+}
+const knowledgeProgressBar =
+  document.getElementById(
+    "knowledgeProgressBar"
+  );
+
+const knowledgeAvatarMarker =
+  document.getElementById(
+    "knowledgeAvatarMarker"
+  );
+
+const knowledgeScore =
+  statistiche.knowledgeScore ?? 0;
+
+if (knowledgeProgressBar) {
+  knowledgeProgressBar.style.width =
+    `${knowledgeScore}%`;
+}
+
+if (knowledgeAvatarMarker) {
+  knowledgeAvatarMarker.style.left =
+    `${knowledgeScore}%`;
+
+  knowledgeAvatarMarker.style.backgroundImage =
+    `url("${getAvatarPath(knowledgeScore)}")`;
 }
 
 if (learningHubCoverage) {
