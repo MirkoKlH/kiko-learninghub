@@ -3374,6 +3374,7 @@ window.testNotifiche = () => {
 
   alert(JSON.stringify(risultato, null, 2));
 };
+window.testNotifiche();
 // ======================================================
 // NOTIFICHE
 // ======================================================
