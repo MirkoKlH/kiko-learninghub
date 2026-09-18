@@ -4,7 +4,12 @@ const productGrid = document.getElementById("productGrid");
 const resultsTitle = document.getElementById("resultsTitle");
 const backButton = document.getElementById("backButton");
 const searchInput = document.getElementById("searchInput");
-
+const notificationToggle =
+  document.getElementById("notificationToggle");
+  const notificheSupportate =
+  "Notification" in window &&
+  "serviceWorker" in navigator &&
+  "PushManager" in window;
 // =========================================================
 // CONFIGURAZIONE SESSIONI GIORNALIERE
 // =========================================================
@@ -3338,5 +3343,28 @@ profileButton.addEventListener(
     );
   }
 );
+// ======================================================
+// NOTIFICHE
+// ======================================================
 
+if (notificationToggle) {
+  notificationToggle.addEventListener("click", async () => {
+    if (!notificheSupportate) {
+      alert("Le notifiche push non sono supportate su questo dispositivo.");
+      return;
+    }
+
+    const permesso = await Notification.requestPermission();
+
+    if (permesso === "granted") {
+      notificationToggle.classList.add("active");
+      notificationToggle.setAttribute("aria-pressed", "true");
+      notificationToggle.setAttribute("aria-label", "Disattiva notifiche");
+    } else {
+      notificationToggle.classList.remove("active");
+      notificationToggle.setAttribute("aria-pressed", "false");
+      notificationToggle.setAttribute("aria-label", "Attiva notifiche");
+    }
+  });
+}
 inizializzaAutenticazione();
