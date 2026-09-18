@@ -3364,7 +3364,15 @@ profileButton.addEventListener(
 // ======================================================
 // NOTIFICHE
 // ======================================================
-
+if (
+  notificationToggle &&
+  "Notification" in window &&
+  Notification.permission === "granted"
+) {
+  notificationToggle.classList.add("active");
+  notificationToggle.setAttribute("aria-pressed", "true");
+  notificationToggle.setAttribute("aria-label", "Disattiva notifiche");
+}
 if (notificationToggle) {
   notificationToggle.addEventListener("click", async () => {
     if (!notificheSupportate) {
