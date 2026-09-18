@@ -3406,20 +3406,7 @@ profileButton.addEventListener(
     );
   }
 );
-window.testNotifiche = () => {
-  const risultato = {
-    Notification: "Notification" in window,
-    permission:
-      "Notification" in window
-        ? Notification.permission
-        : "non disponibile",
-    serviceWorker: "serviceWorker" in navigator,
-    PushManager: "PushManager" in window
-  };
 
-  alert(JSON.stringify(risultato, null, 2));
-};
-window.testNotifiche();
 // ======================================================
 // NOTIFICHE
 // ======================================================
