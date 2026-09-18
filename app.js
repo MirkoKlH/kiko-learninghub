@@ -205,15 +205,63 @@ function caricaProgressiHair() {
   }
 }
 
-function salvaProgressiHair(
+async function salvaProgressiHair(
   progressi
 ) {
+  // Mantiene il salvataggio locale
   localStorage.setItem(
     STORAGE_KEY_HAIR,
     JSON.stringify(progressi)
   );
-}
 
+  // Recupera l'utente attualmente autenticato
+  const {
+    data: { user }
+  } = await supabaseClient.auth.getUser();
+
+  if (!user) {
+    return;
+  }
+
+  // Prepara i progressi dei singoli concept
+  const righe = Object.entries(
+    progressi.concepts
+  ).map(([conceptId, stato]) => ({
+    user_id: user.id,
+    area: "haircare",
+    concept_id: conceptId,
+    mastery: stato.mastery ?? 0,
+    ultima_risposta_corretta:
+      stato.ultimaRisposta === "corretta",
+    serie_corrette: stato.serieCorrette ?? 0,
+    ultimo_aggiornamento:
+      new Date().toISOString(),
+    tentativi: stato.tentativi ?? 0,
+    corrette: stato.corrette ?? 0,
+    errori: stato.errori ?? 0,
+    ultima_domanda: stato.ultimaDomanda ?? null
+  }));
+
+  if (righe.length === 0) {
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("progressi")
+    .upsert(
+      righe,
+      {
+        onConflict: "user_id,area,concept_id"
+      }
+    );
+
+  if (error) {
+    console.error(
+      "Errore salvataggio progressi Supabase:",
+      error
+    );
+  }
+}
 // =========================================================
 // KNOWLEDGE SCORE
 // =========================================================
