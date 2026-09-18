@@ -2807,7 +2807,7 @@ function getAvatarPath(knowledgeScore) {
   const stage =
     getAvatarStage(knowledgeScore);
 
-  return `images/avatar-stage-${stage}.png`;
+  return `images/avatars/avatar-stage-${stage}.png`;
 }
 
 function aggiornaMenuProfilo(profilo, user) {
