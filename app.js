@@ -10,6 +10,24 @@ const notificationToggle =
   "Notification" in window &&
   "serviceWorker" in navigator &&
   "PushManager" in window;
+  if ("serviceWorker" in navigator) {
+  window.addEventListener("load", async () => {
+    try {
+      const registration =
+        await navigator.serviceWorker.register("./service-worker.js");
+
+      console.log(
+        "Service Worker registrato:",
+        registration.scope
+      );
+    } catch (errore) {
+      console.error(
+        "Errore registrazione Service Worker:",
+        errore
+      );
+    }
+  });
+}
 // =========================================================
 // CONFIGURAZIONE SESSIONI GIORNALIERE
 // =========================================================
