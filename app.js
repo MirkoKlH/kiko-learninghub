@@ -10,6 +10,20 @@ const notificationToggle =
   "Notification" in window &&
   "serviceWorker" in navigator &&
   "PushManager" in window;
+const VAPID_PUBLIC_KEY = "BCK0SZhOnczXPKfWf22BaEvKVQBnw-bBhWHVb7P7p_L1ZEQZeEu84ZvLsahKMT30U2QxNYUY3uFIRg1F8Uouqzg";
+  
+function urlBase64ToUint8Array(base64String) {
+  const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding)
+    .replace(/-/g, "+")
+    .replace(/_/g, "/");
+
+  const rawData = window.atob(base64);
+
+  return Uint8Array.from(
+    [...rawData].map((carattere) => carattere.charCodeAt(0))
+  );
+}
   if ("serviceWorker" in navigator) {
   window.addEventListener("load", async () => {
     try {
@@ -3410,32 +3424,166 @@ profileButton.addEventListener(
 // ======================================================
 // NOTIFICHE
 // ======================================================
-if (
-  notificationToggle &&
-  "Notification" in window &&
-  Notification.permission === "granted"
-) {
+
+async function attivaNotifichePush() {
+  const registration = await navigator.serviceWorker.ready;
+
+  let subscription =
+    await registration.pushManager.getSubscription();
+
+  if (!subscription) {
+    subscription = await registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+    });
+  }
+
+  const {
+    data: { user },
+    error: userError
+  } = await supabaseClient.auth.getUser();
+
+  if (userError || !user) {
+    throw new Error("Utente non autenticato.");
+  }
+
+  const subscriptionJSON = subscription.toJSON();
+
+  const { error } = await supabaseClient
+    .from("push_subscriptions")
+    .upsert(
+      {
+        user_id: user.id,
+        endpoint: subscription.endpoint,
+        p256dh: subscriptionJSON.keys.p256dh,
+        auth: subscriptionJSON.keys.auth,
+        updated_at: new Date().toISOString()
+      },
+      {
+        onConflict: "endpoint"
+      }
+    );
+
+  if (error) {
+    throw error;
+  }
+
   notificationToggle.classList.add("active");
   notificationToggle.setAttribute("aria-pressed", "true");
-  notificationToggle.setAttribute("aria-label", "Disattiva notifiche");
+  notificationToggle.setAttribute(
+    "aria-label",
+    "Disattiva notifiche"
+  );
 }
+
+async function disattivaNotifichePush() {
+  const registration = await navigator.serviceWorker.ready;
+  const subscription =
+    await registration.pushManager.getSubscription();
+
+  if (subscription) {
+    const endpoint = subscription.endpoint;
+
+    const {
+      data: { user }
+    } = await supabaseClient.auth.getUser();
+
+    if (user) {
+      const { error } = await supabaseClient
+        .from("push_subscriptions")
+        .delete()
+        .eq("user_id", user.id)
+        .eq("endpoint", endpoint);
+
+      if (error) {
+        throw error;
+      }
+    }
+
+    await subscription.unsubscribe();
+  }
+
+  notificationToggle.classList.remove("active");
+  notificationToggle.setAttribute("aria-pressed", "false");
+  notificationToggle.setAttribute(
+    "aria-label",
+    "Attiva notifiche"
+  );
+}
+
+async function aggiornaStatoNotifiche() {
+  if (!notificationToggle || !notificheSupportate) {
+    return;
+  }
+
+  const registration = await navigator.serviceWorker.ready;
+  const subscription =
+    await registration.pushManager.getSubscription();
+
+  const attive =
+    Notification.permission === "granted" &&
+    subscription !== null;
+
+  notificationToggle.classList.toggle("active", attive);
+  notificationToggle.setAttribute(
+    "aria-pressed",
+    String(attive)
+  );
+  notificationToggle.setAttribute(
+    "aria-label",
+    attive ? "Disattiva notifiche" : "Attiva notifiche"
+  );
+}
+
 if (notificationToggle) {
+  aggiornaStatoNotifiche().catch(console.error);
+
   notificationToggle.addEventListener("click", async () => {
     if (!notificheSupportate) {
-      alert("Le notifiche push non sono supportate su questo dispositivo.");
+      alert(
+        "Le notifiche push non sono supportate su questo dispositivo."
+      );
       return;
     }
 
-    const permesso = await Notification.requestPermission();
+    try {
+      const registration =
+        await navigator.serviceWorker.ready;
 
-    if (permesso === "granted") {
-      notificationToggle.classList.add("active");
-      notificationToggle.setAttribute("aria-pressed", "true");
-      notificationToggle.setAttribute("aria-label", "Disattiva notifiche");
-    } else {
-      notificationToggle.classList.remove("active");
-      notificationToggle.setAttribute("aria-pressed", "false");
-      notificationToggle.setAttribute("aria-label", "Attiva notifiche");
+      const subscription =
+        await registration.pushManager.getSubscription();
+
+      if (subscription) {
+        await disattivaNotifichePush();
+        return;
+      }
+
+      const permesso =
+        await Notification.requestPermission();
+
+      if (permesso !== "granted") {
+        notificationToggle.classList.remove("active");
+        notificationToggle.setAttribute(
+          "aria-pressed",
+          "false"
+        );
+        notificationToggle.setAttribute(
+          "aria-label",
+          "Attiva notifiche"
+        );
+        return;
+      }
+
+      await attivaNotifichePush();
+    } catch (errore) {
+      console.error(
+        "Errore gestione notifiche push:",
+        errore
+      );
+
+      alert(
+        "Non è stato possibile aggiornare le notifiche. Riprova."
+      );
     }
   });
 }
