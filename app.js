@@ -3551,9 +3551,10 @@ if (notificationToggle) {
     }
 
     try {
+      alert("PRIMA di serviceWorker.ready");
       const registration =
         await navigator.serviceWorker.ready;
-
+alert("DOPO serviceWorker.ready");
       const subscription =
         await registration.pushManager.getSubscription();
 
