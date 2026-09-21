@@ -3539,6 +3539,7 @@ if (notificationToggle) {
   aggiornaStatoNotifiche().catch(console.error);
 
   notificationToggle.addEventListener("click", async () => {
+    alert("TEST: interruttore notifiche premuto");
     if (!notificheSupportate) {
       alert(
         "Le notifiche push non sono supportate su questo dispositivo."
