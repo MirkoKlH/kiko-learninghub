@@ -3480,7 +3480,7 @@ async function disattivaNotifichePush() {
   const registration = await navigator.serviceWorker.ready;
   const subscription =
     await registration.pushManager.getSubscription();
-
+alert("Subscription esistente: " + (subscription ? "SI" : "NO"));
   if (subscription) {
     const endpoint = subscription.endpoint;
 
