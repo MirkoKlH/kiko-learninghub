@@ -10,7 +10,7 @@ const notificationToggle =
   "Notification" in window &&
   "serviceWorker" in navigator &&
   "PushManager" in window;
-const VAPID_PUBLIC_KEY = "BCK0SZhOnczXPKfWf22BaEvKVQBnw-bBhWHVb7P7p_L1ZEQZeEu84ZvLsahKMT30U2QxNYUY3uFIRg1F8Uouqzg";
+const VAPID_PUBLIC_KEY = "BBegim56-g-0q0-oKG6U53FIDGHEQVI9sVpUpDlO5cAHonPEE7NwShccApU0GxaIwhY4f_p0PXv-ICUoftlY0N4";
   
 function urlBase64ToUint8Array(base64String) {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
