@@ -3539,6 +3539,7 @@ if (notificationToggle) {
   aggiornaStatoNotifiche().catch(console.error);
 
   notificationToggle.addEventListener("click", async () => {
+   alert("Supporto notifiche: " + notificheSupportate);
     alert("TEST: interruttore notifiche premuto");
     if (!notificheSupportate) {
       alert(
