@@ -208,10 +208,51 @@ function registraSessioneCompletata(
   salvaSessioniGiornaliere(
     registro
   );
+salvaSessioneSuSupabase(area);
 
   return registro.aree[area];
 }
+// =========================================================
+// SALVATAGGIO SESSIONI SU SUPABASE
+// =========================================================
 
+async function salvaSessioneSuSupabase(area) {
+
+  try {
+
+    const {
+      data: { user },
+      error: userError
+    } = await supabaseClient.auth.getUser();
+
+    if (userError || !user) {
+      console.error(
+        "Impossibile salvare la sessione: utente non autenticato."
+      );
+      return;
+    }
+
+    const { error } = await supabaseClient
+      .from("sessioni")
+      .insert({
+        user_id: user.id,
+        area: area
+      });
+
+    if (error) {
+      throw error;
+    }
+
+  } catch (errore) {
+
+    console.error(
+      "Errore salvataggio sessione su Supabase:",
+      errore
+    );
+
+  }
+
+}
 // =========================================================
 // PROGRESSO HAIR
 // =========================================================
