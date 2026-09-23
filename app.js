@@ -3480,7 +3480,7 @@ async function disattivaNotifichePush() {
   const registration = await navigator.serviceWorker.ready;
   const subscription =
     await registration.pushManager.getSubscription();
-alert("Subscription esistente: " + (subscription ? "SI" : "NO"));
+
   if (subscription) {
     const endpoint = subscription.endpoint;
 
@@ -3539,10 +3539,7 @@ if (notificationToggle) {
   aggiornaStatoNotifiche().catch(console.error);
 
   notificationToggle.addEventListener("click", async () => {
-  alert(
-  "Supporto: " + notificheSupportate +
-  "\nPermesso attuale: " + Notification.permission
-);
+
     if (!notificheSupportate) {
       alert(
         "Le notifiche push non sono supportate su questo dispositivo."
@@ -3551,10 +3548,10 @@ if (notificationToggle) {
     }
 
     try {
-      alert("PRIMA di serviceWorker.ready");
+      
       const registration =
         await navigator.serviceWorker.ready;
-alert("DOPO serviceWorker.ready");
+
       const subscription =
         await registration.pushManager.getSubscription();
 

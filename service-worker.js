@@ -4,7 +4,8 @@ self.addEventListener("install", () => {
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(self.clients.claim());
-});self.addEventListener("push", (event) => {
+});
+self.addEventListener("push", (event) => {
   let data = {
     title: "KIKO Le Gru LearningHub",
     body: "Hai una nuova notifica.",
