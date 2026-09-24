@@ -3323,7 +3323,13 @@ background 0.2s ease,
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
 }
+.notification-toggle.active {
+  background: #34c759;
+}
 
+.notification-toggle.active span {
+  left: 21px;
+}
 .profile-logout {
 
   width: 100%;
