@@ -1,0 +1,43 @@
+name: Notifica nuovo contenuto
+
+on:
+  workflow_dispatch:
+    inputs:
+      content_key:
+        description: "Chiave univoca del nuovo contenuto"
+        required: true
+        type: string
+
+      area:
+        description: "Area di apprendimento"
+        required: true
+        type: string
+
+      content_name:
+        description: "Nome del nuovo contenuto"
+        required: true
+        type: string
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Invia notifica LearningHub
+        run: |
+          curl --fail-with-body \
+            --request POST \
+            "${{ secrets.SUPABASE_FUNCTION_URL }}" \
+            --header "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            --header "Content-Type: application/json" \
+            --data "$(jq -n \
+              --arg key "${{ inputs.content_key }}" \
+              --arg area "${{ inputs.area }}" \
+              --arg name "${{ inputs.content_name }}" \
+              '{
+                type: "new_content",
+                contentKey: $key,
+                area: $area,
+                contentName: $name,
+                url: "/"
+              }')"
