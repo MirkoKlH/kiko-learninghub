@@ -2994,14 +2994,19 @@ function mostraLearningHub() {
     adminUsersSection.classList.add("hidden");
   }
 
-  const mainSections =
-    appContent?.querySelectorAll("main > section");
+  const heroSection =
+    document.querySelector(".hero-home");
 
-  mainSections?.forEach(section => {
-    if (section.id !== "adminUsersSection") {
-      section.classList.remove("hidden");
-    }
-  });
+  const categoriesSection =
+    document.querySelector(".categories");
+
+  if (heroSection) {
+    heroSection.classList.remove("hidden");
+  }
+
+  if (categoriesSection) {
+    categoriesSection.classList.remove("hidden");
+  }
 }
 
 async function mostraGestioneUtenti() {
