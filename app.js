@@ -86,6 +86,7 @@ let sessioneQuiz = [];
 let indiceQuiz = 0;
 let risposteCorrette = 0;
 let rispostaBloccata = false;
+let modalitaQuizHaircare = "generale";
 
 // =========================================================
 // SESSIONI GIORNALIERE
@@ -1072,7 +1073,7 @@ function mostraLineeCapelli() {
     recoveryCard.addEventListener(
       "click",
       () => {
-        avviaQuizHaircare();
+        avviaRipassoHaircare();
       }
     );
   }
@@ -1563,6 +1564,115 @@ function creaSessioneQuiz() {
 // =========================================================
 // AVVIO QUIZ
 // =========================================================
+function creaSessioneRipassoHaircare() {
+
+  const progressi =
+    caricaProgressiHair();
+
+  const conceptsRecupero = [
+    ...new Set(
+      quizCapelli
+        .filter(
+          domanda =>
+            domanda.tipo ===
+            "principale" &&
+            classificaConcept(
+              domanda.concept,
+              progressi
+            ) === "recupero"
+        )
+        .map(
+          domanda =>
+            domanda.concept
+        )
+    )
+  ];
+
+  if (
+    conceptsRecupero.length === 0
+  ) {
+    return [];
+  }
+
+  const domandeRipasso =
+    quizCapelli.filter(
+      domanda =>
+        conceptsRecupero.includes(
+          domanda.concept
+        )
+    );
+
+  const domandeMescolate =
+    [...domandeRipasso]
+      .sort(
+        () =>
+          Math.random() - 0.5
+      );
+
+  const conceptsUsati =
+    new Set();
+
+  const sessione = [];
+
+  for (
+    const domanda of domandeMescolate
+  ) {
+
+    if (
+      conceptsUsati.has(
+        domanda.concept
+      )
+    ) {
+      continue;
+    }
+
+    sessione.push(
+      domanda
+    );
+
+    conceptsUsati.add(
+      domanda.concept
+    );
+
+    if (
+      sessione.length === 15
+    ) {
+      break;
+    }
+  }
+
+  return sessione;
+}
+function avviaRipassoHaircare() {
+
+  if (
+    limiteSessioniRaggiunto(
+      "haircare"
+    )
+  ) {
+    return;
+  }
+
+  const sessioneRipasso =
+    creaSessioneRipassoHaircare();
+
+  if (
+    sessioneRipasso.length === 0
+  ) {
+    return;
+  }
+
+  sessioneQuiz =
+    sessioneRipasso;
+modalitaQuizHaircare =
+  "ripasso";
+
+  indiceQuiz = 0;
+  risposteCorrette = 0;
+  rispostaBloccata = false;
+
+  mostraDomandaQuiz();
+}
 
 function avviaQuizHaircare() {
 
@@ -1577,7 +1687,8 @@ function avviaQuizHaircare() {
 
   sessioneQuiz =
     creaSessioneQuiz();
-
+modalitaQuizHaircare =
+  "generale";
   indiceQuiz = 0;
   risposteCorrette = 0;
   rispostaBloccata = false;
@@ -1763,7 +1874,190 @@ function mostraDomandaQuiz() {
       }
     );
 }
+function mostraDomandaQuiz() {
+  const domanda =
+    sessioneQuiz[
+      indiceQuiz
+    ];
 
+  const numeroDomanda =
+    indiceQuiz + 1;
+
+  const totaleDomande =
+    sessioneQuiz.length;
+
+  const avanzamento =
+    Math.round(
+      (
+        indiceQuiz /
+        totaleDomande
+      ) * 100
+    );
+
+  const ripassoMirato =
+    modalitaQuizHaircare ===
+    "ripasso";
+
+  resultsTitle.textContent =
+    ripassoMirato
+      ? "Ripasso Haircare"
+      : "Quiz Haircare";
+
+  productGrid.innerHTML = `
+
+    <section class="hair-quiz">
+
+      <div class="quiz-top">
+
+        <div>
+
+          <p class="quiz-label">
+            ${
+              ripassoMirato
+                ? "RIPASSO MIRATO"
+                : "HAIRCARE TRAINING"
+            }
+          </p>
+
+          <p class="quiz-counter">
+            Domanda
+            ${numeroDomanda}
+            di
+            ${totaleDomande}
+          </p>
+
+        </div>
+
+        <button
+          class="quiz-exit-button"
+          id="quizExitButton"
+        >
+          Esci
+        </button>
+
+      </div>
+
+      <div class="quiz-progress">
+
+        <div
+          class="quiz-progress-bar"
+          style="
+            width:
+            ${avanzamento}%;
+          "
+        ></div>
+
+      </div>
+
+      <div class="quiz-meta">
+
+        <span>
+          ${domanda.area}
+        </span>
+
+        <span>
+          ${
+            domanda.difficolta ===
+              "B"
+              ? "Base"
+              : domanda.difficolta ===
+                  "I"
+                ? "Intermedia"
+                : "Avanzata"
+          }
+        </span>
+
+      </div>
+
+      <h4 class="quiz-question">
+        ${domanda.domanda}
+      </h4>
+
+      <div class="quiz-options">
+
+        ${domanda.opzioni
+          .map(
+            (
+              opzione,
+              index
+            ) => `
+
+              <button
+                class="quiz-option"
+                data-index="${index}"
+              >
+
+                <span
+                  class="
+                    quiz-option-letter
+                  "
+                >
+                  ${String.fromCharCode(
+                    65 + index
+                  )}
+                </span>
+
+                <span>
+                  ${opzione}
+                </span>
+
+              </button>
+
+            `
+          )
+          .join("")}
+
+      </div>
+
+      <div
+        id="quizFeedback"
+        class="
+          quiz-feedback-container
+        "
+      ></div>
+
+    </section>
+
+  `;
+
+  rispostaBloccata =
+    false;
+
+  document
+    .querySelectorAll(
+      ".quiz-option"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            verificaRisposta(
+              Number(
+                button.dataset
+                  .index
+              )
+            );
+
+          }
+        );
+
+      }
+    );
+
+  document
+    .getElementById(
+      "quizExitButton"
+    )
+    .addEventListener(
+      "click",
+      () => {
+        mostraLineeCapelli();
+      }
+    );
+}
 // =========================================================
 // VERIFICA RISPOSTA
 // =========================================================
@@ -1960,6 +2254,10 @@ function mostraRisultatoQuiz() {
   const conceptsValutati =
     contaConceptValutati();
 
+  const ripassoMirato =
+    modalitaQuizHaircare ===
+    "ripasso";
+
   const sessioniOggi =
     registraSessioneCompletata(
       "haircare"
@@ -1976,31 +2274,41 @@ function mostraRisultatoQuiz() {
   ) {
 
     titoloRisultato =
-      "Ottima padronanza.";
+      ripassoMirato
+        ? "Ripasso completato con ottimi risultati."
+        : "Ottima padronanza.";
 
   } else if (
     percentuale >= 75
   ) {
 
     titoloRisultato =
-      "Buona preparazione.";
+      ripassoMirato
+        ? "Il ripasso sta dando i suoi frutti."
+        : "Buona preparazione.";
 
   } else if (
     percentuale >= 60
   ) {
 
     titoloRisultato =
-      "Base solida, continuiamo.";
+      ripassoMirato
+        ? "Stai consolidando questi concetti."
+        : "Base solida, continuiamo.";
 
   } else {
 
     titoloRisultato =
-      "Abbiamo trovato cosa rafforzare.";
+      ripassoMirato
+        ? "Continuiamo a rafforzare questi concetti."
+        : "Abbiamo trovato cosa rafforzare.";
 
   }
 
   resultsTitle.textContent =
-    "Risultato";
+    ripassoMirato
+      ? "Risultato ripasso"
+      : "Risultato";
 
   productGrid.innerHTML = `
 
@@ -2011,7 +2319,11 @@ function mostraRisultatoQuiz() {
           quiz-result-label
         "
       >
-        MISSIONE COMPLETATA
+        ${
+          ripassoMirato
+            ? "RIPASSO COMPLETATO"
+            : "MISSIONE COMPLETATA"
+        }
       </p>
 
       <h4>
@@ -2047,7 +2359,11 @@ function mostraRisultatoQuiz() {
         >
 
           <span>
-            RISULTATO SESSIONE
+            ${
+              ripassoMirato
+                ? "RISULTATO RIPASSO"
+                : "RISULTATO SESSIONE"
+            }
           </span>
 
           <strong>
@@ -2079,12 +2395,24 @@ function mostraRisultatoQuiz() {
           quiz-result-note
         "
       >
-        Il Knowledge Score è calcolato
-        sulle conoscenze già valutate.
-        Al momento LearningHub ha
-        analizzato
-        ${conceptsValutati}
-        concetti Hair.
+        ${
+          ripassoMirato
+            ? `
+              Le risposte di questo ripasso
+              hanno aggiornato il tuo percorso.
+              I concetti rafforzati potranno
+              cambiare categoria in base
+              ai tuoi progressi.
+            `
+            : `
+              Il Knowledge Score è calcolato
+              sulle conoscenze già valutate.
+              Al momento LearningHub ha
+              analizzato
+              ${conceptsValutati}
+              concetti Hair.
+            `
+        }
       </p>
 
       ${
@@ -2140,7 +2468,11 @@ function mostraRisultatoQuiz() {
                 id="quizRestartButton"
                 class="quiz-next-button"
               >
-                Nuova sessione →
+                ${
+                  ripassoMirato
+                    ? "Continua ad allenarti →"
+                    : "Nuova sessione →"
+                }
               </button>
 
             `
@@ -2171,7 +2503,13 @@ function mostraRisultatoQuiz() {
     restartButton.addEventListener(
       "click",
       () => {
-        avviaQuizHaircare();
+
+        if (ripassoMirato) {
+          mostraLineeCapelli();
+        } else {
+          avviaQuizHaircare();
+        }
+
       }
     );
   }
@@ -2186,151 +2524,6 @@ function mostraRisultatoQuiz() {
         mostraLineeCapelli();
       }
     );
-}
-
-// =========================================================
-// MOSTRA PRODOTTI
-// =========================================================
-
-function mostraProdotti(
-  listaProdotti,
-  titolo = "Prodotti"
-) {
-  productGrid.innerHTML = "";
-
-  resultsTitle.textContent =
-    titolo;
-
-  if (
-    listaProdotti.length ===
-    0
-  ) {
-
-    productGrid.innerHTML = `
-
-      <div
-        class="
-          empty-state
-        "
-      >
-
-        <h4>
-          Nessun prodotto trovato
-        </h4>
-
-        <p>
-          Prova con un'altra ricerca.
-        </p>
-
-      </div>
-
-    `;
-
-  } else {
-
-    listaProdotti.forEach(
-      prodotto => {
-
-        const card =
-          document.createElement(
-            "article"
-          );
-
-        card.classList.add(
-          "product-card"
-        );
-
-        card.innerHTML = `
-
-          <div
-            class="
-              product-code
-            "
-          >
-            ${
-              prodotto.codice ||
-              prodotto.nomeBreve
-            }
-          </div>
-
-          <p
-            class="
-              product-type
-            "
-          >
-            ${prodotto.tipologia}
-          </p>
-
-          <h4>
-            ${prodotto.nome}
-          </h4>
-
-          <p
-            class="
-              product-card-description
-            "
-          >
-            ${prodotto.descrizione}
-          </p>
-
-          <button
-            class="
-              product-button
-            "
-            data-id="${prodotto.id}"
-          >
-            Apri scheda →
-          </button>
-
-        `;
-
-        productGrid.appendChild(
-          card
-        );
-
-      }
-    );
-
-    document
-      .querySelectorAll(
-        ".product-button"
-      )
-      .forEach(
-        button => {
-
-          button.addEventListener(
-            "click",
-            () => {
-
-              const prodotto =
-                prodotti.find(
-                  item =>
-                    item.id ===
-                    button.dataset.id
-                );
-
-              if (prodotto) {
-                apriSchedaProdotto(
-                  prodotto
-                );
-              }
-
-            }
-          );
-
-        }
-      );
-  }
-
-  resultsSection
-    .classList
-    .remove(
-      "hidden"
-    );
-
-  resultsSection.scrollIntoView({
-    behavior: "smooth"
-  });
 }
 
 // =========================================================
