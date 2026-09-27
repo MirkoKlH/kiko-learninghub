@@ -2981,7 +2981,73 @@ function mostraLearningHub() {
   }
 }
 
+async function mostraGestioneUtenti() {
+  nascondiTutteLeSchermate();
 
+  const adminUsersSection =
+    document.getElementById("adminUsersSection");
+
+  const adminUsersList =
+    document.getElementById("adminUsersList");
+
+  if (adminUsersSection) {
+    adminUsersSection.classList.remove("hidden");
+  }
+
+  if (!adminUsersList) {
+    return;
+  }
+
+  adminUsersList.innerHTML =
+    "<p>Caricamento richieste...</p>";
+
+  const { data: utenti, error } =
+    await supabaseClient
+      .from("profiles")
+      .select("id, nome, cognome, email, stato, ruolo")
+      .eq("stato", "in_attesa")
+      .order("created_at", { ascending: true });
+
+  if (error) {
+    console.error(
+      "Errore caricamento utenti:",
+      error
+    );
+
+    adminUsersList.innerHTML =
+      "<p>Errore nel caricamento delle richieste.</p>";
+
+    return;
+  }
+
+  if (!utenti || utenti.length === 0) {
+    adminUsersList.innerHTML =
+      "<p>Nessuna richiesta in attesa.</p>";
+
+    return;
+  }
+
+  adminUsersList.innerHTML = utenti
+    .map(
+      utente => `
+        <div class="admin-user-card">
+          <strong>
+            ${utente.nome || ""} ${utente.cognome || ""}
+          </strong>
+          <span>${utente.email || ""}</span>
+        </div>
+      `
+    )
+    .join("");
+}
+const adminUsersBackButton =
+  document.getElementById("adminUsersBackButton");
+
+if (adminUsersBackButton) {
+  adminUsersBackButton.onclick = () => {
+    mostraLearningHub();
+  };
+}
 // =========================================================
 // TAB ACCEDI / REGISTRATI
 // =========================================================
@@ -3242,6 +3308,11 @@ if (adminUsersButton) {
     "hidden",
     profilo?.ruolo !== "admin"
   );
+}
+if (adminUsersButton) {
+  adminUsersButton.onclick = () => {
+    mostraGestioneUtenti();
+  };
 }
   const nome =
     profilo?.nome || "";
