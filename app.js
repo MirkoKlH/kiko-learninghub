@@ -2868,6 +2868,12 @@ const pendingScreen =
 const appContent =
   document.getElementById("appContent");
 
+  const profileButton =
+  document.getElementById("profileButton");
+
+const profileMenu =
+  document.getElementById("profileMenu");
+
 const loginTab =
   document.getElementById("loginTab");
 
