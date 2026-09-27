@@ -3405,6 +3405,16 @@ if (
 
   return;
 }
+if (profilo.stato === "in_attesa") {
+  mostraSchermataAccesso();
+
+  if (authMessage) {
+    authMessage.textContent =
+      "Account in attesa di approvazione. La registrazione è stata completata correttamente. Potrai accedere al LearningHub non appena il tuo account sarà approvato.";
+  }
+
+  return;
+}
 }
 
 // =========================================================
