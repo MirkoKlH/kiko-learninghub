@@ -3234,7 +3234,15 @@ function getAvatarPath(knowledgeScore) {
 function aggiornaMenuProfilo(profilo, user) {
 profiloCorrente = profilo;
 utenteCorrente = user;
+const adminUsersButton =
+  document.getElementById("adminUsersButton");
 
+if (adminUsersButton) {
+  adminUsersButton.classList.toggle(
+    "hidden",
+    profilo?.ruolo !== "admin"
+  );
+}
   const nome =
     profilo?.nome || "";
 
