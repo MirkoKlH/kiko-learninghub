@@ -3743,6 +3743,15 @@ async function attivaNotifichePush() {
 
   const subscriptionJSON = subscription.toJSON();
 
+  // Rimuove eventuali vecchie subscription dello stesso utente
+const { error: deleteOldSubscriptionsError } = await supabaseClient
+  .from("push_subscriptions")
+  .delete()
+  .eq("user_id", user.id);
+
+if (deleteOldSubscriptionsError) {
+  throw deleteOldSubscriptionsError;
+}
   const { error } = await supabaseClient
     .from("push_subscriptions")
     .upsert(
@@ -3776,7 +3785,7 @@ async function disattivaNotifichePush() {
     await registration.pushManager.getSubscription();
 
   if (subscription) {
-    const endpoint = subscription.endpoint;
+  
 
     const {
       data: { user }
@@ -3787,7 +3796,7 @@ async function disattivaNotifichePush() {
         .from("push_subscriptions")
         .delete()
         .eq("user_id", user.id)
-        .eq("endpoint", endpoint);
+    
 
       if (error) {
         throw error;
