@@ -310,8 +310,12 @@ async function caricaProgressiHairDaSupabase(userId) {
   data.forEach((riga) => {
     progressi.concepts[riga.concept_id] = {
       mastery: riga.mastery ?? 0,
-      ultimaRispostaCorretta:
-        riga.ultima_risposta_corretta ?? false,
+  ultimaRisposta:
+  (riga.tentativi ?? 0) === 0
+    ? null
+    : riga.ultima_risposta_corretta === true
+      ? "corretta"
+      : "errata",
       serieCorrette: riga.serie_corrette ?? 0,
       tentativi: riga.tentativi ?? 0,
       corrette: riga.corrette ?? 0,
@@ -875,7 +879,19 @@ function mostraLineeCapelli() {
                 class="
                   hair-path-card
                   hair-path-recovery
+                  ${
+                    percorsoHair.recupero > 0 &&
+                    !limiteRaggiunto
+                      ? "hair-path-actionable"
+                      : ""
+                  }
                 "
+                ${
+                  percorsoHair.recupero > 0 &&
+                  !limiteRaggiunto
+                    ? 'id="hairRecoveryCard"'
+                    : ""
+                }
               >
 
                 <span class="hair-path-status">
@@ -887,8 +903,23 @@ function mostraLineeCapelli() {
                 </strong>
 
                 <p>
-                  concetti
+                  ${
+                    percorsoHair.recupero === 1
+                      ? "concetto"
+                      : "concetti"
+                  }
                 </p>
+
+                ${
+                  percorsoHair.recupero > 0 &&
+                  !limiteRaggiunto
+                    ? `
+                      <span class="hair-path-action">
+                        Ripassa ora →
+                      </span>
+                    `
+                    : ""
+                }
 
               </div>
 
@@ -908,7 +939,11 @@ function mostraLineeCapelli() {
                 </strong>
 
                 <p>
-                  concetti
+                  ${
+                    percorsoHair.consolidamento === 1
+                      ? "concetto"
+                      : "concetti"
+                  }
                 </p>
 
               </div>
@@ -929,7 +964,11 @@ function mostraLineeCapelli() {
                 </strong>
 
                 <p>
-                  concetti
+                  ${
+                    percorsoHair.solido === 1
+                      ? "concetto"
+                      : "concetti"
+                  }
                 </p>
 
               </div>
@@ -950,7 +989,11 @@ function mostraLineeCapelli() {
                   ? `
                     <span>
                       ${percorsoHair.nuovo}
-                      ancora da esplorare
+                      ${
+                        percorsoHair.nuovo === 1
+                          ? "ancora da esplorare"
+                          : "ancora da esplorare"
+                      }
                     </span>
                   `
                   : `
@@ -1020,6 +1063,20 @@ function mostraLineeCapelli() {
     );
   }
 
+  const recoveryCard =
+    document.getElementById(
+      "hairRecoveryCard"
+    );
+
+  if (recoveryCard) {
+    recoveryCard.addEventListener(
+      "click",
+      () => {
+        avviaQuizHaircare();
+      }
+    );
+  }
+
   resultsSection.scrollIntoView({
     behavior: "smooth"
   });
@@ -1074,7 +1131,10 @@ function classificaConcept(
       concept
     ];
 
-  if (!stato) {
+  if (
+    !stato ||
+    (stato.tentativi ?? 0) === 0
+  ) {
     return "nuovo";
   }
 

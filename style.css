@@ -5223,3 +5223,30 @@ mask-composite: intersect;
     letter-spacing: 3px;
   }
 }
+/* =========================================================
+   PERCORSO HAIRCARE - CARD INTERATTIVA
+   ========================================================= */
+
+.hair-path-actionable {
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.hair-path-actionable:hover {
+  transform: translateY(-2px);
+}
+
+.hair-path-actionable:active {
+  transform: scale(0.98);
+}
+
+.hair-path-action {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
