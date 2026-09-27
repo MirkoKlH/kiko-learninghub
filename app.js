@@ -2983,7 +2983,9 @@ function mostraLearningHub() {
 
 async function mostraGestioneUtenti() {
   nascondiTutteLeSchermate();
-
+  if (appContent) {
+    appContent.classList.remove("hidden");
+  }
   const adminUsersSection =
     document.getElementById("adminUsersSection");
 
