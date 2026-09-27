@@ -3351,8 +3351,7 @@ if (adminUsersButton) {
 }
 if (adminUsersButton) {
   adminUsersButton.onclick = () => {
-    alert("CLICK GESTIONE UTENTI OK");
-    mostraGestioneUtenti();
+ mostraGestioneUtenti();
   };
 }
   const nome =
