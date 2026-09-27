@@ -2932,6 +2932,7 @@ function nascondiTutteLeSchermate() {
 }
 
 
+
 function mostraSchermataAccesso() {
 
   nascondiTutteLeSchermate();
@@ -2979,15 +2980,32 @@ function mostraLearningHub() {
   if (appContent) {
     appContent.classList.remove("hidden");
   }
+
+  const adminUsersSection =
+    document.getElementById("adminUsersSection");
+
+  if (adminUsersSection) {
+    adminUsersSection.classList.add("hidden");
+  }
 }
 
 async function mostraGestioneUtenti() {
+
   nascondiTutteLeSchermate();
+
   if (appContent) {
     appContent.classList.remove("hidden");
   }
+
   const adminUsersSection =
     document.getElementById("adminUsersSection");
+
+  const mainSections =
+    appContent?.querySelectorAll("main > section");
+
+  mainSections?.forEach(section => {
+    section.classList.add("hidden");
+  });
 
   const adminUsersList =
     document.getElementById("adminUsersList");
