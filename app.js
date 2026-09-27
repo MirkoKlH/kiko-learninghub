@@ -2993,6 +2993,15 @@ function mostraLearningHub() {
   if (adminUsersSection) {
     adminUsersSection.classList.add("hidden");
   }
+
+  const mainSections =
+    appContent?.querySelectorAll("main > section");
+
+  mainSections?.forEach(section => {
+    if (section.id !== "adminUsersSection") {
+      section.classList.remove("hidden");
+    }
+  });
 }
 
 async function mostraGestioneUtenti() {
