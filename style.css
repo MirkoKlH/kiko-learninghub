@@ -5384,3 +5384,154 @@ mask-composite: intersect;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+/* =========================================================
+   GESTIONE UTENTI — ADMIN
+   ========================================================= */
+
+.admin-users-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 32px 48px;
+  box-sizing: border-box;
+}
+
+.admin-users-header {
+  margin-bottom: 32px;
+}
+
+.admin-users-back {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0 0 24px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  cursor: pointer;
+}
+
+.admin-users-header .hero-label {
+  margin: 0 0 14px;
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.admin-users-header h2 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.admin-users-header > p:not(.hero-label) {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.admin-users-list {
+  width: 100%;
+}
+
+.admin-user-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.admin-user-card:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.admin-user-card strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 17px;
+}
+
+.admin-user-card span {
+  display: block;
+  font-size: 14px;
+  color: #666;
+}
+
+.admin-user-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-user-actions button {
+  min-height: 38px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-user-approve {
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+}
+
+.admin-user-reject {
+  border: 1px solid #bbb;
+  background: transparent;
+  color: #111;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .admin-users-section {
+    padding: 24px 20px 40px;
+  }
+
+  .admin-users-header {
+    margin-bottom: 26px;
+  }
+
+  .admin-users-back {
+    margin-bottom: 28px;
+    font-size: 13px;
+  }
+
+  .admin-users-header .hero-label {
+    margin-bottom: 16px;
+    font-size: 11px;
+  }
+
+  .admin-users-header h2 {
+    font-size: 30px;
+  }
+
+  .admin-users-header > p:not(.hero-label) {
+    font-size: 15px;
+  }
+
+  .admin-user-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding: 20px 0;
+  }
+
+  .admin-user-actions {
+    width: 100%;
+  }
+
+  .admin-user-actions button {
+    flex: 1;
+  }
+}
