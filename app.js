@@ -3614,7 +3614,34 @@ if (registerForm) {
         "Registrazione completata:",
         data
       );
+      try {
 
+        const {
+          error: notificationError
+        } = await supabaseClient.functions.invoke(
+          "send-push-notification",
+          {
+            body: {
+              type: "new_user_request"
+            }
+          }
+        );
+
+        if (notificationError) {
+          console.error(
+            "Errore notifica nuova registrazione:",
+            notificationError
+          );
+        }
+
+      } catch (notificationError) {
+
+        console.error(
+          "Errore invio notifica nuova registrazione:",
+          notificationError
+        );
+
+      }
       registerForm.reset();
 
       authMessage.textContent =
