@@ -87,6 +87,7 @@ let indiceQuiz = 0;
 let risposteCorrette = 0;
 let rispostaBloccata = false;
 let modalitaQuizHaircare = "generale";
+let areaQuizAttiva = "haircare";
 
 // =========================================================
 // SESSIONI GIORNALIERE
@@ -260,6 +261,30 @@ async function salvaSessioneSuSupabase(area) {
 
 const STORAGE_KEY_HAIR =
   "learninghub_hair_progress";
+const STORAGE_KEY_SKINCARE =
+  "learninghub_skincare_progress";
+function caricaProgressiSkincare() {
+  const datiSalvati =
+    localStorage.getItem(
+      STORAGE_KEY_SKINCARE
+    );
+
+  if (!datiSalvati) {
+    return {
+      concepts: {}
+    };
+  }
+
+  try {
+    return JSON.parse(
+      datiSalvati
+    );
+  } catch (errore) {
+    return {
+      concepts: {}
+    };
+  }
+}
 
 function caricaProgressiHair() {
   const datiSalvati =
@@ -330,6 +355,53 @@ async function caricaProgressiHairDaSupabase(userId) {
     JSON.stringify(progressi)
   );
 }
+async function caricaProgressiSkincareDaSupabase(userId) {
+  const { data, error } = await supabaseClient
+    .from("progressi")
+    .select(
+      "concept_id, mastery, ultima_risposta_corretta, serie_corrette, tentativi, corrette, errori, ultima_domanda"
+    )
+    .eq("user_id", userId)
+    .eq("area", "skincare");
+
+  if (error) {
+    console.error(
+      "Errore caricamento progressi Skincare da Supabase:",
+      error
+    );
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    return;
+  }
+
+  const progressi = {
+    concepts: {}
+  };
+
+  data.forEach((riga) => {
+    progressi.concepts[riga.concept_id] = {
+      mastery: riga.mastery ?? 0,
+      ultimaRisposta:
+        (riga.tentativi ?? 0) === 0
+          ? null
+          : riga.ultima_risposta_corretta === true
+            ? "corretta"
+            : "errata",
+      serieCorrette: riga.serie_corrette ?? 0,
+      tentativi: riga.tentativi ?? 0,
+      corrette: riga.corrette ?? 0,
+      errori: riga.errori ?? 0,
+      ultimaDomanda: riga.ultima_domanda ?? null
+    };
+  });
+
+  localStorage.setItem(
+    STORAGE_KEY_SKINCARE,
+    JSON.stringify(progressi)
+  );
+}
 async function salvaProgressiHair(
   progressi
 ) {
@@ -386,7 +458,61 @@ async function salvaProgressiHair(
       error
     );
   }
+async function salvaProgressiSkincare(
+  progressi
+) {
+  localStorage.setItem(
+    STORAGE_KEY_SKINCARE,
+    JSON.stringify(progressi)
+  );
+
+  const {
+    data: { user }
+  } = await supabaseClient.auth.getUser();
+
+  if (!user) {
+    return;
+  }
+
+  const righe = Object.entries(
+    progressi.concepts
+  ).map(([conceptId, stato]) => ({
+    user_id: user.id,
+    area: "skincare",
+    concept_id: conceptId,
+    mastery: stato.mastery ?? 0,
+    ultima_risposta_corretta:
+      stato.ultimaRisposta === "corretta",
+    serie_corrette: stato.serieCorrette ?? 0,
+    ultimo_aggiornamento:
+      new Date().toISOString(),
+    tentativi: stato.tentativi ?? 0,
+    corrette: stato.corrette ?? 0,
+    errori: stato.errori ?? 0,
+    ultima_domanda: stato.ultimaDomanda ?? null
+  }));
+
+  if (righe.length === 0) {
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("progressi")
+    .upsert(
+      righe,
+      {
+        onConflict: "user_id,area,concept_id"
+      }
+    );
+
+  if (error) {
+    console.error(
+      "Errore salvataggio progressi Skincare su Supabase:",
+      error
+    );
+  }
 }
+
 // =========================================================
 // KNOWLEDGE SCORE
 // =========================================================
@@ -396,7 +522,9 @@ function aggiornaConcept(
   corretta
 ) {
   const progressi =
-    caricaProgressiHair();
+  areaQuizAttiva === "skincare"
+    ? caricaProgressiSkincare()
+    : caricaProgressiHair();
 
   const concept =
     domanda.concept;
@@ -466,8 +594,47 @@ function aggiornaConcept(
   stato.ultimaDomanda =
     domanda.id;
 
+ if (
+  areaQuizAttiva === "skincare"
+) {
+  salvaProgressiSkincare(
+    progressi
+  );
+} else {
   salvaProgressiHair(
     progressi
+  );
+}
+}
+function calcolaKnowledgeScoreSkincare() {
+  const progressi =
+    caricaProgressiSkincare();
+
+  const concepts =
+    Object.values(
+      progressi.concepts
+    );
+
+  if (
+    concepts.length === 0
+  ) {
+    return 0;
+  }
+
+  const totale =
+    concepts.reduce(
+      (
+        somma,
+        concept
+      ) =>
+        somma +
+        concept.mastery,
+      0
+    );
+
+  return Math.round(
+    totale /
+    concepts.length
   );
 }
 
@@ -502,7 +669,14 @@ function calcolaKnowledgeScore() {
       concepts.length
   );
 }
+function contaConceptValutatiSkincare() {
+  const progressi =
+    caricaProgressiSkincare();
 
+  return Object.keys(
+    progressi.concepts
+  ).length;
+}
 function contaConceptValutati() {
   const progressi =
     caricaProgressiHair();
@@ -1082,7 +1256,73 @@ function mostraLineeCapelli() {
     behavior: "smooth"
   });
 }
+// =========================================================
+// MOSTRA SKINCARE
+// =========================================================
 
+function mostraSkincare() {
+
+  resultsTitle.textContent =
+    "Skincare";
+
+  resultsSection
+    .classList
+    .remove("hidden");
+
+  productGrid.innerHTML = `
+
+    <section class="hair-training-card">
+
+      <div class="hair-training-copy">
+
+        <p class="hair-training-label">
+          SKINCARE TRAINING
+        </p>
+
+        <h3>
+          Allenati sulla Skincare
+        </h3>
+
+        <p>
+          Metti alla prova la tua conoscenza
+          delle linee, dei prodotti e della
+          consulenza skincare.
+        </p>
+
+      </div>
+
+      <button
+        class="hair-training-button"
+        id="skincareTrainingButton"
+      >
+        Inizia training →
+      </button>
+
+    </section>
+
+  `;
+
+  const trainingButton =
+    document.getElementById(
+      "skincareTrainingButton"
+    );
+
+  if (trainingButton) {
+
+    trainingButton.addEventListener(
+      "click",
+      () => {
+        avviaQuizSkincare();
+      }
+    );
+
+  }
+
+  resultsSection.scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
 // =========================================================
 // SELEZIONE DOMANDE QUIZ
 // =========================================================
@@ -1644,7 +1884,7 @@ function creaSessioneRipassoHaircare() {
   return sessione;
 }
 function avviaRipassoHaircare() {
-
+areaQuizAttiva = "haircare";
   if (
     limiteSessioniRaggiunto(
       "haircare"
@@ -1687,6 +1927,7 @@ function avviaQuizHaircare() {
 
   sessioneQuiz =
     creaSessioneQuiz();
+    areaQuizAttiva = "haircare";
 modalitaQuizHaircare =
   "generale";
   indiceQuiz = 0;
@@ -1695,185 +1936,36 @@ modalitaQuizHaircare =
 
   mostraDomandaQuiz();
 }
+function avviaQuizSkincare() {
 
+  areaQuizAttiva = "skincare";
+  modalitaQuizHaircare = "generale";
+
+  if (
+    limiteSessioniRaggiunto(
+      "skincare"
+    )
+  ) {
+    mostraSkincare();
+    return;
+  }
+
+  sessioneQuiz =
+    mescolaArray(
+      quizSkincare
+    ).slice(0, 15);
+
+  indiceQuiz = 0;
+  risposteCorrette = 0;
+  rispostaBloccata = false;
+
+  mostraDomandaQuiz();
+}
 // =========================================================
 // MOSTRA DOMANDA
 // =========================================================
 
-function mostraDomandaQuiz() {
-  const domanda =
-    sessioneQuiz[
-      indiceQuiz
-    ];
 
-  const numeroDomanda =
-    indiceQuiz + 1;
-
-  const totaleDomande =
-    sessioneQuiz.length;
-
-  const avanzamento =
-    Math.round(
-      (
-        indiceQuiz /
-        totaleDomande
-      ) * 100
-    );
-
-  resultsTitle.textContent =
-    "Quiz Haircare";
-
-  productGrid.innerHTML = `
-
-    <section class="hair-quiz">
-
-      <div class="quiz-top">
-
-        <div>
-
-          <p class="quiz-label">
-            HAIRCARE TRAINING
-          </p>
-
-          <p class="quiz-counter">
-            Domanda
-            ${numeroDomanda}
-            di
-            ${totaleDomande}
-          </p>
-
-        </div>
-
-        <button
-          class="quiz-exit-button"
-          id="quizExitButton"
-        >
-          Esci
-        </button>
-
-      </div>
-
-      <div class="quiz-progress">
-
-        <div
-          class="quiz-progress-bar"
-          style="
-            width:
-            ${avanzamento}%;
-          "
-        ></div>
-
-      </div>
-
-      <div class="quiz-meta">
-
-        <span>
-          ${domanda.area}
-        </span>
-
-        <span>
-          ${
-            domanda.difficolta ===
-              "B"
-              ? "Base"
-              : domanda.difficolta ===
-                  "I"
-                ? "Intermedia"
-                : "Avanzata"
-          }
-        </span>
-
-      </div>
-
-      <h4 class="quiz-question">
-        ${domanda.domanda}
-      </h4>
-
-      <div class="quiz-options">
-
-        ${domanda.opzioni
-          .map(
-            (
-              opzione,
-              index
-            ) => `
-
-              <button
-                class="quiz-option"
-                data-index="${index}"
-              >
-
-                <span
-                  class="
-                    quiz-option-letter
-                  "
-                >
-                  ${String.fromCharCode(
-                    65 + index
-                  )}
-                </span>
-
-                <span>
-                  ${opzione}
-                </span>
-
-              </button>
-
-            `
-          )
-          .join("")}
-
-      </div>
-
-      <div
-        id="quizFeedback"
-        class="
-          quiz-feedback-container
-        "
-      ></div>
-
-    </section>
-
-  `;
-
-  rispostaBloccata =
-    false;
-
-  document
-    .querySelectorAll(
-      ".quiz-option"
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            verificaRisposta(
-              Number(
-                button.dataset
-                  .index
-              )
-            );
-
-          }
-        );
-
-      }
-    );
-
-  document
-    .getElementById(
-      "quizExitButton"
-    )
-    .addEventListener(
-      "click",
-      () => {
-        mostraLineeCapelli();
-      }
-    );
-}
 function mostraDomandaQuiz() {
   const domanda =
     sessioneQuiz[
@@ -1898,8 +1990,10 @@ function mostraDomandaQuiz() {
     modalitaQuizHaircare ===
     "ripasso";
 
-  resultsTitle.textContent =
-    ripassoMirato
+ resultsTitle.textContent =
+  areaQuizAttiva === "skincare"
+    ? "Quiz Skincare"
+    : ripassoMirato
       ? "Ripasso Haircare"
       : "Quiz Haircare";
 
@@ -1913,10 +2007,12 @@ function mostraDomandaQuiz() {
 
           <p class="quiz-label">
             ${
-              ripassoMirato
-                ? "RIPASSO MIRATO"
-                : "HAIRCARE TRAINING"
-            }
+  areaQuizAttiva === "skincare"
+    ? "SKINCARE TRAINING"
+    : ripassoMirato
+      ? "RIPASSO MIRATO"
+      : "HAIRCARE TRAINING"
+}
           </p>
 
           <p class="quiz-counter">
@@ -2041,22 +2137,33 @@ function mostraDomandaQuiz() {
               )
             );
 
-          }
-        );
+       }
+);  
 
       }
     );
 
-  document
-    .getElementById(
-      "quizExitButton"
-    )
-    .addEventListener(
-      "click",
-      () => {
-        mostraLineeCapelli();
+ document
+  .getElementById(
+    "quizExitButton"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      if (
+        areaQuizAttiva ===
+        "skincare"
+      ) {
+        mostraSkincare();
+        return;
       }
-    );
+
+      mostraLineeCapelli();
+
+    }
+  );
+}
 }
 // =========================================================
 // VERIFICA RISPOSTA
@@ -2086,10 +2193,10 @@ function verificaRisposta(
     risposteCorrette += 1;
   }
 
-  aggiornaConcept(
-    domanda,
-    corretta
-  );
+aggiornaConcept(
+  domanda,
+  corretta
+);
 
   const buttons =
     document.querySelectorAll(
@@ -2249,18 +2356,25 @@ function mostraRisultatoQuiz() {
     );
 
   const knowledgeScore =
-    calcolaKnowledgeScore();
+    areaQuizAttiva === "skincare"
+      ? calcolaKnowledgeScoreSkincare()
+      : calcolaKnowledgeScore();
 
-  const conceptsValutati =
-    contaConceptValutati();
+const conceptsValutati =
+    areaQuizAttiva === "skincare"
+      ? contaConceptValutatiSkincare()
+      : contaConceptValutati();
+
+
 
   const ripassoMirato =
+    areaQuizAttiva === "haircare" &&
     modalitaQuizHaircare ===
     "ripasso";
 
   const sessioniOggi =
     registraSessioneCompletata(
-      "haircare"
+      areaQuizAttiva
     );
 
   const limiteRaggiunto =
@@ -2505,25 +2619,38 @@ function mostraRisultatoQuiz() {
       () => {
 
         if (ripassoMirato) {
-          mostraLineeCapelli();
-        } else {
-          avviaQuizHaircare();
-        }
+  mostraLineeCapelli();
+} else if (
+  areaQuizAttiva === "skincare"
+) {
+  avviaQuizSkincare();
+} else {
+  avviaQuizHaircare();
+}
 
       }
     );
   }
 
-  document
-    .getElementById(
-      "quizReturnButton"
-    )
-    .addEventListener(
-      "click",
-      () => {
-        mostraLineeCapelli();
+ document
+  .getElementById(
+    "quizReturnButton"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      if (
+        areaQuizAttiva === "skincare"
+      ) {
+        mostraSkincare();
+        return;
       }
-    );
+
+      mostraLineeCapelli();
+
+    }
+  );
 }
 
 // =========================================================
@@ -3925,7 +4052,9 @@ async function inizializzaAutenticazione() {
 await caricaProgressiHairDaSupabase(
   data.session.user.id
 );
-
+await caricaProgressiSkincareDaSupabase(
+  data.session.user.id
+);
   await controllaProfiloUtente(
     data.session.user
   );
