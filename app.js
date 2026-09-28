@@ -3129,7 +3129,47 @@ adminUsersList.innerHTML = utenti
       await mostraGestioneUtenti();
     });
   });
+adminUsersList
+  .querySelectorAll(".admin-user-reject")
+  .forEach(button => {
+    button.addEventListener("click", async () => {
+      const userId = button.dataset.userId;
+
+      const conferma = window.confirm(
+        "Vuoi davvero rifiutare questa richiesta di accesso?"
+      );
+
+      if (!conferma) {
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = "Rifiuto...";
+
+      const { error } = await supabaseClient
+        .from("profiles")
+        .update({
+          stato: "rifiutato"
+        })
+        .eq("id", userId);
+
+      if (error) {
+        console.error(
+          "Errore rifiuto utente:",
+          error
+        );
+
+        button.disabled = false;
+        button.textContent = "Rifiuta";
+        return;
+      }
+
+      await mostraGestioneUtenti();
+    });
+  });
 }
+
+
 const adminUsersBackButton =
   document.getElementById("adminUsersBackButton");
 
