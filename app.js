@@ -3704,6 +3704,12 @@ if (registerForm) {
         "Registrazione completata:",
         data
       );
+      const nuovoUtente =
+  data?.user &&
+  Array.isArray(data.user.identities) &&
+  data.user.identities.length > 0;
+
+if (nuovoUtente) {
       try {
 
         const {
@@ -3731,6 +3737,7 @@ if (registerForm) {
           notificationError
         );
 
+      }
       }
       registerForm.reset();
 
