@@ -3439,6 +3439,140 @@ background 0.2s ease,
     background-image 0.25s ease;
 
 }
+/* =========================================================
+   GESTIONE UTENTI — ADMIN
+   ========================================================= */
+
+.admin-users-section {
+  width: 100%;
+  padding: 64px 0 72px;
+}
+
+.admin-users-header {
+  margin-bottom: 34px;
+}
+
+.admin-users-header .section-label {
+  margin-bottom: 12px;
+}
+
+.admin-users-header h2 {
+  margin: 0 0 8px;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -1.2px;
+}
+
+.admin-users-header p {
+  max-width: 560px;
+  margin: 0;
+  color: #77716c;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.admin-users-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.admin-user-card {
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #dedbd6;
+  border-radius: 18px;
+}
+
+.admin-user-card strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.admin-user-card > span {
+  display: block;
+  margin-bottom: 22px;
+  color: #777777;
+  font-size: 12px;
+}
+
+.admin-user-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-user-approve,
+.admin-user-reject {
+  padding: 10px 15px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.admin-user-approve {
+  border: 1px solid #111111;
+  background: #111111;
+  color: #ffffff;
+}
+
+.admin-user-approve:hover {
+  background: #ffffff;
+  color: #111111;
+}
+
+.admin-user-reject {
+  border: 1px solid #d8d5d0;
+  background: transparent;
+  color: #77716c;
+}
+
+.admin-user-reject:hover {
+  border-color: #111111;
+  color: #111111;
+}
+
+@media (max-width: 650px) {
+  .admin-users-section {
+    padding: 42px 0 55px;
+  }
+
+  .admin-users-list {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-user-card {
+    padding: 20px;
+  }
+}
+.admin-users-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 28px;
+  padding: 0 0 7px;
+  border: 0;
+  border-bottom: 1px solid #aaa49e;
+  background: transparent;
+  color: #55514e;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.admin-users-back:hover {
+  color: #111111;
+  border-color: #111111;
+}
 
 /* =========================================================
 
