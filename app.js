@@ -2873,7 +2873,13 @@ categoryCards.forEach(
           mostraLineeCapelli();
           return;
         }
-
+if (
+  categoria ===
+  "skincare"
+) {
+  mostraSkincare();
+  return;
+}
         const prodottiFiltrati =
           prodotti.filter(
             prodotto =>
