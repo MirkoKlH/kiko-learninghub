@@ -458,6 +458,8 @@ async function salvaProgressiHair(
       error
     );
   }
+}
+
 async function salvaProgressiSkincare(
   progressi
 ) {
@@ -2164,7 +2166,7 @@ function mostraDomandaQuiz() {
     }
   );
 }
-}
+
 // =========================================================
 // VERIFICA RISPOSTA
 // =========================================================
