@@ -3067,18 +3067,68 @@ async function mostraGestioneUtenti() {
     return;
   }
 
-  adminUsersList.innerHTML = utenti
-    .map(
-      utente => `
-        <div class="admin-user-card">
+adminUsersList.innerHTML = utenti
+  .map(
+    utente => `
+      <div class="admin-user-card">
+        <div class="admin-user-info">
           <strong>
             ${utente.nome || ""} ${utente.cognome || ""}
           </strong>
           <span>${utente.email || ""}</span>
         </div>
-      `
-    )
-    .join("");
+
+        <div class="admin-user-actions">
+          <button
+            type="button"
+            class="admin-user-approve"
+            data-user-id="${utente.id}"
+          >
+            Approva
+          </button>
+
+          <button
+            type="button"
+            class="admin-user-reject"
+            data-user-id="${utente.id}"
+          >
+            Rifiuta
+          </button>
+        </div>
+      </div>
+    `
+  )
+  .join("");
+  adminUsersList
+  .querySelectorAll(".admin-user-approve")
+  .forEach(button => {
+    button.addEventListener("click", async () => {
+      const userId = button.dataset.userId;
+
+      button.disabled = true;
+      button.textContent = "Approvazione...";
+
+      const { error } = await supabaseClient
+        .from("profiles")
+        .update({
+          stato: "approvato"
+        })
+        .eq("id", userId);
+
+      if (error) {
+        console.error(
+          "Errore approvazione utente:",
+          error
+        );
+
+        button.disabled = false;
+        button.textContent = "Approva";
+        return;
+      }
+
+      await mostraGestioneUtenti();
+    });
+  });
 }
 const adminUsersBackButton =
   document.getElementById("adminUsersBackButton");
