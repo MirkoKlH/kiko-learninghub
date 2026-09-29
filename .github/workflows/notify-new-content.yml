@@ -81,7 +81,7 @@ jobs:
               '{
                 type: "new_content",
                 contentKey: $key,
-                customTitle: $title,
-                customBody: $body,
+                title: $title,
+                body: $body,
                 url: "/"
               }')"
