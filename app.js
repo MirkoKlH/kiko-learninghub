@@ -2957,14 +2957,13 @@ function apriSchedaProdotto(
       "
     >
 
-      <button
-        class="
-          detail-back-button
-        "
-        id="detailBackButton"
-      >
-        ← Torna ai capelli
-      </button>
+    <button class="detail-back-button" id="detailBackButton">
+  ${
+    prodotto.categoria === "skincare"
+      ? "← Torna alla Skincare"
+      : "← Torna ai capelli"
+  }
+</button>
 
       <div
         class="
@@ -3105,16 +3104,22 @@ function apriSchedaProdotto(
   resultsTitle.textContent =
     prodotto.nome;
 
-  document
-    .getElementById(
-      "detailBackButton"
-    )
-    .addEventListener(
-      "click",
-      () => {
+document
+  .getElementById(
+    "detailBackButton"
+  )
+  .addEventListener(
+    "click",
+    () => {
+      if (
+        prodotto.categoria === "skincare"
+      ) {
+        mostraSkincare();
+      } else {
         mostraLineeCapelli();
       }
-    );
+    }
+  );
 }
 
 // =========================================================
