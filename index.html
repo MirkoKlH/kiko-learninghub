@@ -1,883 +1,1755 @@
 <!DOCTYPE html>
+
 <html lang="it">
 
+
+
 <head>
+
   <link rel="manifest" href="manifest.webmanifest">
+
 <meta name="theme-color" content="#080808">
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
 
   <title>KIKO Le Gru LearningHub</title>
 
+
+
   <link rel="icon" type="image/png" href="icon.png">
+
+
 
   <link rel="apple-touch-icon" href="icon.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https\://fonts.googleapis.com">
+
+<link rel="preconnect" href="https\://fonts.gstatic.com" crossorigin>
+
+<link href="https\://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+
+
 
   <link rel="stylesheet" href="style.css?v=2">
+
 </head>
+
+
 
 <body>
 
 
+
+
+
   <!-- =====================================================
+
        ACCESSO / REGISTRAZIONE
-  ====================================================== -->
+
+  \====================================================== -->
+
+
 
   <section id="authScreen" class="auth-screen">
 
+
+
     <div class="auth-card">
 
+
+
       <p class="eyebrow">KIKO LE GRU</p>
+
+
 
       <h1>LearningHub</h1>
 
 
+
+
+
       <div class="auth-tabs">
 
-        <button
-          id="loginTab"
-          class="auth-tab active"
-          type="button"
-        >
-          Accedi
-        </button>
+
 
         <button
-          id="registerTab"
-          class="auth-tab"
+
+          id="loginTab"
+
+          class="auth-tab active"
+
           type="button"
+
         >
-          Registrati
+
+          Accedi
+
         </button>
+
+
+
+        <button
+
+          id="registerTab"
+
+          class="auth-tab"
+
+          type="button"
+
+        >
+
+          Registrati
+
+        </button>
+
+
 
       </div>
 
 
+
+
+
       <!-- LOGIN -->
+
+
 
       <form id="loginForm" class="auth-form">
 
+
+
         <label for="loginEmail">
+
           Email
+
         </label>
 
+
+
         <input
+
           type="email"
+
           id="loginEmail"
+
           autocomplete="email"
+
           required
+
         >
+
+
+
 
 
         <label for="loginPassword">
+
           Password
+
         </label>
 
+
+
         <input
+
           type="password"
+
           id="loginPassword"
+
           autocomplete="current-password"
+
           required
+
         >
 
 
+
+
+
         <button
+
           type="submit"
+
           class="auth-submit"
+
         >
+
           Accedi
+
         </button>
+
+
+
 
 
         <button
+
           type="button"
+
           id="forgotPasswordButton"
+
           class="auth-tab"
+
         >
+
           Password dimenticata?
+
         </button>
+
+
 
       </form>
+
+
+
+
 
 
 
       <!-- REGISTRAZIONE -->
 
+
+
       <form
+
         id="registerForm"
+
         class="auth-form hidden"
+
       >
 
+
+
         <label for="registerNome">
+
           Nome
+
         </label>
 
+
+
         <input
+
           type="text"
+
           id="registerNome"
+
           autocomplete="given-name"
+
           required
+
         >
+
+
+
 
 
         <label for="registerCognome">
+
           Cognome
+
         </label>
 
+
+
         <input
+
           type="text"
+
           id="registerCognome"
+
           autocomplete="family-name"
+
           required
+
         >
+
+
+
 
 
         <label for="registerEmail">
+
           Email
+
         </label>
 
+
+
         <input
+
           type="email"
+
           id="registerEmail"
+
           autocomplete="email"
+
           required
+
         >
+
+
+
 
 
         <label for="registerPassword">
+
           Password
+
         </label>
 
+
+
         <input
+
           type="password"
+
           id="registerPassword"
+
           autocomplete="new-password"
+
           required
+
         >
+
+
+
 
 
         <button
+
           type="submit"
+
           class="auth-submit"
+
         >
+
           Registrati
+
         </button>
+
+
 
       </form>
 
 
+
+
+
       <p
+
         id="authMessage"
+
         class="auth-message"
+
       ></p>
 
+
+
     </div>
+
+
 
   </section>
 
 
 
+
+
+
+
   <!-- =====================================================
+
        PASSWORD DIMENTICATA
-  ====================================================== -->
+
+  \====================================================== -->
+
+
 
   <section
+
     id="forgotPasswordScreen"
+
     class="auth-screen hidden"
+
   >
+
+
 
     <div class="auth-card">
 
+
+
       <p class="eyebrow">KIKO LE GRU</p>
+
+
 
       <h1>Recupera password</h1>
 
+
+
       <p class="auth-message">
+
         Inserisci l'indirizzo email associato al tuo account.
+
         Ti invieremo un link per scegliere una nuova password.
+
       </p>
 
 
+
+
+
       <form
+
         id="forgotPasswordForm"
+
         class="auth-form"
+
       >
 
+
+
         <label for="forgotPasswordEmail">
+
           Email
+
         </label>
 
+
+
         <input
+
           type="email"
+
           id="forgotPasswordEmail"
+
           autocomplete="email"
+
           required
+
         >
 
+
+
         <button
+
           type="submit"
+
           class="auth-submit"
+
         >
+
           Invia link di recupero
+
         </button>
 
+
+
         <button
+
           type="button"
+
           id="backToLoginButton"
+
           class="auth-tab"
+
         >
+
           ← Torna all'accesso
+
         </button>
+
+
 
       </form>
 
 
+
+
+
       <p
+
         id="forgotPasswordMessage"
+
         class="auth-message"
+
       ></p>
 
+
+
     </div>
+
+
 
   </section>
 
 
 
+
+
+
+
   <!-- =====================================================
+
        NUOVA PASSWORD
-  ====================================================== -->
+
+  \====================================================== -->
+
+
 
   <section
+
     id="updatePasswordScreen"
+
     class="auth-screen hidden"
+
   >
 
+
+
     <div class="auth-card">
+
+
 
       <p class="eyebrow">KIKO LE GRU</p>
 
+
+
       <h1>Scegli una nuova password</h1>
 
+
+
       <p class="auth-message">
+
         Inserisci la nuova password che vuoi utilizzare
+
         per accedere al LearningHub.
+
       </p>
 
 
+
+
+
       <form
+
         id="updatePasswordForm"
+
         class="auth-form"
+
       >
 
+
+
         <label for="newPassword">
+
           Nuova password
+
         </label>
 
+
+
         <input
+
           type="password"
+
           id="newPassword"
+
           autocomplete="new-password"
+
           required
+
         >
+
+
+
 
 
         <label for="confirmNewPassword">
+
           Conferma password
+
         </label>
 
+
+
         <input
+
           type="password"
+
           id="confirmNewPassword"
+
           autocomplete="new-password"
+
           required
+
         >
+
+
+
 
 
         <button
+
           type="submit"
+
           class="auth-submit"
+
         >
+
           Salva nuova password
+
         </button>
+
+
 
       </form>
 
 
+
+
+
       <p
+
         id="updatePasswordMessage"
+
         class="auth-message"
+
       ></p>
 
+
+
     </div>
+
+
 
   </section>
 
 
 
+
+
+
+
   <!-- =====================================================
+
        ACCOUNT IN ATTESA
-  ====================================================== -->
+
+  \====================================================== -->
+
+
 
   <section
+
     id="pendingScreen"
+
     class="auth-screen hidden"
+
   >
+
+
 
     <div class="auth-card">
 
+
+
       <p class="eyebrow">
+
         KIKO LE GRU
+
       </p>
+
+
 
       <h1>
+
         Richiesta ricevuta
+
       </h1>
 
+
+
       <p class="auth-message">
+
         Il tuo account è stato creato correttamente.
+
       </p>
 
+
+
       <p class="auth-message">
+
         L'accesso al LearningHub deve essere approvato
+
         da un amministratore.
+
       </p>
 
+
+
       <p class="auth-message">
+
         Una volta autorizzato potrai accedere
+
         con la tua email e la tua password.
+
       </p>
+
+
 
     </div>
+
+
 
   </section>
 
 
 
+
+
+
+
   <!-- =====================================================
+
        LEARNINGHUB
-  ====================================================== -->
+
+  \====================================================== -->
+
+
 
   <div
+
     id="appContent"
+
     class="hidden"
+
   >
+
+
+
 
 
     <header class="topbar">
 
+
+
       <div class="home-brand">
+
         <div class="kiko-wordmark">
+
           <strong>KIKO</strong>
+
           <span>MILANO</span>
+
         </div>
+
         <span class="brand-divider" aria-hidden="true"></span>
+
         <div class="learning-brand">
+
           <span>LE GRU</span>
+
          <strong>LearningHub</strong>
+
         </div>
+
       </div>
+
+
+
 
 
   <div class="topbar-actions">
 
+
+
   <div class="version">
+
   v0.1.2 
+
 </div>
 
+
+
   <button
+
     id="profileButton"
+
     class="profile-button"
+
     type="button"
+
     aria-expanded="false"
+
     aria-controls="profileMenu"
+
   >
+
     <span class="profile-avatar">
+
       M
+
     </span>
+
+
 
     <span>
+
       Profilo
+
     </span>
 
+
+
     <span class="profile-chevron">
+
       ▾
+
     </span>
+
   </button>
+
 <div
+
   id="profileMenu"
+
   class="profile-menu hidden"
+
 >
+
+
 
   <div class="profile-menu-header">
 
+
+
     <div class="profile-menu-avatar">
+
       M
+
     </div>
+
+
 
     <div>
+
       <strong id="profileName">
+
   Utente
+
 </strong>
+
+
 
 <span id="profileEmail">
+
 </span>
+
     </div>
+
+
 
   </div>
 
+
+
   <div class="profile-menu-section">
+
+
 
   <div class="profile-stat-heading">
+
   <span>Knowledge Score generale</span>
+
   <strong
+
     id="generalKnowledgeScore"
+
     class="profile-score-hidden"
+
   >
+
     Da valutare
+
   </strong>
+
 </div>
+
+
 
 <div
+
   class="profile-progress profile-knowledge-progress"
+
   id="knowledgeProgress"
+
 >
-  <div
-    class="profile-progress-bar"
-    id="knowledgeProgressBar"
-    style="width: 0%"
-  ></div>
 
   <div
-    class="knowledge-avatar-marker"
-    id="knowledgeAvatarMarker"
+
+    class="profile-progress-bar"
+
+    id="knowledgeProgressBar"
+
+    style="width: 0%"
+
   ></div>
+
+
+
+  <div
+
+    class="knowledge-avatar-marker"
+
+    id="knowledgeAvatarMarker"
+
+  ></div>
+
 </div>
 
+
+
     <p>
+
       Quanto padroneggi le conoscenze
+
       già valutate.
+
     </p>
 
+
+
   </div>
+
+
 
   <div class="profile-menu-section">
 
+
+
     <div class="profile-stat-heading">
+
       <span>Copertura LearningHub</span>
+
       <strong id="learningHubCoverage">
+
   0%
+
 </strong>
+
     </div>
+
+
 
     <div class="profile-progress">
+
       <div
+
         class="profile-progress-bar"
+
         style="width: 0%"
+
       ></div>
+
     </div>
 
+
+
     <p>
+
       Quanto del percorso è già stato
+
       valutato.
+
     </p>
 
+
+
   </div>
+
+
 
   <div class="profile-menu-section profile-notifications">
 
+
+
     <div>
+
       <strong>Notifiche</strong>
+
       <span>Promemoria di apprendimento</span>
+
     </div>
 
+
+
     <button
+
     id="notificationToggle" 
+
     class="notification-toggle"
+
       type="button"
+
       aria-label="Attiva notifiche"
+
       aria-pressed="false"
+
     >
+
       <span></span>
+
     </button>
 
+
+
   </div>
+
 <button
+
   id="adminUsersButton"
+
   class="profile-logout hidden"
+
   type="button"
+
 >
+
   Gestione utenti
+
 </button>
+
   <button
+
     id="logoutButton"
+
     class="profile-logout"
+
     type="button"
+
   >
+
     Esci dall'account
+
   </button>
 
-</div>
+
 
 </div>
+
+
+
+</div>
+
+
 
     </header>
+
+
+
+
 
 
 
     <main>
 
 
+
+
+
      <section class="hero hero-home">
 
+
+
   <div class="hero-copy">
+
     <p class="hero-label">KIKO LE GRU LEARNINGHUB</p>
 
+
+
     <h2>
+
       La Formazione<br>
+
       che valorizza<br>
+
       il tuo <span>talento.</span>
+
     </h2>
 
+
+
     <p class="hero-text">
+
       Scopri i prodotti, approfondisci le tue conoscenze
+
       e allenati per rendere ogni consulenza ancora più efficace.
+
     </p>
+
   </div>
+
+
 
   <div class="hero-pigments" aria-hidden="true">
+
     <img src="images/home/pigments.png" alt="">
+
     <div class="hero-signature">
+
      More Knowledge<br><span>More Beauty</span><span class="signature-heart">♡</span>
+
     </div>
+
   </div>
 
-  <div class="hero-book" aria-hidden="true">
-    <img src="images/home/book.png" alt="">
-  </div>
+<div class="search-box hero-search">
 
-  <div class="search-box hero-search">
     <span class="search-icon" aria-hidden="true">⌕</span>
+
     <input
+
       type="text"
+
       id="searchInput"
+
       placeholder="Cerca un prodotto, ingrediente o esigenza..."
+
     >
+
   </div>
+
+
 
 </section>
 
-
+      <section id="weeklyHome" class="weekly-home" aria-label="Weekly operativa"></section>
 
       <section class="categories">
 
+
+
         <div class="section-heading">
+
+
 
           <div>
 
+
+
             <p class="section-label home-areas-title">
+
               ESPLORA LE AREE FORMATIVE <span aria-hidden="true"></span>
+
             </p>
+
+
 
           </div>
 
+
+
         </div>
+
+
+
 
 
        <div class="category-grid">
 
 
+
+
+
   <button
+
     class="category-card category-capelli"
+
     data-category="capelli"
+
   >
 
+
+
     <span class="category-number">
+
       01
+
     </span>
+
+
 
     <div>
 
+
+
       <h4>
+
         Capelli
+
       </h4>
 
+
+
       <p>
+
         Haircare, styling e trattamenti
+
       </p>
+
+
 
     </div>
 
+
+
     <span class="arrow">
+
       →
+
     </span>
+
+
 
   </button>
 
 
 
+
+
+
+
   <button
+
     class="category-card category-skincare"
+
     data-category="skincare"
+
   >
 
+
+
     <span class="category-number">
+
       02
+
     </span>
+
+
 
     <div>
 
+
+
       <h4>
+
         Skincare
+
       </h4>
 
+
+
       <p>
+
         Detersione, trattamenti e cura della pelle
+
       </p>
+
+
 
     </div>
 
+
+
     <span class="arrow">
+
       →
+
     </span>
+
+
 
   </button>
 
 
 
+
+
+
+
   <button
+
     class="category-card category-viso"
+
     data-category="viso"
+
   >
 
+
+
     <span class="category-number">
+
       03
+
     </span>
+
+
 
     <div>
 
+
+
       <h4>
+
         Viso
+
       </h4>
 
+
+
       <p>
+
         Base e complexion
+
       </p>
+
+
 
     </div>
 
+
+
     <span class="arrow">
+
       →
+
     </span>
+
+
 
   </button>
 
 
 
+
+
+
+
   <button
+
     class="category-card category-occhi"
+
     data-category="occhi"
+
   >
 
+
+
     <span class="category-number">
+
       04
+
     </span>
+
+
 
     <div>
 
+
+
       <h4>
+
         Occhi
+
       </h4>
 
+
+
       <p>
+
         Mascara, palette, liner e sopracciglia
+
       </p>
+
+
 
     </div>
 
+
+
     <span class="arrow">
+
       →
+
     </span>
+
+
 
   </button>
 
 
 
+
+
+
+
   <button
+
     class="category-card category-labbra"
+
     data-category="labbra"
+
   >
 
+
+
     <span class="category-number">
+
       05
+
     </span>
+
+
 
     <div>
 
+
+
       <h4>
+
         Labbra
+
       </h4>
 
+
+
       <p>
+
         Rossetti, matite e trattamenti
+
       </p>
+
+
 
     </div>
 
+
+
     <span class="arrow">
+
       →
+
     </span>
 
+
+
   </button>
+
+
+
+
 
 
 
   <button
+
     class="category-card category-collection"
+
     data-category="collection"
+
   >
 
+
+
     <span class="category-number">
+
       06
+
     </span>
+
+
 
     <div>
 
+
+
       <h4>
+
         Collection
+
       </h4>
 
+
+
       <p>
+
         Collezioni stagionali e novità
+
       </p>
+
+
 
     </div>
 
+
+
     <span class="arrow">
+
       →
+
     </span>
 
+
+
   </button>
+
+
+
 
 
 </div> 
 
+
+
       </section>
+
+
+
+
 
 
 
       <section
+
         id="resultsSection"
+
         class="results hidden"
+
       >
+
+
 
         <div class="section-heading">
 
+
+
           <div>
 
+
+
             <p class="section-label">
+
               RISULTATI
+
             </p>
 
+
+
             <h3 id="resultsTitle">
+
               Prodotti
+
             </h3>
+
+
 
           </div>
 
 
+
+
+
           <button
+
             id="backButton"
+
             class="back-button"
+
           >
+
             ← Tutte le categorie
+
           </button>
+
+
 
         </div>
 
 
+
+
+
         <div
+
           id="productGrid"
+
           class="product-grid"
+
         ></div>
+
+
 
       </section>
 
+
+
 <section
+
   id="adminUsersSection"
+
   class="admin-users-section hidden"
+
 >
+
   <div class="admin-users-header">
+
     <button
+
       id="adminUsersBackButton"
+
       type="button"
+
       class="admin-users-back"
+
     >
+
       ← Torna al LearningHub
+
     </button>
 
+
+
     <p class="hero-label">AMMINISTRAZIONE</p>
+
     <h2>Gestione utenti</h2>
+
     <p>
+
       Gestisci le richieste di accesso al LearningHub.
+
     </p>
+
   </div>
 
+
+
   <div id="adminUsersList" class="admin-users-list"></div>
+
     <p>Nessuna richiesta da mostrare.</p>
+
   </div>
+
 </section>
+
     </main>
 
 
 
+
+
+
+
     <footer class="home-footer">
+
       <div class="footer-kiko">
+
         <strong>KIKO</strong>
+
         <span>MILANO</span>
+
       </div>
+
       <p>BEAUTY<br>LIVES IN YOU</p>
+
     </footer>
+
+
+
 
 
   </div>
 
 
 
+
+
+
+
   <!-- =====================================================
+
        SUPABASE
-  ====================================================== -->
+
+  \====================================================== -->
+
+
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
 
+
+
+
   <script>
 
+
+
     const SUPABASE_URL =
-      "https://ffmpiiuwsltpraisqgnj.supabase.co";
+
+      "https\://ffmpiiuwsltpraisqgnj.supabase.co";
+
+
 
     const SUPABASE_PUBLISHABLE_KEY =
+
       "sb_publishable_F5b0unQHnvcW4a_CbCL2kA_dWdpzUFI";
 
 
+
+
+
     const supabaseClient =
+
       supabase.createClient(
+
         SUPABASE_URL,
+
         SUPABASE_PUBLISHABLE_KEY
+
       );
+
+
 
   </script>
 
 
+
+
+
 <script src="data/prodotti.js"></script>
+
 <script src="data/prodotti-skincare.js"></script>
+
 <script src="data/quiz-capelli.js"></script>
+
 <script src="data/quiz-skincare.js"></script>
+<script src="data/weekly-data.js?v=1"></script>
+<script src="weekly.js?v=1"></script>
+
 <script src="app.js?v=11"></script>
+
+
 
 </body>
 
+
+
 </html>
+
+
