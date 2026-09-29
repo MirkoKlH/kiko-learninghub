@@ -95,6 +95,12 @@ const lineeSkincare = [
       "Idratazione quotidiana con soluzioni specifiche in base alle esigenze della pelle."
   },
   {
+  id: "power-shake",
+  nome: "Power Shake",
+  descrizione:
+    "Skincare vitaminica e multisensoriale per idratazione, luminosità e preparazione della pelle al make-up."
+},
+  {
     id: "skin-tech-serum",
     nome: "Skin Tech Serum",
     descrizione:
@@ -1363,40 +1369,85 @@ function mostraSkincare() {
     <div class="hair-lines-grid">
 
       ${lineeSkincare
-        .map(
-          linea => {
+  .map(
+    linea => {
 
-            return `
+      const prodottiLinea =
+        prodottiSkincare.filter(
+          prodotto =>
+            prodotto.linea ===
+            linea.id
+        );
 
-              <section class="hair-line-card">
+      let prodottiHTML = "";
 
-                <div class="hair-line-header">
+      if (
+        prodottiLinea.length > 0
+      ) {
 
-                  <h4>
-                    ${linea.nome}
-                  </h4>
+        prodottiHTML =
+          prodottiLinea
+            .map(
+              prodotto => `
 
-                  <p>
-                    ${linea.descrizione}
-                  </p>
+                <button
+                  class="hair-product-link skincare-product-link"
+                  data-id="${prodotto.id}"
+                >
 
-                </div>
+                  <span>
+                    ${prodotto.nomeBreve}
+                  </span>
 
-                <div class="hair-products-list">
+                  <span class="hair-arrow">
+                    →
+                  </span>
 
-                  <div class="hair-line-empty">
-                    Prodotti da inserire
-                  </div>
+                </button>
 
-                </div>
+              `
+            )
+            .join("");
 
-              </section>
+      } else {
 
-            `;
+        prodottiHTML = `
 
-          }
-        )
-        .join("")}
+          <div class="hair-line-empty">
+            Prodotti da inserire
+          </div>
+
+        `;
+
+      }
+
+      return `
+
+        <section class="hair-line-card">
+
+          <div class="hair-line-header">
+
+            <h4>
+              ${linea.nome}
+            </h4>
+
+            <p>
+              ${linea.descrizione}
+            </p>
+
+          </div>
+
+          <div class="hair-products-list">
+            ${prodottiHTML}
+          </div>
+
+        </section>
+
+      `;
+
+    }
+  )
+  .join("")}
 
     </div>
 
@@ -1481,7 +1532,35 @@ function mostraSkincare() {
     </section>
 
   `;
+document
+  .querySelectorAll(
+    ".skincare-product-link"
+  )
+  .forEach(
+    button => {
 
+      button.addEventListener(
+        "click",
+        () => {
+
+          const prodotto =
+            prodottiSkincare.find(
+              item =>
+                item.id ===
+                button.dataset.id
+            );
+
+          if (prodotto) {
+            apriSchedaProdotto(
+              prodotto
+            );
+          }
+
+        }
+      );
+
+    }
+  );
   const trainingButton =
     document.getElementById(
       "skincareTrainingButton"
