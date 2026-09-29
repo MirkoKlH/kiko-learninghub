@@ -1,6 +1,7 @@
 name: Notifica nuovo contenuto
 
 on:
+  # Mantiene il sistema manuale già usato per i contenuti formativi
   workflow_dispatch:
     inputs:
       content_key:
@@ -18,12 +19,24 @@ on:
         required: true
         type: string
 
+  # La notifica Weekly parte quando viene pubblicato weekly-data.js
+  push:
+    branches:
+      - main
+    paths:
+      - "data/weekly-data.js"
+
 jobs:
   notify:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Invia notifica LearningHub
+      # =========================================================
+      # NOTIFICHE MANUALI - CONTENUTI FORMATIVI
+      # =========================================================
+
+      - name: Invia notifica contenuto
+        if: github.event_name == 'workflow_dispatch'
         run: |
           curl --fail-with-body \
             --request POST \
@@ -39,5 +52,36 @@ jobs:
                 contentKey: $key,
                 area: $area,
                 contentName: $name,
+                url: "/"
+              }')"
+
+      # =========================================================
+      # NOTIFICA AUTOMATICA - NUOVA WEEKLY
+      # =========================================================
+
+      - name: Genera identificativo Weekly
+        if: github.event_name == 'push'
+        id: weekly
+        run: |
+          WEEK_KEY="weekly-$(date +'%G-w%V')"
+          echo "week_id=$WEEK_KEY" >> "$GITHUB_OUTPUT"
+
+      - name: Invia notifica nuova Weekly
+        if: github.event_name == 'push'
+        run: |
+          curl --fail-with-body \
+            --request POST \
+            "${{ secrets.SUPABASE_FUNCTION_URL }}" \
+            --header "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            --header "Content-Type: application/json" \
+            --data "$(jq -n \
+              --arg key "${{ steps.weekly.outputs.week_id }}" \
+              --arg title "Nuova Weekly disponibile ✨" \
+              --arg body "Scopri le attività, le promo e gli aggiornamenti operativi della nuova settimana." \
+              '{
+                type: "new_content",
+                contentKey: $key,
+                customTitle: $title,
+                customBody: $body,
                 url: "/"
               }')"
