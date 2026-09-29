@@ -77,6 +77,54 @@ const lineeCapelli = [
     descrizione: "Definizione, controllo e brillantezza per ricci e onde."
   }
 ];
+// =========================================================
+// LINEE SKINCARE
+// =========================================================
+
+const lineeSkincare = [
+  {
+    id: "new-pure-clean",
+    nome: "New Pure Clean",
+    descrizione:
+      "Detersione e rimozione del make-up per costruire il primo step della routine."
+  },
+  {
+    id: "hydra-pro",
+    nome: "Hydra Pro",
+    descrizione:
+      "Idratazione quotidiana con soluzioni specifiche in base alle esigenze della pelle."
+  },
+  {
+    id: "skin-tech-serum",
+    nome: "Skin Tech Serum",
+    descrizione:
+      "Booster e sieri mirati da scegliere in base al bisogno attuale della pelle."
+  },
+  {
+    id: "skin-trainer",
+    nome: "Skin Trainer",
+    descrizione:
+      "Trattamenti per idratazione, luminosità e mantenimento della pelle."
+  },
+  {
+    id: "skin-renaissance",
+    nome: "Skin Renaissance",
+    descrizione:
+      "Linea multicorrection: lifting di giorno, replumping di notte e trattamenti specifici."
+  },
+  {
+    id: "sebo-balance",
+    nome: "Sebo Balance",
+    descrizione:
+      "Trattamenti purificanti e opacizzanti dedicati soprattutto alle pelli miste e grasse."
+  },
+  {
+    id: "kind-by-kiko",
+    nome: "Kind by KIKO",
+    descrizione:
+      "Routine essenziale e delicata pensata per idratazione, comfort e luminosità."
+  }
+];
 
 // =========================================================
 // STATO QUIZ
@@ -1290,38 +1338,145 @@ function mostraSkincare() {
   resultsTitle.textContent =
     "Skincare";
 
+  const knowledgeScore =
+    calcolaKnowledgeScoreSkincare();
+
+  const conceptsValutati =
+    contaConceptValutatiSkincare();
+
+  const sessioniOggi =
+    sessioniCompletateOggi(
+      "skincare"
+    );
+
+  const limiteRaggiunto =
+    limiteSessioniRaggiunto(
+      "skincare"
+    );
+
   resultsSection
     .classList
     .remove("hidden");
 
   productGrid.innerHTML = `
 
-    <section class="hair-training-card">
+    <div class="hair-lines-grid">
 
-      <div class="hair-training-copy">
+      ${lineeSkincare
+        .map(
+          linea => {
+
+            return `
+
+              <section class="hair-line-card">
+
+                <div class="hair-line-header">
+
+                  <h4>
+                    ${linea.nome}
+                  </h4>
+
+                  <p>
+                    ${linea.descrizione}
+                  </p>
+
+                </div>
+
+                <div class="hair-products-list">
+
+                  <div class="hair-line-empty">
+                    Prodotti da inserire
+                  </div>
+
+                </div>
+
+              </section>
+
+            `;
+
+          }
+        )
+        .join("")}
+
+    </div>
+
+    <section class="hair-training-section">
+
+      <div class="hair-training-content">
 
         <p class="hair-training-label">
-          SKINCARE TRAINING
+          FORMAZIONE
         </p>
 
-        <h3>
-          Allenati sulla Skincare
-        </h3>
+        <h4>
+          ${
+            limiteRaggiunto
+              ? "Allenamento di oggi completato"
+              : "Allenati"
+          }
+        </h4>
 
-        <p>
-          Metti alla prova la tua conoscenza
-          delle linee, dei prodotti e della
-          consulenza skincare.
+        <p class="hair-training-description">
+
+          ${
+            limiteRaggiunto
+              ? `
+                Hai completato le 2 sessioni
+                Skincare di oggi.
+                Torna domani per continuare
+                il tuo percorso.
+              `
+              : `
+                Hai studiato le linee Skincare?
+                Ora metti alla prova quello
+                che hai imparato.
+              `
+          }
+
         </p>
+
+        ${
+          conceptsValutati > 0
+            ? `
+
+              <div class="hair-score-preview">
+
+                <span>
+                  KNOWLEDGE SCORE
+                </span>
+
+                <strong>
+                  ${knowledgeScore}%
+                </strong>
+
+              </div>
+
+            `
+            : ""
+        }
+
+        ${
+          limiteRaggiunto
+            ? `
+
+              <div class="hair-daily-complete">
+                2/2 sessioni completate oggi
+              </div>
+
+            `
+            : `
+
+              <button
+                class="hair-training-button"
+                id="skincareTrainingButton"
+              >
+                Inizia il quiz Skincare →
+              </button>
+
+            `
+        }
 
       </div>
-
-      <button
-        class="hair-training-button"
-        id="skincareTrainingButton"
-      >
-        Inizia training →
-      </button>
 
     </section>
 
