@@ -1,4 +1,4 @@
-// Test notifica automatica Weekly 3
+
 window.WEEKLY_DATA = {
   settimane: [
     { id: "w39", numero: 39, dal: "2026-09-21", al: "2026-09-27" },
