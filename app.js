@@ -693,8 +693,11 @@ function contaConceptValutati() {
 
 function calcolaStatisticheGenerali() {
 
-  const progressi =
+  const progressiHair =
     caricaProgressiHair();
+
+  const progressiSkincare =
+    caricaProgressiSkincare();
 
   const conceptsTotaliHair = [
     ...new Set(
@@ -711,16 +714,36 @@ function calcolaStatisticheGenerali() {
     )
   ];
 
-  const conceptsValutati =
+  const conceptsTotaliSkincare = [
+    ...new Set(
+      quizSkincare.map(
+        domanda =>
+          domanda.concept
+      )
+    )
+  ];
+
+  const conceptsValutatiHair =
     Object.values(
-      progressi.concepts
+      progressiHair.concepts
     );
+
+  const conceptsValutatiSkincare =
+    Object.values(
+      progressiSkincare.concepts
+    );
+
+  const conceptsValutati = [
+    ...conceptsValutatiHair,
+    ...conceptsValutatiSkincare
+  ];
 
   const totaleValutati =
     conceptsValutati.length;
 
   const totaleDisponibili =
-    conceptsTotaliHair.length;
+    conceptsTotaliHair.length +
+    conceptsTotaliSkincare.length;
 
   let knowledgeScore = null;
 
@@ -2526,7 +2549,11 @@ const conceptsValutati =
               Al momento LearningHub ha
               analizzato
               ${conceptsValutati}
-              concetti Hair.
+${
+  areaQuizAttiva === "skincare"
+    ? "concetti Skincare."
+    : "concetti Hair."
+}
             `
         }
       </p>
@@ -2545,13 +2572,17 @@ const conceptsValutati =
                 Allenamento di oggi completato
               </strong>
 
-              <p>
-                Hai completato le 2 sessioni
-                Haircare di oggi.
-                Torna domani per ripassare,
-                rafforzare i concetti
-                e continuare il tuo percorso.
-              </p>
+             <p>
+  Hai completato le 2 sessioni
+  ${
+    areaQuizAttiva === "skincare"
+      ? "Skincare"
+      : "Haircare"
+  } di oggi.
+  Torna domani per ripassare,
+  rafforzare i concetti
+  e continuare il tuo percorso.
+</p>
 
             </div>
 
@@ -2595,14 +2626,20 @@ const conceptsValutati =
             : ""
         }
 
-        <button
-          id="quizReturnButton"
-          class="
-            quiz-secondary-button
-          "
-        >
-          Torna alle linee Haircare
-        </button>
+     ${
+  areaQuizAttiva === "haircare"
+    ? `
+      <button
+        id="quizReturnButton"
+        class="
+          quiz-secondary-button
+        "
+      >
+        Torna alle linee Haircare
+      </button>
+    `
+    : ""
+}
 
       </div>
 
@@ -2634,25 +2671,19 @@ const conceptsValutati =
     );
   }
 
- document
-  .getElementById(
+const returnButton =
+  document.getElementById(
     "quizReturnButton"
-  )
-  .addEventListener(
+  );
+
+if (returnButton) {
+  returnButton.addEventListener(
     "click",
     () => {
-
-      if (
-        areaQuizAttiva === "skincare"
-      ) {
-        mostraSkincare();
-        return;
-      }
-
       mostraLineeCapelli();
-
     }
   );
+}
 }
 
 // =========================================================
