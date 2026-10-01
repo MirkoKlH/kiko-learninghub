@@ -887,7 +887,50 @@ function riepilogoPercorsoHair() {
 
   return riepilogo;
 }
+// =========================================================
+// RIEPILOGO PERCORSO SKINCARE
+// =========================================================
 
+function riepilogoPercorsoSkincare() {
+  const progressi =
+    caricaProgressiSkincare();
+
+  const concepts = [
+    ...new Set(
+      quizSkincare.map(
+        domanda =>
+          domanda.concept
+      )
+    )
+  ];
+
+  const riepilogo = {
+    recupero: 0,
+    consolidamento: 0,
+    solido: 0,
+    nuovo: 0,
+    totale: concepts.length
+  };
+
+  concepts.forEach(
+    concept => {
+
+      const stato =
+        classificaConcept(
+          concept,
+          progressi
+        );
+
+      riepilogo[stato] += 1;
+    }
+  );
+
+  riepilogo.valutati =
+    riepilogo.totale -
+    riepilogo.nuovo;
+
+  return riepilogo;
+}
 // =========================================================
 // TESTO PRODOTTO
 // =========================================================
@@ -1350,6 +1393,9 @@ function mostraSkincare() {
   const conceptsValutati =
     contaConceptValutatiSkincare();
 
+  const percorsoSkincare =
+    riepilogoPercorsoSkincare();
+
   const sessioniOggi =
     sessioniCompletateOggi(
       "skincare"
@@ -1369,85 +1415,83 @@ function mostraSkincare() {
     <div class="hair-lines-grid">
 
       ${lineeSkincare
-  .map(
-    linea => {
+        .map(
+          linea => {
 
-      const prodottiLinea =
-        prodottiSkincare.filter(
-          prodotto =>
-            prodotto.linea ===
-            linea.id
-        );
+            const prodottiLinea =
+              prodottiSkincare.filter(
+                prodotto =>
+                  prodotto.linea ===
+                  linea.id
+              );
 
-      let prodottiHTML = "";
+            let prodottiHTML = "";
 
-      if (
-        prodottiLinea.length > 0
-      ) {
+            if (
+              prodottiLinea.length > 0
+            ) {
 
-        prodottiHTML =
-          prodottiLinea
-            .map(
-              prodotto => `
+              prodottiHTML =
+                prodottiLinea
+                  .map(
+                    prodotto => `
 
-                <button
-                  class="hair-product-link skincare-product-link"
-                  data-id="${prodotto.id}"
-                >
+                      <button
+                        class="hair-product-link skincare-product-link"
+                        data-id="${prodotto.id}"
+                      >
 
-                  <span>
-                    ${prodotto.nomeBreve}
-                  </span>
+                        <span>
+                          ${prodotto.nomeBreve}
+                        </span>
 
-                  <span class="hair-arrow">
-                    →
-                  </span>
+                        <span class="hair-arrow">
+                          →
+                        </span>
 
-                </button>
+                      </button>
 
-              `
-            )
-            .join("");
+                    `
+                  )
+                  .join("");
 
-      } else {
+            } else {
 
-        prodottiHTML = `
+              prodottiHTML = `
 
-          <div class="hair-line-empty">
-            Prodotti da inserire
-          </div>
+                <div class="hair-line-empty">
+                  Prodotti da inserire
+                </div>
 
-        `;
+              `;
+            }
 
-      }
+            return `
 
-      return `
+              <section class="hair-line-card">
 
-        <section class="hair-line-card">
+                <div class="hair-line-header">
 
-          <div class="hair-line-header">
+                  <h4>
+                    ${linea.nome}
+                  </h4>
 
-            <h4>
-              ${linea.nome}
-            </h4>
+                  <p>
+                    ${linea.descrizione}
+                  </p>
 
-            <p>
-              ${linea.descrizione}
-            </p>
+                </div>
 
-          </div>
+                <div class="hair-products-list">
+                  ${prodottiHTML}
+                </div>
 
-          <div class="hair-products-list">
-            ${prodottiHTML}
-          </div>
+              </section>
 
-        </section>
-
-      `;
-
-    }
-  )
-  .join("")}
+            `;
+          }
+        )
+        .join("")}
 
     </div>
 
@@ -1472,16 +1516,18 @@ function mostraSkincare() {
           ${
             limiteRaggiunto
               ? `
-                Hai completato le 2 sessioni
-                Skincare di oggi.
-                Torna domani per continuare
-                il tuo percorso.
-              `
+                  Hai completato le 2 sessioni
+                  Skincare di oggi.
+                  Torna domani: LearningHub
+                  ripartirà dai concetti da
+                  rafforzare e continuerà
+                  il tuo percorso.
+                `
               : `
-                Hai studiato le linee Skincare?
-                Ora metti alla prova quello
-                che hai imparato.
-              `
+                  Hai studiato le linee Skincare?
+                  Ora metti alla prova quello
+                  che hai imparato.
+                `
           }
 
         </p>
@@ -1490,19 +1536,19 @@ function mostraSkincare() {
           conceptsValutati > 0
             ? `
 
-              <div class="hair-score-preview">
+                <div class="hair-score-preview">
 
-                <span>
-                  KNOWLEDGE SCORE
-                </span>
+                  <span>
+                    KNOWLEDGE SCORE
+                  </span>
 
-                <strong>
-                  ${knowledgeScore}%
-                </strong>
+                  <strong>
+                    ${knowledgeScore}%
+                  </strong>
 
-              </div>
+                </div>
 
-            `
+              `
             : ""
         }
 
@@ -1510,57 +1556,217 @@ function mostraSkincare() {
           limiteRaggiunto
             ? `
 
-              <div class="hair-daily-complete">
-                2/2 sessioni completate oggi
-              </div>
+                <div class="hair-daily-complete">
+                  2/2 sessioni completate oggi
+                </div>
 
-            `
+              `
             : `
 
-              <button
-                class="hair-training-button"
-                id="skincareTrainingButton"
-              >
-                Inizia il quiz Skincare →
-              </button>
+                <button
+                  class="hair-training-button"
+                  id="skincareTrainingButton"
+                >
+                  Inizia il quiz Skincare →
+                </button>
 
-            `
+              `
         }
 
       </div>
 
     </section>
 
-  `;
-document
-  .querySelectorAll(
-    ".skincare-product-link"
-  )
-  .forEach(
-    button => {
+    ${
+      conceptsValutati > 0
+        ? `
 
-      button.addEventListener(
-        "click",
-        () => {
+            <section class="hair-path-section">
 
-          const prodotto =
-            prodottiSkincare.find(
-              item =>
-                item.id ===
-                button.dataset.id
-            );
+              <div class="hair-path-heading">
 
-          if (prodotto) {
-            apriSchedaProdotto(
-              prodotto
-            );
-          }
+                <p class="hair-path-label">
+                  PERCORSO SKINCARE
+                </p>
 
-        }
-      );
+                <h4>
+                  Il tuo percorso
+                </h4>
 
+                <p>
+                  LearningHub utilizza le tue risposte
+                  per capire cosa consolidare nelle
+                  prossime sessioni.
+                </p>
+
+              </div>
+
+              <div class="hair-path-grid">
+
+                <div
+                  class="
+                    hair-path-card
+                    hair-path-recovery
+                    ${
+                      percorsoSkincare.recupero > 0 &&
+                      !limiteRaggiunto
+                        ? "hair-path-actionable"
+                        : ""
+                    }
+                  "
+                  ${
+                    percorsoSkincare.recupero > 0 &&
+                    !limiteRaggiunto
+                      ? 'id="skincareRecoveryCard"'
+                      : ""
+                  }
+                >
+
+                  <span class="hair-path-status">
+                    DA RAFFORZARE
+                  </span>
+
+                  <strong>
+                    ${percorsoSkincare.recupero}
+                  </strong>
+
+                  <p>
+                    ${
+                      percorsoSkincare.recupero === 1
+                        ? "concetto"
+                        : "concetti"
+                    }
+                  </p>
+
+                  ${
+                    percorsoSkincare.recupero > 0 &&
+                    !limiteRaggiunto
+                      ? `
+                          <span class="hair-path-action">
+                            Ripassa ora →
+                          </span>
+                        `
+                      : ""
+                  }
+
+                </div>
+
+                <div
+                  class="
+                    hair-path-card
+                    hair-path-learning
+                  "
+                >
+
+                  <span class="hair-path-status">
+                    IN APPRENDIMENTO
+                  </span>
+
+                  <strong>
+                    ${percorsoSkincare.consolidamento}
+                  </strong>
+
+                  <p>
+                    ${
+                      percorsoSkincare.consolidamento === 1
+                        ? "concetto"
+                        : "concetti"
+                    }
+                  </p>
+
+                </div>
+
+                <div
+                  class="
+                    hair-path-card
+                    hair-path-solid
+                  "
+                >
+
+                  <span class="hair-path-status">
+                    SOLIDI
+                  </span>
+
+                  <strong>
+                    ${percorsoSkincare.solido}
+                  </strong>
+
+                  <p>
+                    ${
+                      percorsoSkincare.solido === 1
+                        ? "concetto"
+                        : "concetti"
+                    }
+                  </p>
+
+                </div>
+
+              </div>
+
+              <div class="hair-path-footer">
+
+                <span>
+                  ${percorsoSkincare.valutati}
+                  di
+                  ${percorsoSkincare.totale}
+                  concetti valutati
+                </span>
+
+                ${
+                  percorsoSkincare.nuovo > 0
+                    ? `
+                        <span>
+                          ${percorsoSkincare.nuovo}
+                          ancora da esplorare
+                        </span>
+                      `
+                    : `
+                        <span>
+                          Tutti i concetti sono stati esplorati
+                        </span>
+                      `
+                }
+
+              </div>
+
+            </section>
+
+          `
+        : ""
     }
-  );
+
+  `;
+
+  document
+    .querySelectorAll(
+      ".skincare-product-link"
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const prodotto =
+              prodottiSkincare.find(
+                item =>
+                  item.id ===
+                  button.dataset.id
+              );
+
+            if (prodotto) {
+              apriSchedaProdotto(
+                prodotto
+              );
+            }
+
+          }
+        );
+
+      }
+    );
+
   const trainingButton =
     document.getElementById(
       "skincareTrainingButton"
@@ -1572,6 +1778,22 @@ document
       "click",
       () => {
         avviaQuizSkincare();
+      }
+    );
+
+  }
+
+  const recoveryCard =
+    document.getElementById(
+      "skincareRecoveryCard"
+    );
+
+  if (recoveryCard) {
+
+    recoveryCard.addEventListener(
+      "click",
+      () => {
+        avviaRipassoSkincare();
       }
     );
 
@@ -2189,6 +2411,118 @@ function avviaQuizHaircare() {
     areaQuizAttiva = "haircare";
 modalitaQuizHaircare =
   "generale";
+  indiceQuiz = 0;
+  risposteCorrette = 0;
+  rispostaBloccata = false;
+
+  mostraDomandaQuiz();
+}
+function creaSessioneRipassoSkincare() {
+
+  const progressi =
+    caricaProgressiSkincare();
+
+  const conceptsRecupero = [
+    ...new Set(
+      quizSkincare
+        .filter(
+          domanda =>
+            classificaConcept(
+              domanda.concept,
+              progressi
+            ) === "recupero"
+        )
+        .map(
+          domanda =>
+            domanda.concept
+        )
+    )
+  ];
+
+  if (
+    conceptsRecupero.length === 0
+  ) {
+    return [];
+  }
+
+  const domandeRipasso =
+    quizSkincare.filter(
+      domanda =>
+        conceptsRecupero.includes(
+          domanda.concept
+        )
+    );
+
+  const domandeMescolate =
+    [...domandeRipasso]
+      .sort(
+        () =>
+          Math.random() - 0.5
+      );
+
+  const conceptsUsati =
+    new Set();
+
+  const sessione = [];
+
+  for (
+    const domanda of domandeMescolate
+  ) {
+
+    if (
+      conceptsUsati.has(
+        domanda.concept
+      )
+    ) {
+      continue;
+    }
+
+    sessione.push(
+      domanda
+    );
+
+    conceptsUsati.add(
+      domanda.concept
+    );
+
+    if (
+      sessione.length === 15
+    ) {
+      break;
+    }
+  }
+
+  return sessione;
+}
+
+
+function avviaRipassoSkincare() {
+
+  areaQuizAttiva = "skincare";
+
+  if (
+    limiteSessioniRaggiunto(
+      "skincare"
+    )
+  ) {
+    return;
+  }
+
+  const sessioneRipasso =
+    creaSessioneRipassoSkincare();
+
+  if (
+    sessioneRipasso.length === 0
+  ) {
+    return;
+  }
+
+  sessioneQuiz =
+    sessioneRipasso;
+
+  modalitaQuizHaircare =
+    "ripasso";
+
   indiceQuiz = 0;
   risposteCorrette = 0;
   rispostaBloccata = false;
