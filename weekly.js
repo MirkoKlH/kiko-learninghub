@@ -105,37 +105,95 @@
     </button>`;
   }
 
-  function renderHome() {
+    function renderHome() {
     const mount = document.getElementById("weeklyHome");
     if (!mount) return;
+
     const d = today();
     const week = settimanaPer(d);
     const actions = azioniOggi(d);
     const active = attivi(d);
     const upcoming = inArrivo(d, 7);
 
-    const actionCard = actions[0]
-      ? card(actions[0], actions[0].kind === "window" ? "DA FARE" : "DA FARE OGGI", actions[0].kind === "window" ? `ENTRO ${fmt(actions[0].evento.finestraAzione.entro)}` : fmt(d))
-      : `<div class="weekly-card weekly-card-empty"><span class="weekly-card-status">DA FARE OGGI</span><strong>Nessuna attività urgente</strong><span class="weekly-card-copy">Non risultano azioni operative con scadenza oggi.</span></div>`;
+    const selected = [];
+    const selectedIds = new Set();
 
-    const activeCard = active[0]
-      ? card(active[0], statusEvento(active[0], d), (() => {
-          const f = faseAttiva(active[0], d);
-          const s = f?.dataInizio || active[0].dataInizio;
-          const e = f?.dataFine || active[0].dataFine;
-          return e ? `${fmt(s)} → ${fmt(e)}` : fmt(s);
-        })())
-      : "";
+    function addCard(html, eventId) {
+      if (!html || !eventId || selectedIds.has(eventId) || selected.length >= 3) return;
+      selected.push(html);
+      selectedIds.add(eventId);
+    }
 
-    const upcomingCard = upcoming[0]
-      ? card(upcoming[0], "IN ARRIVO", fmt(upcoming[0].dataInizio))
-      : "";
+    function dateLabelFor(e) {
+      const f = faseAttiva(e, d);
+      const start = f?.dataInizio || e.dataInizio;
+      const end = f?.dataFine || e.dataFine;
+
+      if (!start) return "";
+      return end ? `${fmt(start)} → ${fmt(end)}` : fmt(start);
+    }
+
+    // 1. Se oggi c'è un'attività operativa, occupa la prima card.
+    if (actions[0]) {
+      const action = actions[0];
+
+      addCard(
+        card(
+          action,
+          action.kind === "window" ? "DA FARE" : "DA FARE OGGI",
+          action.kind === "window"
+            ? `ENTRO ${fmt(action.evento.finestraAzione.entro)}`
+            : fmt(d)
+        ),
+        action.evento.id
+      );
+    }
+
+    // 2. Riempi gli spazi disponibili dando priorità alle promo attive.
+    const activePromos = active.filter((e) => e.tipo === "promo");
+
+    activePromos.forEach((e) => {
+      addCard(
+        card(
+          e,
+          statusEvento(e, d),
+          dateLabelFor(e)
+        ),
+        e.id
+      );
+    });
+
+    // 3. Se non ci sono abbastanza promo, usa gli altri eventi attivi.
+    active
+      .filter((e) => e.tipo !== "promo")
+      .forEach((e) => {
+        addCard(
+          card(
+            e,
+            statusEvento(e, d),
+            dateLabelFor(e)
+          ),
+          e.id
+        );
+      });
+
+    // 4. Se restano ancora spazi, usa gli eventi in arrivo.
+    upcoming.forEach((e) => {
+      addCard(
+        card(
+          e,
+          "IN ARRIVO",
+          fmt(e.dataInizio)
+        ),
+        e.id
+      );
+    });
 
     mount.innerHTML = `<div class="weekly-heading">
       <div><span class="weekly-kicker">WEEKLY · W${week.numero}</span><span class="weekly-range">${fmt(week.dal, true)} – ${fmt(week.al, true)}</span></div>
       <button type="button" class="weekly-all-button" id="weeklyOpenAll">Vedi tutta la Weekly →</button>
     </div>
-    <div class="weekly-home-grid">${actionCard}${activeCard}${upcomingCard}</div>`;
+    <div class="weekly-home-grid">${selected.join("")}</div>`;
   }
 
   function ensureOverlay() {
