@@ -105,38 +105,109 @@
     </button>`;
   }
 
-  function renderHome() {
-    const mount = document.getElementById("weeklyHome");
-    if (!mount) return;
-    const d = today();
-    const week = settimanaPer(d);
-    const actions = azioniOggi(d);
-    const active = attivi(d);
-    const upcoming = inArrivo(d, 7);
+function renderHome() {
+  const mount = document.getElementById("weeklyHome");
+  if (!mount) return;
 
-    const actionCard = actions[0]
-      ? card(actions[0], actions[0].kind === "window" ? "DA FARE" : "DA FARE OGGI", actions[0].kind === "window" ? `ENTRO ${fmt(actions[0].evento.finestraAzione.entro)}` : fmt(d))
-      : `<div class="weekly-card weekly-card-empty"><span class="weekly-card-status">DA FARE OGGI</span><strong>Nessuna attività urgente</strong><span class="weekly-card-copy">Non risultano azioni operative con scadenza oggi.</span></div>`;
+  const d = today();
+  const week = settimanaPer(d);
+  const actions = azioniOggi(d);
+  const active = attivi(d);
+  const upcoming = inArrivo(d, 7);
 
-    const activeCard = active[0]
-      ? card(active[0], statusEvento(active[0], d), (() => {
-          const f = faseAttiva(active[0], d);
-          const s = f?.dataInizio || active[0].dataInizio;
-          const e = f?.dataFine || active[0].dataFine;
-          return e ? `${fmt(s)} → ${fmt(e)}` : fmt(s);
-        })())
-      : "";
+  const promoAttive = active.filter((e) => e.tipo === "promo");
 
-    const upcomingCard = upcoming[0]
-      ? card(upcoming[0], "IN ARRIVO", fmt(upcoming[0].dataInizio))
-      : "";
+  function cardEventoAttivo(evento) {
+    const f = faseAttiva(evento, d);
+    const start = f?.dataInizio || evento.dataInizio;
+    const end = f?.dataFine || evento.dataFine;
 
-    mount.innerHTML = `<div class="weekly-heading">
-      <div><span class="weekly-kicker">WEEKLY · W${week.numero}</span><span class="weekly-range">${fmt(week.dal, true)} – ${fmt(week.al, true)}</span></div>
-      <button type="button" class="weekly-all-button" id="weeklyOpenAll">Vedi tutta la Weekly →</button>
-    </div>
-    <div class="weekly-home-grid">${actionCard}${activeCard}${upcomingCard}</div>`;
+    return card(
+      evento,
+      statusEvento(evento, d),
+      end ? `${fmt(start)} → ${fmt(end)}` : fmt(start)
+    );
   }
+
+  const homeCards = [];
+  const idsMostrati = new Set();
+
+  // Se c'è un'attività operativa oggi, occupa il primo spazio.
+  if (actions.length > 0) {
+    const action = actions[0];
+
+    homeCards.push(
+      card(
+        action,
+        action.kind === "window" ? "DA FARE" : "DA FARE OGGI",
+        action.kind === "window"
+          ? `ENTRO ${fmt(action.evento.finestraAzione.entro)}`
+          : fmt(d)
+      )
+    );
+
+    if (action.evento?.id) {
+      idsMostrati.add(action.evento.id);
+    }
+  }
+
+  // Riempi gli spazi disponibili con le promo attive.
+  for (const evento of promoAttive) {
+    if (homeCards.length >= 3) break;
+    if (idsMostrati.has(evento.id)) continue;
+
+    homeCards.push(cardEventoAttivo(evento));
+    idsMostrati.add(evento.id);
+  }
+
+  // Se ci sono meno di 3 card, usa altri eventi attivi.
+  for (const evento of active) {
+    if (homeCards.length >= 3) break;
+    if (idsMostrati.has(evento.id)) continue;
+
+    homeCards.push(cardEventoAttivo(evento));
+    idsMostrati.add(evento.id);
+  }
+
+  // Ultimo fallback: eventi in arrivo.
+  for (const evento of upcoming) {
+    if (homeCards.length >= 3) break;
+    if (idsMostrati.has(evento.id)) continue;
+
+    homeCards.push(
+      card(
+        evento,
+        "IN ARRIVO",
+        fmt(evento.dataInizio)
+      )
+    );
+
+    idsMostrati.add(evento.id);
+  }
+
+  mount.innerHTML = `
+    <div class="weekly-heading">
+      <div>
+        <span class="weekly-kicker">WEEKLY · W${week.numero}</span>
+        <span class="weekly-range">
+          ${fmt(week.dal, true)} – ${fmt(week.al, true)}
+        </span>
+      </div>
+
+      <button
+        type="button"
+        class="weekly-all-button"
+        id="weeklyOpenAll"
+      >
+        Vedi tutta la Weekly →
+      </button>
+    </div>
+
+    <div class="weekly-home-grid">
+      ${homeCards.join("")}
+    </div>
+  `;
+}
 
   function ensureOverlay() {
     let overlay = document.getElementById("weeklyOverlay");
